@@ -5,7 +5,7 @@ pub fn contact() -> Html {
     html! {
         <section id="contact" class="terminal-section">
             <div class="section-header">
-                <span class="prompt">{"benjamin@portfolio:~$"}</span>
+                <span class="prompt">{"benjamin@BenjaminNiccum:~$"}</span>
                 <span class="command">{"./connect.sh --help"}</span>
             </div>
             
@@ -34,7 +34,7 @@ EXAMPLES:
         Opens: https://linkedin.com/in/b-niccum
         
     ./connect.sh --portfolio
-        Opens: https://benjaminniccum.godaddysites.com
+        Opens: https://BenjaminNiccum.com
 
 AVAILABILITY:
     Status: ● Online and ready to collaborate

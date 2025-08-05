@@ -5,7 +5,7 @@ pub fn projects() -> Html {
     html! {
         <section id="projects" class="terminal-section">
             <div class="section-header">
-                <span class="prompt">{"benjamin@portfolio:~$"}</span>
+                <span class="prompt">{"benjamin@BenjaminNiccum:~$"}</span>
                 <span class="command">{"git log --oneline --graph"}</span>
             </div>
             

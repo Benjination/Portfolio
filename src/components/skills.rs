@@ -5,7 +5,7 @@ pub fn skills() -> Html {
     html! {
         <section id="skills" class="terminal-section">
             <div class="section-header">
-                <span class="prompt">{"benjamin@portfolio:~$"}</span>
+                <span class="prompt">{"benjamin@BenjaminNiccum:~$"}</span>
                 <span class="command">{"ls -la skills/"}</span>
             </div>
             

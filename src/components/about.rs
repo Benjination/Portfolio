@@ -5,7 +5,7 @@ pub fn about() -> Html {
     html! {
         <section id="about" class="terminal-section">
             <div class="section-header">
-                <span class="prompt">{"benjamin@portfolio:~$"}</span>
+                <span class="prompt">{"benjamin@BenjaminNiccum:~$"}</span>
                 <span class="command">{"cat about.md"}</span>
             </div>
             

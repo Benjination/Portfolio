@@ -7,18 +7,20 @@ pub fn header() -> Html {
             <div class="ascii-art">
                 <pre class="ascii-name">
 {r#"
- ██████╗ ███████╗███╗   ██╗     ███╗   ██╗██╗ ██████╗ ██████╗██╗   ██╗███╗   ███╗
+ ██████╗ ███████╗███╗   ██╗     ███╗   ██╗██╗ ██████╗  ██████╗██╗   ██╗███╗   ███╗
  ██╔══██╗██╔════╝████╗  ██║     ████╗  ██║██║██╔════╝██╔════╝██║   ██║████╗ ████║
  ██████╔╝█████╗  ██╔██╗ ██║     ██╔██╗ ██║██║██║     ██║     ██║   ██║██╔████╔██║
  ██╔══██╗██╔══╝  ██║╚██╗██║     ██║╚██╗██║██║██║     ██║     ██║   ██║██║╚██╔╝██║
  ██████╔╝███████╗██║ ╚████║     ██║ ╚████║██║╚██████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║
  ╚═════╝ ╚══════╝╚═╝  ╚═══╝     ╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝
+                                                                                    
+                            BenjaminNiccum.com
 "#}
                 </pre>
             </div>
             
             <div class="terminal-prompt">
-                <span class="prompt-user">{"user@portfolio"}</span>
+                <span class="prompt-user">{"benjamin@BenjaminNiccum"}</span>
                 <span class="prompt-separator">{":"}</span>
                 <span class="prompt-path">{"~"}</span>
                 <span class="prompt-symbol">{"$"}</span>
@@ -26,7 +28,7 @@ pub fn header() -> Html {
             </div>
             
             <div class="tagline">
-                <span class="comment">{"# Software Engineer | Rust Enthusiast | Problem Solver"}</span>
+                <span class="comment">{"# Software Engineer | Code Enthusiast | Problem Solver"}</span>
             </div>
             
             <nav class="terminal-nav">

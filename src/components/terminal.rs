@@ -30,7 +30,7 @@ pub fn terminal() -> Html {
                 let command = (*input_value).clone();
                 let mut new_output = (*output).clone();
                 
-                new_output.push(format!("benjamin@portfolio:~$ {}", command));
+                new_output.push(format!("benjamin@BenjaminNiccum:~$ {}", command));
                 
                 let response = match command.trim() {
                     "help" => vec![
@@ -133,7 +133,7 @@ pub fn terminal() -> Html {
                     <span class="control minimize"></span>
                     <span class="control maximize"></span>
                 </div>
-                <div class="terminal-title">{"benjamin@portfolio - Terminal"}</div>
+                <div class="terminal-title">{"benjamin@BenjaminNiccum - Terminal"}</div>
             </div>
             
             <div class="terminal-content">
@@ -144,7 +144,7 @@ pub fn terminal() -> Html {
                 </div>
                 
                 <div class="terminal-input-line">
-                    <span class="terminal-prompt">{"benjamin@portfolio:~$"}</span>
+                    <span class="terminal-prompt">{"benjamin@BenjaminNiccum:~$"}</span>
                     <input 
                         ref={input_ref}
                         type="text"
