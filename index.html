@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Benjamin Niccum - Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Benjamin Niccum - Software Engineer Portfolio. Rust, WebAssembly, and innovative development.">
+    <link data-trunk rel="scss" href="styles/main.scss" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        // Terminal startup effect
+        document.body.classList.add('terminal-startup');
+        setTimeout(() => {
+            document.body.classList.remove('terminal-startup');
+        }, 2000);
+    </script>
+</body>
+</html>

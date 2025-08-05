@@ -1,0 +1,17 @@
+[package]
+name = "portfolio"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+yew = { version = "0.21", features = ["csr"] }
+gloo = "0.11"
+wasm-bindgen = "0.2"
+web-sys = "0.3"
+js-sys = "0.3"
+wasm-bindgen-futures = "0.4"ge]
+name = "portfolio"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]

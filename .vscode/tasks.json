@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "args": [],
+            "command": "source ~/.cargo/env && trunk serve",
+            "group": "build",
+            "isBackground": true,
+            "label": "Serve Portfolio",
+            "presentation": {
+                "echo": true,
+                "focus": false,
+                "panel": "new",
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+            "type": "shell"
+        },
+        {
+            "args": [],
+            "command": "source ~/.cargo/env && trunk build --release",
+            "group": "build",
+            "isBackground": false,
+            "label": "Build Portfolio",
+            "presentation": {
+                "echo": true,
+                "focus": false,
+                "panel": "new",
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+            "type": "shell"
+        },
+        {
+            "args": [],
+            "command": "source ~/.cargo/env && cargo check",
+            "group": "build",
+            "isBackground": false,
+            "label": "Check Rust Code",
+            "presentation": {
+                "echo": true,
+                "focus": false,
+                "panel": "new",
+                "reveal": "always"
+            },
+            "problemMatcher": [],
+            "type": "shell"
+        }
+    ]
+}

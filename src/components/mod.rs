@@ -1,0 +1,15 @@
+mod header;
+mod about;
+mod skills;
+mod projects;
+mod contact;
+mod terminal;
+mod matrix_rain;
+
+pub use header::Header;
+pub use about::About;
+pub use skills::Skills;
+pub use projects::Projects;
+pub use contact::Contact;
+pub use terminal::Terminal;
+pub use matrix_rain::MatrixRain;
