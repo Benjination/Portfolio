@@ -54,7 +54,7 @@ jobs:
         npm install -g sass
         
     - name: Build with Trunk
-      run: trunk build --release --public-url /Portfolio/
+      run: trunk build --release
       
     - name: Setup Pages
       uses: actions/configure-pages@v4
