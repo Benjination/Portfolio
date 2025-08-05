@@ -29,21 +29,29 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Install Rust
-      uses: actions-rs/toolchain@v1
+      uses: dtolnay/rust-toolchain@stable
       with:
-        toolchain: stable
-        target: wasm32-unknown-unknown
-        override: true
+        targets: wasm32-unknown-unknown
+        
+    - name: Cache cargo dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
         
     - name: Install Trunk
       run: |
-        wget -qO- https://github.com/thedodd/trunk/releases/latest/download/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
+        wget -qO- https://github.com/thedodd/trunk/releases/download/v0.21.4/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
         sudo mv trunk /usr/local/bin/
         
     - name: Install Sass
       run: |
-        wget -qO- https://github.com/sass/dart-sass/releases/latest/download/dart-sass-latest-linux-x64.tar.gz | tar -xzf-
-        sudo mv dart-sass/sass /usr/local/bin/
+        npm install -g sass
         
     - name: Build with Trunk
       run: trunk build --release --public-url /Portfolio/
