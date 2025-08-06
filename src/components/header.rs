@@ -36,6 +36,8 @@ pub fn header() -> Html {
                     <li><a href="#about" class="nav-command">{"./about.sh"}</a></li>
                     <li><a href="#skills" class="nav-command">{"./skills.sh"}</a></li>
                     <li><a href="#projects" class="nav-command">{"./projects.sh"}</a></li>
+                    <li><a href="#snake-game" class="nav-command">{"./snake.exe"}</a></li>
+                    <li><a href="#leaderboard" class="nav-command">{"./highscores.db"}</a></li>
                     <li><a href="#contact" class="nav-command">{"./contact.sh"}</a></li>
                     <li><a href="https://github.com/Benjination" class="nav-command">{"cat github.txt"}</a></li>
                 </ul>

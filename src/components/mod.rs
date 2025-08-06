@@ -5,6 +5,8 @@ mod projects;
 mod contact;
 mod terminal;
 mod matrix_rain;
+mod snake;
+mod leaderboard;
 
 pub use header::Header;
 pub use about::About;
@@ -13,3 +15,5 @@ pub use projects::Projects;
 pub use contact::Contact;
 pub use terminal::Terminal;
 pub use matrix_rain::MatrixRain;
+pub use snake::Snake;
+pub use leaderboard::Leaderboard;
