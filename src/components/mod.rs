@@ -7,6 +7,7 @@ mod terminal;
 mod matrix_rain;
 mod snake;
 mod leaderboard;
+mod counter;
 
 pub use header::Header;
 pub use about::About;
@@ -17,3 +18,4 @@ pub use terminal::Terminal;
 pub use matrix_rain::MatrixRain;
 pub use snake::Snake;
 pub use leaderboard::Leaderboard;
+pub use counter::{Counter, CounterType};
