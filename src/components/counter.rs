@@ -125,66 +125,11 @@ async fn increment_counter(counter_type: &CounterType) -> u32 {
     
     web_sys::console::log_1(&format!("Incrementing counter: {}", doc_id).into());
     
-    // Try to increment using Firestore's atomic increment
-    // First attempt: Use PATCH to update existing document
-    let patch_url = format!("{}/{}", FIRESTORE_COUNTERS_URL, doc_id);
-    
-    // Create increment operation using Firestore transforms
-    let transform_document = serde_json::json!({
-        "writes": [{
-            "transform": {
-                "document": format!("projects/{}/databases/(default)/documents/counters/{}", FIRESTORE_PROJECT_ID, doc_id),
-                "fieldTransforms": [{
-                    "fieldPath": "count",
-                    "increment": {
-                        "integerValue": "1"
-                    }
-                }]
-            }
-        }]
-    });
-
-    let commit_url = format!("https://firestore.googleapis.com/v1/projects/{}/databases/(default)/documents:commit", FIRESTORE_PROJECT_ID);
-    
-    web_sys::console::log_1(&format!("Trying atomic increment at: {}", commit_url).into());
-    
-    // Try atomic increment first
-    match Request::post(&commit_url)
-        .header("Content-Type", "application/json")
-        .body(transform_document.to_string())
-    {
-        Ok(request) => {
-            match request.send().await {
-                Ok(response) => {
-                    web_sys::console::log_1(&format!("Atomic increment response: {}", response.status()).into());
-                    
-                    if response.status() == 200 {
-                        // Fetch the updated count
-                        let updated_count = fetch_counter(counter_type).await;
-                        if updated_count > 0 {
-                            web_sys::console::log_1(&format!("Atomic increment successful: {}", updated_count).into());
-                            return updated_count;
-                        }
-                    }
-                }
-                Err(e) => {
-                    web_sys::console::log_1(&format!("Atomic increment request error: {:?}", e).into());
-                }
-            }
-        }
-        Err(e) => {
-            web_sys::console::log_1(&format!("Atomic increment build error: {:?}", e).into());
-        }
-    }
-    
-    // If atomic increment fails, try to create/update document manually
-    // This handles the case where the document doesn't exist yet
-    web_sys::console::log_1(&"Atomic increment failed, trying manual update".into());
-    
+    // Simplified approach: just get current count and increment it
     let current_count = fetch_counter(counter_type).await;
     let new_count = current_count + 1;
     
-    web_sys::console::log_1(&format!("Manual increment: {} -> {}", current_count, new_count).into());
+    web_sys::console::log_1(&format!("Current count: {}, incrementing to: {}", current_count, new_count).into());
     
     let document = serde_json::json!({
         "fields": {
@@ -197,7 +142,7 @@ async fn increment_counter(counter_type: &CounterType) -> u32 {
         }
     });
 
-    // Use PATCH to update existing document or PUT to create new one
+    // Try PATCH first (update existing document)
     let update_url = format!("{}/{}", FIRESTORE_COUNTERS_URL, doc_id);
     
     web_sys::console::log_1(&format!("Trying PATCH update at: {}", update_url).into());
@@ -214,6 +159,11 @@ async fn increment_counter(counter_type: &CounterType) -> u32 {
                     if response.status() == 200 {
                         web_sys::console::log_1(&format!("PATCH successful: {}", new_count).into());
                         return new_count;
+                    } else {
+                        // Log the response text for debugging
+                        if let Ok(response_text) = response.text().await {
+                            web_sys::console::log_1(&format!("PATCH failed with response: {}", response_text).into());
+                        }
                     }
                 }
                 Err(e) => {
@@ -240,9 +190,14 @@ async fn increment_counter(counter_type: &CounterType) -> u32 {
                 Ok(response) => {
                     web_sys::console::log_1(&format!("POST response: {}", response.status()).into());
                     
-                    if response.status() == 200 {
+                    if response.status() == 200 || response.status() == 201 {
                         web_sys::console::log_1(&format!("POST successful: {}", new_count).into());
                         return new_count;
+                    } else {
+                        // Log the response text for debugging
+                        if let Ok(response_text) = response.text().await {
+                            web_sys::console::log_1(&format!("POST failed with response: {}", response_text).into());
+                        }
                     }
                 }
                 Err(e) => {
@@ -255,9 +210,9 @@ async fn increment_counter(counter_type: &CounterType) -> u32 {
         }
     }
     
-    // If all attempts fail, return current count + 1 as best effort
-    web_sys::console::log_1(&format!("All increment attempts failed, returning: {}", current_count + 1).into());
-    current_count + 1
+    // If all attempts fail, return the incremented value anyway for local display
+    web_sys::console::log_1(&format!("Firebase update failed, returning local increment: {}", new_count).into());
+    new_count
 }
 
 // Hook to increment game plays counter
