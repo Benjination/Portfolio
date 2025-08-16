@@ -10,46 +10,52 @@ pub fn skills() -> Html {
             </div>
             
             <div class="section-content">
-                <pre class="file-listing">
-{r#"total 42
-drwxr-xr-x  7 benjamin benjamin 4096 Aug  5 2025 .
-drwxr-xr-x 12 benjamin benjamin 4096 Aug  5 2025 ..
-
-Programming Languages:
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 rust.rs          [Advanced]
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 c.c              [Proficient]
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 java.java        [Proficient]
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 python.py        [Proficient]
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 cpp.cpp          [Proficient]
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 swift.swift      [Intermediate]
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 assembly.s       [Intermediate]
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 sql.sql          [Proficient]
-
-Web Technologies:
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 html5.html
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 css3.css
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 javascript.js
--rw-r--r--  1 benjamin benjamin  ███ Aug  5 2025 webassembly.wasm  [🔥 Latest]
-
-Frameworks & Tools:
-drwxr-xr-x  2 benjamin benjamin 4096 Aug  5 2025 android_studio/
-drwxr-xr-x  2 benjamin benjamin 4096 Aug  5 2025 xcode/
-drwxr-xr-x  2 benjamin benjamin 4096 Aug  5 2025 git/
-drwxr-xr-x  2 benjamin benjamin 4096 Aug  5 2025 firebase/
-drwxr-xr-x  2 benjamin benjamin 4096 Aug  5 2025 unix_systems/
-drwxr-xr-x  2 benjamin benjamin 4096 Aug  5 2025 jira_confluence/
-drwxr-xr-x  2 benjamin benjamin 4096 Aug  5 2025 latex/
-
-Special Interests:
--rwxr-xr-x  1 benjamin benjamin  ███ Aug  5 2025 mobile_development*
--rwxr-xr-x  1 benjamin benjamin  ███ Aug  5 2025 data_structures*
--rwxr-xr-x  1 benjamin benjamin  ███ Aug  5 2025 algorithm_design*
--rwxr-xr-x  1 benjamin benjamin  ███ Aug  5 2025 system_architecture*
-"#}
-                </pre>
+                <div class="skills-content">
+                    <h2>{"🛠️ My Toolkit & Expertise"}</h2>
+                    <p>{"I work with a variety of programming languages and tools to bring ideas to life. Here's what I can help you build with:"}</p>
+                    
+                    <h3>{"💻 Programming Languages I Love:"}</h3>
+                    <ul>
+                        <li>{"🦀 Rust - My current favorite! Great for building fast, reliable software"}</li>
+                        <li>{"☕ Java - Solid choice for large applications and enterprise solutions"}</li>
+                        <li>{"🐍 Python - Perfect for data work, automation, and quick prototypes"}</li>
+                        <li>{"🎯 C/C++ - When you need maximum performance and control"}</li>
+                        <li>{"📱 Swift - For beautiful iOS apps that users actually enjoy"}</li>
+                        <li>{"🔧 Assembly - Getting down to the metal when needed"}</li>
+                        <li>{"📊 SQL - Making sense of data and databases"}</li>
+                    </ul>
+                    
+                    <h3>{"🌐 Web Technologies:"}</h3>
+                    <ul>
+                        <li>{"HTML5 & CSS3 - The foundation of every great website"}</li>
+                        <li>{"JavaScript - Making websites interactive and dynamic"}</li>
+                        <li>{"WebAssembly - Bringing desktop-level performance to the web"}</li>
+                    </ul>
+                    
+                    <h3>{"🔨 Tools & Frameworks I Use Daily:"}</h3>
+                    <ul>
+                        <li>{"Mobile Development (iOS & Android)"}</li>
+                        <li>{"Git - Keeping track of code changes and collaborating with teams"}</li>
+                        <li>{"Firebase - Building apps with real-time features"}</li>
+                        <li>{"Unix/Linux Systems - My preferred development environment"}</li>
+                        <li>{"Project Management (Jira, Confluence)"}</li>
+                        <li>{"LaTeX - For beautiful documentation and reports"}</li>
+                    </ul>
+                    
+                    <h3>{"🎯 What I'm Passionate About:"}</h3>
+                    <ul>
+                        <li>{"Building mobile apps that people love to use"}</li>
+                        <li>{"Designing efficient algorithms and data structures"}</li>
+                        <li>{"Creating scalable system architectures"}</li>
+                        <li>{"Solving complex technical challenges"}</li>
+                    </ul>
+                    
+                    <h3>{"🌱 Currently Exploring:"}</h3>
+                    <p>{"Artificial Intelligence, Machine Learning, and Advanced Software Design Patterns (Always learning something new!)"}</p>
+                </div>
                 
                 <div class="skill-highlight">
-                    <span class="comment">{"# Currently exploring: AI/ML, Advanced Software Design Patterns"}</span>
+                    <span class="comment">{"💡 Love working with new technologies? Let's explore them together!"}</span>
                 </div>
             </div>
         </section>

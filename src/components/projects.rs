@@ -10,48 +10,30 @@ pub fn projects() -> Html {
             </div>
             
             <div class="section-content">
-                <pre class="git-log">
-{r#"* 7f5a8bc (HEAD -> main) feat: Portfolio Website in Rust + Yew
-|\  
-| * 4e2d9fa feat: Advanced WebAssembly implementation
-| * 2b1c5ef refactor: Modern terminal-inspired UI
-|/  
-* 8a3f7bd (tag: v2.0) feat: The Mystical Tarot iOS App
-|\  
-| * 5c9e4af feat: Core ML integration for tarot insights
-| * 3d7b2fe feat: SwiftUI custom card animations
-| * 1a6f8ce feat: Firebase backend integration
-|/  
-* 6b4a9cd feat: Elder Scrolls Add-ons
-|\  
-| * 9e7f3bc feat: Advanced scripting system
-| * 8d2a5fe feat: Custom UI modifications
-|/  
-* 4c8e2fb feat: GitHub Profile Enhancement
-|\  
-| * 7a1b9de feat: Dynamic Spotify integration
-| * 2f5c8ea feat: Animated contribution snake
-| * 6d4e7af feat: Custom README automation
-|/  
-* 1b9d5ea init: Begin software engineering journey
+                <div class="projects-intro">
+{r#"🚀 Projects I've Built
 
-Repository Statistics:
-├── Total Commits: 150+
-├── Lines of Code: 10,000+
-├── Languages Used: 8
-└── Coffee Consumed: ∞ cups ☕
+Here are some of the things I've created recently. Each project taught me something new 
+and represents a different challenge I've tackled. I love building things that people 
+actually want to use!
+
+📊 Project Stats:
+   • 150+ commits across various projects
+   • 10,000+ lines of code written  
+   • 8 different programming languages used
+   • ∞ cups of coffee consumed ☕ (definitely the most important metric!)
 "#}
-                </pre>
+                </div>
                 
                 <div class="project-cards">
                     <div class="project-card">
                         <div class="card-header">
                             <span class="file-icon">{"📱"}</span>
                             <span class="project-name">{"The Mystical Tarot"}</span>
-                            <span class="language-tag">{"Swift"}</span>
+                            <span class="language-tag">{"iOS App"}</span>
                         </div>
                         <div class="card-content">
-                            <p>{"iOS tarot card reading app with custom animations and AI-powered insights."}</p>
+                            <p>{"A beautiful iOS tarot card reading app with custom animations and AI-powered insights. Users can get personalized readings and explore the mystical world of tarot cards with smooth, engaging interactions."}</p>
                             <div class="tech-stack">
                                 <span class="tech">{"SwiftUI"}</span>
                                 <span class="tech">{"Core ML"}</span>
@@ -64,10 +46,10 @@ Repository Statistics:
                         <div class="card-header">
                             <span class="file-icon">{"🎮"}</span>
                             <span class="project-name">{"Elder Scrolls Mods"}</span>
-                            <span class="language-tag">{"C++"}</span>
+                            <span class="language-tag">{"Game Mods"}</span>
                         </div>
                         <div class="card-content">
-                            <p>{"Game modifications and add-ons with advanced scripting systems."}</p>
+                            <p>{"Custom game modifications and add-ons that enhance the Elder Scrolls gaming experience. Features advanced scripting systems and UI improvements that thousands of players have downloaded and enjoyed."}</p>
                             <div class="tech-stack">
                                 <span class="tech">{"C++"}</span>
                                 <span class="tech">{"Game Engine API"}</span>
@@ -80,14 +62,14 @@ Repository Statistics:
                         <div class="card-header">
                             <span class="file-icon">{"🦀"}</span>
                             <span class="project-name">{"This Portfolio"}</span>
-                            <span class="language-tag">{"Rust"}</span>
+                            <span class="language-tag">{"Web App"}</span>
                         </div>
                         <div class="card-content">
-                            <p>{"Modern portfolio built with Rust and WebAssembly for maximum performance."}</p>
+                            <p>{"The website you're looking at right now! Built with cutting-edge web technologies for lightning-fast performance. Features a retro terminal theme, interactive Snake game, and real-time visitor counters."}</p>
                             <div class="tech-stack">
                                 <span class="tech">{"Rust"}</span>
-                                <span class="tech">{"Yew"}</span>
                                 <span class="tech">{"WebAssembly"}</span>
+                                <span class="tech">{"Firebase"}</span>
                             </div>
                         </div>
                     </div>

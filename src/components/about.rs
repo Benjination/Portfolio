@@ -10,51 +10,35 @@ pub fn about() -> Html {
             </div>
             
             <div class="section-content">
-                <pre class="code-block">
-{r#"## About Benjamin Niccum
+                <div class="about-content">
+                    <div class="intro-text">
+{r#"👋 Hi there! I'm Benjamin Niccum
 
-```rust
-struct SoftwareEngineer {
-    name: String,
-    location: String,
-    education: String,
-    passion: Vec<String>,
-    current_focus: String,
-}
+I'm a passionate software engineer who loves turning ideas into reality through code. 
+Think of me as a digital problem-solver who gets excited about building things that 
+make people's lives easier and more enjoyable.
 
-impl SoftwareEngineer {
-    fn new() -> Self {
-        Self {
-            name: "Benjamin Niccum".to_string(),
-            location: "Based in the US".to_string(),
-            education: "Recent Software Engineering Graduate".to_string(),
-            passion: vec![
-                "Building intuitive applications".to_string(),
-                "Solving complex problems".to_string(),
-                "Learning cutting-edge technologies".to_string(),
-                "Creating digital magic ✨".to_string(),
-            ],
-            current_focus: "Seeking opportunities to innovate and grow".to_string(),
-        }
-    }
-    
-    fn get_philosophy(&self) -> &str {
-        "The best way to predict the future is to create it."
-    }
-}
-```
+🎯 What drives me:
+   • Creating apps and websites that are both beautiful and functional
+   • Solving puzzles (whether they're in code or real life!)
+   • Learning new technologies and staying on the cutting edge
+   • Collaborating with teams to build something amazing
 
-💻 **Background:** Recent software engineering graduate with hands-on experience 
-   across diverse industries including retail, manufacturing, finance, and team 
-   management.
+📍 Where I come from:
+I'm a recent software engineering graduate based in the US, with hands-on experience 
+across different industries - from retail and manufacturing to finance and team 
+management. This diverse background helps me understand problems from multiple angles.
 
-🚀 **Approach:** I start by understanding your unique challenges, then propose 
-   practical solutions using modern development practices and cutting-edge tools.
+🚀 My approach:
+I believe the best software starts with understanding what people really need. 
+I listen first, then craft solutions using modern tools and best practices. 
+My goal? To build digital experiences that feel magical but work reliably.
 
-🎯 **Goal:** Ready to collaborate on innovative projects that drive business 
-   forward and create meaningful impact.
-"#}
-                </pre>
+💭 Philosophy: "The best way to predict the future is to create it."
+
+Ready to collaborate on something incredible? Let's build the future together! ✨"#}
+                    </div>
+                </div>
             </div>
         </section>
     }
