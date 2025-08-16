@@ -934,6 +934,132 @@ body {
   // Snake game specific mobile styles moved to main mobile section above
 }
 
+// Mobile Controls for Snake Game
+.mobile-controls {
+  display: none; // Hidden by default on desktop
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid $dark-green;
+  border-radius: 8px;
+  
+  .mobile-control-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  
+  .mobile-control-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mobile-control-btn {
+    width: 60px;
+    height: 60px;
+    background: $terminal-bg;
+    border: 2px solid $primary-green;
+    border-radius: 8px;
+    color: $primary-green;
+    font-size: 1.5rem;
+    font-family: $mono-font;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include terminal-glow;
+    
+    &:hover, &:active {
+      background: rgba(0, 255, 0, 0.1);
+      border-color: $secondary-green;
+      transform: scale(0.95);
+      box-shadow: 
+        0 0 10px $primary-green,
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+    }
+    
+    &:active {
+      transform: scale(0.9);
+      background: rgba(0, 255, 0, 0.2);
+    }
+    
+    // Disable text selection and highlighting
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .pause-btn {
+    background: rgba(255, 176, 0, 0.1);
+    border-color: $amber;
+    color: $amber;
+    
+    &:hover, &:active {
+      background: rgba(255, 176, 0, 0.2);
+      border-color: lighten($amber, 10%);
+      box-shadow: 
+        0 0 10px $amber,
+        inset 0 0 20px rgba(255, 176, 0, 0.1);
+    }
+  }
+}
+
+// Show mobile controls only on mobile devices
+@media (max-width: 768px) {
+  .mobile-controls {
+    display: block;
+  }
+  
+  // Adjust spacing for mobile controls
+  #snake-game {
+    .game-controls {
+      margin-bottom: 1rem;
+      
+      .controls-info {
+        ul {
+          font-size: 0.7rem;
+          
+          li {
+            margin: 0.2rem 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-controls {
+    margin: 1rem 0;
+    padding: 0.75rem;
+    
+    .mobile-control-btn {
+      width: 50px;
+      height: 50px;
+      font-size: 1.2rem;
+    }
+    
+    .mobile-control-grid {
+      max-width: 170px;
+      gap: 0.4rem;
+    }
+    
+    .mobile-control-row {
+      gap: 0.4rem;
+    }
+  }
+}
+
 // Leaderboard Styles
 #leaderboard {
   .leaderboard-container {

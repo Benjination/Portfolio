@@ -676,6 +676,88 @@ pub fn snake() -> Html {
         })
     };
 
+    // Mobile control callbacks
+    let move_up = {
+        let game_state = game_state.clone();
+        let force_update = force_update.clone();
+        Callback::from(move |_: web_sys::MouseEvent| {
+            let game_rc = game_state.borrow();
+            let mut game = game_rc.borrow_mut();
+            if !game.started && !game.game_over {
+                game.start();
+                wasm_bindgen_futures::spawn_local(async {
+                    increment_game_counter().await;
+                });
+            }
+            game.change_direction(Direction::Up);
+            force_update.set(*force_update + 1);
+        })
+    };
+
+    let move_down = {
+        let game_state = game_state.clone();
+        let force_update = force_update.clone();
+        Callback::from(move |_: web_sys::MouseEvent| {
+            let game_rc = game_state.borrow();
+            let mut game = game_rc.borrow_mut();
+            if !game.started && !game.game_over {
+                game.start();
+                wasm_bindgen_futures::spawn_local(async {
+                    increment_game_counter().await;
+                });
+            }
+            game.change_direction(Direction::Down);
+            force_update.set(*force_update + 1);
+        })
+    };
+
+    let move_left = {
+        let game_state = game_state.clone();
+        let force_update = force_update.clone();
+        Callback::from(move |_: web_sys::MouseEvent| {
+            let game_rc = game_state.borrow();
+            let mut game = game_rc.borrow_mut();
+            if !game.started && !game.game_over {
+                game.start();
+                wasm_bindgen_futures::spawn_local(async {
+                    increment_game_counter().await;
+                });
+            }
+            game.change_direction(Direction::Left);
+            force_update.set(*force_update + 1);
+        })
+    };
+
+    let move_right = {
+        let game_state = game_state.clone();
+        let force_update = force_update.clone();
+        Callback::from(move |_: web_sys::MouseEvent| {
+            let game_rc = game_state.borrow();
+            let mut game = game_rc.borrow_mut();
+            if !game.started && !game.game_over {
+                game.start();
+                wasm_bindgen_futures::spawn_local(async {
+                    increment_game_counter().await;
+                });
+            }
+            game.change_direction(Direction::Right);
+            force_update.set(*force_update + 1);
+        })
+    };
+
+    let toggle_pause = {
+        let game_state = game_state.clone();
+        let force_update = force_update.clone();
+        Callback::from(move |_: web_sys::MouseEvent| {
+            let game_rc = game_state.borrow();
+            let mut game = game_rc.borrow_mut();
+            if game.started && !game.game_over {
+                game.toggle_pause();
+                force_update.set(*force_update + 1);
+            }
+        })
+    };
+
     let game_rc = game_state.borrow();
     let game = game_rc.borrow();
     let on_initials_input = {
@@ -803,6 +885,34 @@ pub fn snake() -> Html {
                     onclick={canvas_click}
                     style="outline: none; cursor: pointer; border: 2px solid #00ff00; display: block;"
                 />
+                
+                // Mobile controls - only show on mobile devices
+                <div class="mobile-controls">
+                    <div class="mobile-control-grid">
+                        <div class="mobile-control-row">
+                            <button class="mobile-control-btn up-btn" onclick={move_up}>
+                                {"▲"}
+                            </button>
+                        </div>
+                        <div class="mobile-control-row">
+                            <button class="mobile-control-btn left-btn" onclick={move_left}>
+                                {"◄"}
+                            </button>
+                            <button class="mobile-control-btn pause-btn" onclick={toggle_pause}>
+                                {if game.paused { "▶️" } else { "⏸️" }}
+                            </button>
+                            <button class="mobile-control-btn right-btn" onclick={move_right}>
+                                {"►"}
+                            </button>
+                        </div>
+                        <div class="mobile-control-row">
+                            <button class="mobile-control-btn down-btn" onclick={move_down}>
+                                {"▼"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="game-controls">
                 <div class="controls-info">
                     <h4>{"Controls:"}</h4>
