@@ -1,0 +1,88 @@
+# The Plan - Portfolio Customization Tasks
+
+This file lists all the places in the portfolio site where you need to customize with your own information. The site currently contains generic placeholder data about "Benjamin Niccum" that needs to be updated with your personal details.
+
+## 🎯 HIGH PRIORITY - Core Identity
+
+### Header Component (`src/components/header.rs`)
+- **ASCII Art Name**: Currently shows "BEN NICCUM" - needs your name in ASCII
+- **Domain Reference**: "BenjaminNiccum.com" in ASCII art
+- **Username**: "benjamin@BenjaminNiccum" in terminal prompt
+- **Tagline**: "Software Engineer | Code Enthusiast | Problem Solver"
+
+### About Section (`src/components/about.rs`)
+- **Name**: "Benjamin Niccum" in struct
+- **Location**: "Based in the US" 
+- **Education**: "Recent Software Engineering Graduate"
+- **Passion**: Update the passion vector with your interests
+- **Background**: Update work experience description
+- **Philosophy**: "The best way to predict the future is to create it."
+
+### Contact Section (`src/components/contact.rs`)
+- **Email**: benjination2@gmail.com
+- **GitHub**: github.com/Benjination  
+- **LinkedIn**: linkedin.com/in/b-niccum
+- **Legacy Portfolio**: benjaminniccum.godaddysites.com
+- **Spotify**: Reference to "current coding soundtrack"
+- **Location**: "US (flexible for global teams)"
+- **Availability Status**: Currently set to "Online and ready to collaborate"
+
+## 🔧 MEDIUM PRIORITY - Professional Content
+
+### Projects Section (`src/components/projects.rs`)
+- **Project 1**: "The Mystical Tarot" iOS app - replace with your project
+- **Project 2**: "Elder Scrolls Mods" - replace with your project  
+- **Project 3**: "This Portfolio" - can keep or replace
+- **Git Log Stats**: "150+ commits, 10,000+ lines" - update with real stats
+- **Repository name**: References to commits and project history
+
+### Skills Section (`src/components/skills.rs`)
+- **Username**: "benjamin benjamin" in file ownership
+- **Programming Languages**: Rust[Advanced], C[Proficient], etc. - update skill levels
+- **Special Interests**: mobile_development, data_structures, etc.
+- **Current Learning**: "AI/ML, Advanced Software Design Patterns"
+
+### Snake Game (`src/components/snake.rs`)
+- **Terminal Prompt**: "benjamin@BenjaminNiccum:~$" 
+- **Global Leaderboard URL**: Currently "https://example.com/api/snake-leaderboard"
+
+## 📝 LOW PRIORITY - Configuration & Metadata
+
+### Package Configuration (`Cargo.toml`)
+- **Package Name**: "portfolio" - consider renaming
+- **Author**: Not explicitly set, may want to add
+
+### README (`README.md`)
+- **Title**: "Benjamin Niccum's Portfolio"
+- **All references to Benjamin Niccum throughout documentation
+
+### Other Files
+- **Copilot Instructions** (`.github/copilot-instructions.md`): Contains project context
+- **Domain References**: Any other files referencing BenjaminNiccum.com
+
+## 🌐 FUTURE CONSIDERATIONS
+
+### Global Leaderboard Backend
+- Currently uses placeholder URL "https://example.com/api/snake-leaderboard"
+- You'll need to implement a real backend API if you want global scores
+
+### Domain & Hosting
+- Update any hardcoded domain references when you deploy
+- Consider updating terminal prompts to match your actual domain
+
+## ✅ COMPLETION CHECKLIST
+
+- [ ] Update ASCII art with your name
+- [ ] Replace all instances of "Benjamin Niccum" with your name
+- [ ] Update email addresses and social links
+- [ ] Replace project descriptions with your actual projects
+- [ ] Update skills and proficiency levels
+- [ ] Customize the about section with your background
+- [ ] Update location and availability status
+- [ ] Replace domain references
+- [ ] Consider implementing global leaderboard backend
+- [ ] Update README documentation
+
+---
+
+**Note**: Search the entire codebase for "Benjamin", "Niccum", "benjination", and "BenjaminNiccum" to catch any missed references.
