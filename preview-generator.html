@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Portfolio Preview Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .preview-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            border: 2px solid #00ff00;
+            box-shadow: 
+                inset 0 0 100px rgba(0, 255, 0, 0.1),
+                0 0 50px rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            border-bottom: 1px solid #008800;
+        }
+        .ascii-art {
+            font-size: 11px;
+            line-height: 1.1;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .title {
+            font-size: 28px;
+            color: #00ff00;
+            text-shadow: 0 0 15px #00ff00;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        .tagline {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .prompt {
+            color: #00cc00;
+        }
+        .command {
+            color: #ffb000;
+        }
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 14px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .content {
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 2;
+        }
+        .skills {
+            flex: 1;
+            margin-right: 40px;
+        }
+        .skills h3 {
+            color: #00ff00;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        .skills ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .skills li {
+            color: #cccccc;
+            margin: 6px 0;
+            font-size: 14px;
+        }
+        .skills li::before {
+            content: '> ';
+            color: #00ff00;
+        }
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .counter-demo {
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+            min-width: 200px;
+            box-shadow: inset 0 0 50px rgba(0, 255, 0, 0.1);
+        }
+        .counter-label {
+            color: #ffb000;
+            font-size: 12px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        .counter-value {
+            color: #00ff00;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00ff00;
+        }
+        .game-demo {
+            background: #1a1a1a;
+            border: 1px solid #008800;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 200px;
+        }
+        .game-demo h4 {
+            color: #00cc00;
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        .snake-preview {
+            font-family: monospace;
+            font-size: 10px;
+            line-height: 1;
+            color: #008800;
+        }
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            color: #666666;
+            font-size: 12px;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <div class="matrix-bg" id="matrix"></div>
+        
+        <div class="header">
+            <div class="ascii-art">
+██████╗ ███████╗███╗   ██╗     ██████╗ ███████╗██╗   ██╗
+██╔══██╗██╔════╝████╗  ██║     ██╔══██╗██╔════╝██║   ██║
+██████╔╝█████╗  ██╔██╗ ██║     ██║  ██║█████╗  ██║   ██║
+██╔══██╗██╔══╝  ██║╚██╗██║     ██║  ██║██╔══╝  ╚██╗ ██╔╝
+██████╔╝███████╗██║ ╚████║     ██████╔╝███████╗ ╚████╔╝ 
+╚═════╝ ╚══════╝╚═╝  ╚═══╝     ╚═════╝ ╚══════╝  ╚═══╝
+            </div>
+            <div class="title">Software Engineer Portfolio</div>
+            <div class="tagline">
+                <span class="prompt">benjamin@portfolio:~$</span> 
+                <span class="command">cat README.md</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="skills">
+                <h3>🛠️ Technology Stack</h3>
+                <ul>
+                    <li>🦀 Rust - Systems & WebAssembly</li>
+                    <li>☕ Java - Enterprise Applications</li>
+                    <li>🐍 Python - Data & Automation</li>
+                    <li>📱 Mobile Development (iOS/Android)</li>
+                    <li>☁️ Firebase & Cloud Platforms</li>
+                    <li>🎮 Interactive Web Experiences</li>
+                </ul>
+            </div>
+            
+            <div class="right-section">
+                <div class="counter-demo">
+                    <div class="counter-label">SITE VISITORS</div>
+                    <div class="counter-value">000127</div>
+                </div>
+                
+                <div class="game-demo">
+                    <h4>🐍 Snake Game Included</h4>
+                    <div class="snake-preview">
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓░░░░░░░░░░░░░▓
+▓░██░░░░░░░░░░▓
+▓░██░░░░●░░░░░▓
+▓░░░░░░░░░░░░░▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="watermark">benjination.github.io/Portfolio</div>
+    </div>
+
+    <script>
+        // Generate matrix rain effect
+        const matrix = document.getElementById('matrix');
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        
+        function createRain() {
+            for (let i = 0; i < 100; i++) {
+                const span = document.createElement('span');
+                span.textContent = chars[Math.floor(Math.random() * chars.length)];
+                span.style.position = 'absolute';
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.color = '#003300';
+                span.style.fontSize = Math.random() * 6 + 6 + 'px';
+                span.style.opacity = Math.random() * 0.5 + 0.2;
+                matrix.appendChild(span);
+            }
+        }
+        
+        createRain();
+        
+        // Auto-screenshot instruction
+        setTimeout(() => {
+            console.log('Ready for screenshot! This preview is 1200x630px - perfect for social media.');
+            console.log('Take a screenshot and save it as "preview.png" in your portfolio folder.');
+        }, 1000);
+    </script>
+</body>
+</html>
