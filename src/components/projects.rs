@@ -11,16 +11,14 @@ pub fn projects() -> Html {
             
             <div class="section-content">
                 <div class="projects-intro">
-{r#"🚀 Projects I've Built
+{r#"🚀 Recent Projects
 
-Here are some of the things I've created recently. Each project taught me something new 
-and represents a different challenge I've tackled. I love building things that people 
-actually want to use!
+Here are some of the things I've built recently. Each project represents different challenges I've tackled, from holistic health websites to desktop applications. I enjoy creating solutions that solve real-world problems!
 
 📊 Project Stats:
-   • 150+ commits across various projects
-   • 10,000+ lines of code written  
-   • 8 different programming languages used
+   • 50+ commits across recent projects
+   • Multiple programming languages and frameworks
+   • Full-stack development experience
    • ∞ cups of coffee consumed ☕ (definitely the most important metric!)
 "#}
                 </div>
@@ -28,48 +26,71 @@ actually want to use!
                 <div class="project-cards">
                     <div class="project-card">
                         <div class="card-header">
-                            <span class="file-icon">{"📱"}</span>
-                            <span class="project-name">{"The Mystical Tarot"}</span>
-                            <span class="language-tag">{"iOS App"}</span>
+                            <span class="file-icon">{"🌿"}</span>
+                            <span class="project-name">{"Healing Synergies"}</span>
+                            <span class="language-tag">{"Website"}</span>
                         </div>
                         <div class="card-content">
-                            <p>{"A beautiful iOS tarot card reading app with custom animations and AI-powered insights. Users can get personalized readings and explore the mystical world of tarot cards with smooth, engaging interactions."}</p>
+                            <p>{"A comprehensive holistic health and wellness website featuring service management, recipe collections, and client testimonials. Built with modern web technologies and includes payment integration, contact forms, and responsive design."}</p>
                             <div class="tech-stack">
-                                <span class="tech">{"SwiftUI"}</span>
-                                <span class="tech">{"Core ML"}</span>
-                                <span class="tech">{"Firebase"}</span>
+                                <span class="tech">{"HTML5"}</span>
+                                <span class="tech">{"CSS3"}</span>
+                                <span class="tech">{"JavaScript"}</span>
+                                <span class="tech">{"GitHub Pages"}</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://HealingSynergies.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    {"🌐 Live Site"}
+                                </a>
+                                <a href="https://github.com/Benjination/Healing-Synergies" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    {"📂 View Code"}
+                                </a>
                             </div>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="card-header">
-                            <span class="file-icon">{"🎮"}</span>
-                            <span class="project-name">{"Elder Scrolls Mods"}</span>
-                            <span class="language-tag">{"Game Mods"}</span>
+                            <span class="file-icon">{"�"}</span>
+                            <span class="project-name">{"The Pantry"}</span>
+                            <span class="language-tag">{"Desktop App"}</span>
                         </div>
                         <div class="card-content">
-                            <p>{"Custom game modifications and add-ons that enhance the Elder Scrolls gaming experience. Features advanced scripting systems and UI improvements that thousands of players have downloaded and enjoyed."}</p>
+                            <p>{"A beautiful macOS meal planning application with recipe management, weekly menu boards, and smart shopping list generation. Features Walmart integration, local data storage, and an intuitive drag-and-drop interface."}</p>
                             <div class="tech-stack">
-                                <span class="tech">{"C++"}</span>
-                                <span class="tech">{"Game Engine API"}</span>
-                                <span class="tech">{"Modding Tools"}</span>
+                                <span class="tech">{"TypeScript"}</span>
+                                <span class="tech">{"Electron"}</span>
+                                <span class="tech">{"Node.js"}</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Benjination/The-Pantry" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    {"📂 View Repository"}
+                                </a>
                             </div>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="card-header">
-                            <span class="file-icon">{"🦀"}</span>
-                            <span class="project-name">{"This Portfolio"}</span>
-                            <span class="language-tag">{"Web App"}</span>
+                            <span class="file-icon">{"🌱"}</span>
+                            <span class="project-name">{"Adelante Landscapes"}</span>
+                            <span class="language-tag">{"Jekyll Site"}</span>
                         </div>
                         <div class="card-content">
-                            <p>{"The website you're looking at right now! Built with cutting-edge web technologies for lightning-fast performance. Features a retro terminal theme, interactive Snake game, and real-time visitor counters."}</p>
+                            <p>{"Professional landscape design website built with Jekyll for GitHub Pages. Features responsive design, filterable portfolio gallery, blog system, and contact integration. Showcases edible landscaping and sustainable garden design services."}</p>
                             <div class="tech-stack">
-                                <span class="tech">{"Rust"}</span>
-                                <span class="tech">{"WebAssembly"}</span>
-                                <span class="tech">{"Firebase"}</span>
+                                <span class="tech">{"Jekyll"}</span>
+                                <span class="tech">{"HTML5"}</span>
+                                <span class="tech">{"CSS3"}</span>
+                                <span class="tech">{"GitHub Pages"}</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://AdelanteLandscapes.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    {"🌐 Live Site"}
+                                </a>
+                                <a href="https://github.com/Benjination/AdelanteLandscapes" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    {"📂 View Code"}
+                                </a>
                             </div>
                         </div>
                     </div>
