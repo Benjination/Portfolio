@@ -100,6 +100,11 @@ pub fn contact() -> Html {
                         <span class="link-text">{"Spotify Profile"}</span>
                     </a>
                     
+                    <a href="https://www.twitch.tv/benjination" target="_blank" class="contact-link">
+                        <span class="link-icon">{"🎮"}</span>
+                        <span class="link-text">{"Twitch Channel"}</span>
+                    </a>
+                    
                     <a href="https://benjaminniccum.godaddysites.com" class="contact-link" target="_blank">
                         <span class="link-icon">{"🌐"}</span>
                         <span class="link-text">{"Legacy Portfolio"}</span>

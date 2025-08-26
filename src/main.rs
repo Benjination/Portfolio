@@ -2,7 +2,7 @@ use yew::prelude::*;
 
 mod components;
 
-use components::{Header, About, Skills, Projects, Contact, Terminal, MatrixRain, Snake, Counter, CounterType};
+use components::{Header, About, Skills, Projects, Contact, Terminal, MatrixRain, Snake, Counter, CounterType, Streaming};
 
 #[function_component(App)]
 fn app() -> Html {
@@ -15,6 +15,7 @@ fn app() -> Html {
                     <About />
                     <Skills />
                     <Projects />
+                    <Streaming />
                     <Snake />
                     <Contact />
                 </main>

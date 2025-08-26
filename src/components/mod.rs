@@ -9,6 +9,7 @@ mod snake;
 mod leaderboard;
 mod counter;
 mod spotify;
+mod streaming;
 
 pub use header::Header;
 pub use about::About;
@@ -21,3 +22,4 @@ pub use snake::Snake;
 pub use leaderboard::Leaderboard;
 pub use counter::{Counter, CounterType};
 pub use spotify::SpotifyWidget;
+pub use streaming::Streaming;

@@ -640,6 +640,202 @@ body {
   }
 }
 
+// Streaming Section
+.streaming-content {
+  margin-bottom: 2rem;
+  
+  h2, h3 {
+    color: $primary-green;
+    @include terminal-glow;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.twitch-widget {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: $terminal-bg-light;
+  border: 1px solid $dark-green;
+  border-radius: 8px;
+  @include crt-effect;
+  
+  .twitch-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: #9146ff; // Twitch purple
+    font-family: $mono-font;
+    font-weight: bold;
+    @include terminal-glow;
+    
+    .twitch-icon {
+      font-size: 1.2rem;
+      animation: pulse 2s infinite;
+    }
+    
+    .twitch-title {
+      font-size: 1.1rem;
+      flex: 1;
+    }
+    
+    .stream-status {
+      font-size: 0.8rem;
+      color: #ff0000;
+      animation: blink 1.5s infinite;
+      background: rgba(255, 0, 0, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      border: 1px solid #ff0000;
+    }
+  }
+  
+  .twitch-embed-container {
+    margin: 1rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid $dark-green;
+    
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      display: block;
+    }
+  }
+  
+  .twitch-actions {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+    align-items: start;
+    
+    .twitch-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #9146ff;
+      text-decoration: none;
+      font-family: $mono-font;
+      padding: 0.8rem 1.5rem;
+      border: 1px solid #9146ff;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      
+      &:hover {
+        background: rgba(145, 70, 255, 0.1);
+        @include terminal-glow;
+        transform: translateX(5px);
+      }
+    }
+    
+    .stream-info {
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+      
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin: 0;
+        
+        li {
+          margin-bottom: 0.3rem;
+          position: relative;
+          padding-left: 1.5rem;
+          
+          &::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #9146ff;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.streaming-schedule {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(145, 70, 255, 0.05);
+  border: 1px solid #9146ff;
+  border-radius: 8px;
+  
+  h3 {
+    margin-top: 0;
+    color: #9146ff;
+    @include terminal-glow;
+  }
+  
+  .schedule-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    
+    .schedule-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem;
+      background: $terminal-bg-light;
+      border: 1px solid $dark-green;
+      border-radius: 4px;
+      font-family: $mono-font;
+      
+      .day {
+        font-weight: bold;
+        color: $primary-green;
+      }
+      
+      .time {
+        color: $amber;
+        font-size: 0.9rem;
+      }
+    }
+  }
+  
+  .schedule-note {
+    font-size: 0.8rem;
+    color: $dark-gray;
+    font-style: italic;
+    margin: 0;
+  }
+}
+
+// Responsive design for streaming section
+@media (max-width: 768px) {
+  .twitch-actions {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    
+    .twitch-link {
+      justify-self: center;
+    }
+  }
+  
+  .twitch-embed-container iframe {
+    height: 250px;
+  }
+  
+  .schedule-item {
+    flex-direction: column !important;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
+
 // Terminal container
 .terminal-container {
   position: fixed;
