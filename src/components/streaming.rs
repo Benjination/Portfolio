@@ -41,8 +41,8 @@ pub fn streaming() -> Html {
                                 <h3>{"🎯 What I Stream:"}</h3>
                                 <ul>
                                     <li>{"Live coding sessions"}</li>
+                                    <li>{"Gaming - ESO, Baldur's Gate, and more"}</li>
                                     <li>{"Web development tutorials"}</li>
-                                    <li>{"Game development"}</li>
                                     <li>{"Tech talks and Q&A"}</li>
                                 </ul>
                             </div>
@@ -59,6 +59,10 @@ pub fn streaming() -> Html {
                             <div class="schedule-item">
                                 <span class="day">{"Thursday"}</span>
                                 <span class="time">{"12:00 PM - 3:00 PM CST"}</span>
+                            </div>
+                            <div class="schedule-item">
+                                <span class="day">{"Friday"}</span>
+                                <span class="time">{"8:00 PM - 10:00 PM CST"}</span>
                             </div>
                         </div>
                         <p class="schedule-note">{"Schedule may vary - follow on Twitch for notifications!"}</p>
