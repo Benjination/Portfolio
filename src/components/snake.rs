@@ -485,32 +485,56 @@ pub fn snake() -> Html {
                 match key.as_str() {
                     // Left hand: WASD
                     "w" | "W" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with W key".into());
                         }
                         game.change_direction(Direction::Up);
                         updated = true;
                     }
                     "s" | "S" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with S key".into());
                         }
                         game.change_direction(Direction::Down);
                         updated = true;
                     }
                     "a" | "A" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with A key".into());
                         }
                         game.change_direction(Direction::Left);
                         updated = true;
                     }
                     "d" | "D" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with D key".into());
                         }
                         game.change_direction(Direction::Right);
@@ -518,32 +542,56 @@ pub fn snake() -> Html {
                     }
                     // Right hand: O K L : and ;
                     "o" | "O" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with O key".into());
                         }
                         game.change_direction(Direction::Up);
                         updated = true;
                     }
                     "l" | "L" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with L key".into());
                         }
                         game.change_direction(Direction::Down);
                         updated = true;
                     }
                     "k" | "K" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with K key".into());
                         }
                         game.change_direction(Direction::Left);
                         updated = true;
                     }
                     ":" | ";" => {
-                        if !game.started {
+                        if !game.started || game.game_over {
+                            if game.game_over {
+                                game.reset();
+                            }
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game started with : or ; key".into());
                         }
                         game.change_direction(Direction::Right);
@@ -561,6 +609,9 @@ pub fn snake() -> Html {
                         if game.game_over {
                             game.reset();
                             game.start();
+                            wasm_bindgen_futures::spawn_local(async {
+                                increment_counter(&CounterType::GamePlays).await;
+                            });
                             web_sys::console::log_1(&"Game restarted".into());
                             updated = true;
                         }
