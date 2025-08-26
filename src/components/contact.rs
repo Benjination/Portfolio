@@ -1,4 +1,5 @@
 use yew::prelude::*;
+use super::SpotifyWidget;
 
 #[function_component(Contact)]
 pub fn contact() -> Html {
@@ -18,12 +19,35 @@ pub fn contact() -> Html {
                     <p>{"benjination2@gmail.com - I typically respond within 24 hours (often much faster!)"}</p>
                     
                     <h3>{"🌐 Find me online:"}</h3>
-                    <ul>
-                        <li>{"GitHub - Check out my code and contributions"}</li>
-                        <li>{"LinkedIn - Connect for professional networking"}</li>
-                        <li>{"Portfolio - My previous website (this one's replacing it!)"}</li>
-                        <li>{"Spotify - See what I'm listening to while coding 🎵"}</li>
+                    <ul class="online-links">
+                        <li>
+                            <a href="https://github.com/Benjination" target="_blank" class="inline-link">
+                                {"GitHub"}
+                            </a>
+                            {" - Check out my code and contributions"}
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/in/b-niccum" target="_blank" class="inline-link">
+                                {"LinkedIn"}
+                            </a>
+                            {" - Connect for professional networking"}
+                        </li>
+                        <li>
+                            <a href="https://benjaminniccum.godaddysites.com" target="_blank" class="inline-link">
+                                {"Portfolio"}
+                            </a>
+                            {" - My previous website (this one's replacing it!)"}
+                        </li>
+                        <li>
+                            <a href="https://open.spotify.com/user/31jc2jyehqkhi3uqnre3fh3ic2by" target="_blank" class="inline-link">
+                                {"Spotify"}
+                            </a>
+                            {" - See what I'm listening to while coding 🎵"}
+                        </li>
                     </ul>
+                    
+                    // Spotify Now Playing Widget
+                    <SpotifyWidget />
                     
                     <h3>{"📍 About my availability:"}</h3>
                     <ul>
@@ -69,6 +93,11 @@ pub fn contact() -> Html {
                     <a href="https://linkedin.com/in/b-niccum" class="contact-link" target="_blank">
                         <span class="link-icon">{"💼"}</span>
                         <span class="link-text">{"linkedin.com/in/b-niccum"}</span>
+                    </a>
+                    
+                                        <a href="https://open.spotify.com/user/31jc2jyehqkhi3uqnre3fh3ic2by" target="_blank" class="contact-link">
+                        <span class="link-icon">{"🎵"}</span>
+                        <span class="link-text">{"Spotify Profile"}</span>
                     </a>
                     
                     <a href="https://benjaminniccum.godaddysites.com" class="contact-link" target="_blank">

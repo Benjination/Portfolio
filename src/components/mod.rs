@@ -8,6 +8,7 @@ mod matrix_rain;
 mod snake;
 mod leaderboard;
 mod counter;
+mod spotify;
 
 pub use header::Header;
 pub use about::About;
@@ -19,3 +20,4 @@ pub use matrix_rain::MatrixRain;
 pub use snake::Snake;
 pub use leaderboard::Leaderboard;
 pub use counter::{Counter, CounterType};
+pub use spotify::SpotifyWidget;

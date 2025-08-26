@@ -276,6 +276,36 @@ body {
       }
     }
     
+    .online-links {
+      .inline-link {
+        color: $primary-green;
+        text-decoration: none;
+        font-weight: bold;
+        position: relative;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          @include terminal-glow;
+          
+          &::after {
+            content: ' →';
+            color: $amber;
+            animation: blink 0.8s infinite;
+          }
+        }
+        
+        &::before {
+          content: '[';
+          color: $dark-green;
+        }
+        
+        &::after {
+          content: ']';
+          color: $dark-green;
+        }
+      }
+    }
+    
     .call-to-action {
       margin-top: 2rem;
       padding-top: 1.5rem;
@@ -459,6 +489,154 @@ body {
   
   .link-text {
     font-family: $mono-font;
+  }
+}
+
+// Spotify Widget
+.spotify-widget {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: $terminal-bg-light;
+  border: 1px solid $dark-green;
+  border-radius: 8px;
+  @include crt-effect;
+  
+  .spotify-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: $primary-green;
+    font-family: $mono-font;
+    font-weight: bold;
+    @include terminal-glow;
+    
+    .spotify-icon {
+      font-size: 1.2rem;
+      animation: pulse 2s infinite;
+    }
+    
+    .spotify-title {
+      font-size: 1.1rem;
+      flex: 1;
+    }
+    
+    .spotify-status {
+      font-size: 0.8rem;
+      color: $amber;
+      animation: blink 1.5s infinite;
+    }
+  }
+  
+  .spotify-content {
+    .spotify-image {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid $dark-green;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      
+      &.loaded {
+        opacity: 1;
+      }
+      
+      &:hover {
+        border-color: $primary-green;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+      }
+    }
+    
+    .spotify-fallback {
+      .spotify-placeholder {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        
+        .spotify-album-art {
+          width: 80px;
+          height: 80px;
+          background: rgba(0, 255, 0, 0.1);
+          border: 1px solid $dark-green;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          .spotify-icon-large {
+            font-size: 2rem;
+            color: $gray;
+            opacity: 0.7;
+          }
+        }
+        
+        .spotify-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          
+          .spotify-track {
+            font-family: $mono-font;
+            font-weight: bold;
+            color: $primary-green;
+            margin-bottom: 0.25rem;
+          }
+          
+          .spotify-artist {
+            font-family: $mono-font;
+            color: $gray;
+            font-size: 0.9rem;
+          }
+        }
+      }
+      
+      .spotify-actions {
+        border-top: 1px solid $dark-green;
+        padding-top: 1rem;
+        
+        .spotify-profile-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: $primary-green;
+          text-decoration: none;
+          font-family: $mono-font;
+          padding: 0.5rem 1rem;
+          border: 1px solid $dark-green;
+          border-radius: 4px;
+          transition: all 0.3s ease;
+          margin-bottom: 0.5rem;
+          
+          &:hover {
+            border-color: $primary-green;
+            background: rgba(0, 255, 0, 0.1);
+            @include terminal-glow;
+          }
+        }
+        
+        .spotify-note {
+          display: block;
+          font-family: $mono-font;
+          font-size: 0.8rem;
+          color: $dark-gray;
+          margin-top: 0.5rem;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7;
+    transform: scale(1.1);
   }
 }
 
