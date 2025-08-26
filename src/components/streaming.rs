@@ -24,7 +24,7 @@ pub fn streaming() -> Html {
                         <div class="twitch-embed-container">
                             // Embedded Twitch player
                             <iframe
-                                src="https://player.twitch.tv/?channel=benjination&parent=localhost&parent=benjination.github.io"
+                                src="https://player.twitch.tv/?channel=benjination&parent=localhost&parent=benjination.github.io&parent=vercel.app&parent=netlify.app&parent=surge.sh&parent=benjaminniccum.com"
                                 height="400"
                                 width="100%"
                                 allowfullscreen={true}>
