@@ -81,7 +81,7 @@ pub fn counter(props: &CounterProps) -> Html {
     }
 }
 
-async fn fetch_counter(counter_type: &CounterType) -> u32 {
+pub async fn fetch_counter(counter_type: &CounterType) -> u32 {
     let url = format!("{}/{}", FIRESTORE_COUNTERS_URL, counter_type.document_id());
     
     // Add some debug logging
@@ -97,7 +97,10 @@ async fn fetch_counter(counter_type: &CounterType) -> u32 {
                     
                     if let Ok(firestore_response) = serde_json::from_str::<serde_json::Value>(&text) {
                         if let Some(count_str) = firestore_response["fields"]["count"]["integerValue"].as_str() {
-                            let count = count_str.parse().unwrap_or(0);
+                            let count = count_str.parse().unwrap_or(match counter_type {
+                                CounterType::GamePlays => 128,
+                                _ => 0,
+                            });
                             web_sys::console::log_1(&format!("Parsed count: {}", count).into());
                             return count;
                         } else {
@@ -116,11 +119,14 @@ async fn fetch_counter(counter_type: &CounterType) -> u32 {
         }
     }
     
-    // If document doesn't exist or fetch fails, return 0
-    0
+    // If document doesn't exist or fetch fails, return default based on counter type
+    match counter_type {
+        CounterType::GamePlays => 128,
+        _ => 0,
+    }
 }
 
-async fn increment_counter(counter_type: &CounterType) -> u32 {
+pub async fn increment_counter(counter_type: &CounterType) -> u32 {
     let doc_id = counter_type.document_id();
     
     web_sys::console::log_1(&format!("Incrementing counter: {}", doc_id).into());

@@ -20,6 +20,6 @@ pub use terminal::Terminal;
 pub use matrix_rain::MatrixRain;
 pub use snake::Snake;
 pub use leaderboard::Leaderboard;
-pub use counter::{Counter, CounterType};
+pub use counter::{Counter, CounterType, increment_counter, fetch_counter};
 pub use spotify::SpotifyWidget;
 pub use streaming::Streaming;

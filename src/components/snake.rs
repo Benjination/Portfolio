@@ -8,7 +8,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use serde::{Serialize, Deserialize};
 use gloo_net::http::Request;
-use crate::components::{Counter, CounterType};
+use crate::components::{Counter, CounterType, increment_counter};
 // --- Leaderboard Types ---
 #[derive(Clone, PartialEq, Eq, Serialize, Deserialize, Debug)]
 pub struct ScoreEntry {
@@ -140,48 +140,6 @@ async fn submit_global_score(entry: &ScoreEntry) {
             web_sys::console::log_2(&"Firestore request creation error:".into(), &format!("{:?}", e).into());
         }
     }
-}
-
-async fn increment_game_counter() {
-    let current_count = fetch_game_counter().await;
-    let new_count = current_count + 1;
-    
-    let document = serde_json::json!({
-        "fields": {
-            "count": {
-                "integerValue": new_count.to_string()
-            },
-            "last_updated": {
-                "timestampValue": js_sys::Date::new_0().to_iso_string().as_string().unwrap_or_else(|| "2025-08-06T00:00:00.000Z".to_string())
-            }
-        }
-    });
-
-    let url = format!("https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/counters?documentId=game_plays");
-    
-    if let Ok(request) = Request::post(&url)
-        .header("Content-Type", "application/json")
-        .body(document.to_string())
-    {
-        let _ = request.send().await;
-    }
-}
-
-async fn fetch_game_counter() -> u32 {
-    let url = "https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/counters/game_plays";
-    
-    if let Ok(response) = Request::get(url).send().await {
-        if response.status() == 200 {
-            if let Ok(text) = response.text().await {
-                if let Ok(firestore_response) = serde_json::from_str::<serde_json::Value>(&text) {
-                    if let Some(count_str) = firestore_response["fields"]["count"]["integerValue"].as_str() {
-                        return count_str.parse().unwrap_or(0);
-                    }
-                }
-            }
-        }
-    }
-    0
 }
 
 fn load_local_leaderboard() -> Vec<ScoreEntry> {
@@ -650,7 +608,7 @@ pub fn snake() -> Html {
             // Increment game counter when starting a new game
             if should_increment {
                 wasm_bindgen_futures::spawn_local(async {
-                    increment_game_counter().await;
+                    increment_counter(&CounterType::GamePlays).await;
                 });
             }
         })
@@ -670,7 +628,7 @@ pub fn snake() -> Html {
                 
                 // Increment game counter when starting a new game
                 wasm_bindgen_futures::spawn_local(async {
-                    increment_game_counter().await;
+                    increment_counter(&CounterType::GamePlays).await;
                 });
             }
         })
@@ -686,7 +644,7 @@ pub fn snake() -> Html {
             if !game.started && !game.game_over {
                 game.start();
                 wasm_bindgen_futures::spawn_local(async {
-                    increment_game_counter().await;
+                    increment_counter(&CounterType::GamePlays).await;
                 });
             }
             game.change_direction(Direction::Up);
@@ -703,7 +661,7 @@ pub fn snake() -> Html {
             if !game.started && !game.game_over {
                 game.start();
                 wasm_bindgen_futures::spawn_local(async {
-                    increment_game_counter().await;
+                    increment_counter(&CounterType::GamePlays).await;
                 });
             }
             game.change_direction(Direction::Down);
@@ -720,7 +678,7 @@ pub fn snake() -> Html {
             if !game.started && !game.game_over {
                 game.start();
                 wasm_bindgen_futures::spawn_local(async {
-                    increment_game_counter().await;
+                    increment_counter(&CounterType::GamePlays).await;
                 });
             }
             game.change_direction(Direction::Left);
@@ -737,7 +695,7 @@ pub fn snake() -> Html {
             if !game.started && !game.game_over {
                 game.start();
                 wasm_bindgen_futures::spawn_local(async {
-                    increment_game_counter().await;
+                    increment_counter(&CounterType::GamePlays).await;
                 });
             }
             game.change_direction(Direction::Right);
