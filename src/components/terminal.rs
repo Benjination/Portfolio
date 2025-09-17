@@ -1,6 +1,9 @@
 use yew::prelude::*;
 use web_sys::HtmlInputElement;
 use gloo::timers::callback::Timeout;
+use wasm_bindgen_futures::spawn_local;
+use crate::components::blog_auth::{verify_blog_password, verify_blog_credentials, authenticate_admin, AuthState};
+use crate::components::blog_admin::BlogAdmin;
 
 #[function_component(Terminal)]
 pub fn terminal() -> Html {
@@ -11,6 +14,11 @@ pub fn terminal() -> Html {
         "".to_string(),
     ]);
     let input_value = use_state(|| String::new());
+    let waiting_for_password = use_state(|| false);
+    let waiting_for_email = use_state(|| false);
+    let blog_email = use_state(|| String::new());
+    let password_attempts = use_state(|| 0u32);
+    let auth_state = use_state(|| None::<AuthState>);
     
     let on_input = {
         let input_value = input_value.clone();
@@ -24,12 +32,95 @@ pub fn terminal() -> Html {
         let input_value = input_value.clone();
         let output = output.clone();
         let input_ref = input_ref.clone();
+        let waiting_for_password = waiting_for_password.clone();
+        let waiting_for_email = waiting_for_email.clone();
+        let blog_email = blog_email.clone();
+        let password_attempts = password_attempts.clone();
+        let auth_state_for_keydown = auth_state.clone();
         
         Callback::from(move |e: KeyboardEvent| {
             if e.key() == "Enter" {
                 let command = (*input_value).clone();
                 let mut new_output = (*output).clone();
                 
+                // Handle email input mode
+                if *waiting_for_email {
+                    let email = command.clone();
+                    blog_email.set(email.clone());
+                    waiting_for_email.set(false);
+                    waiting_for_password.set(true);
+                    
+                    // Show email and prompt for password
+                    new_output.push(format!("benjamin@BenjaminNiccum:~$ {}", email));
+                    new_output.push("🔐 [sudo] password for admin: ".to_string());
+                    output.set(new_output);
+                    
+                    input_value.set(String::new());
+                    if let Some(input) = input_ref.cast::<HtmlInputElement>() {
+                        input.set_value("");
+                    }
+                    return;
+                }
+                
+                // Handle password input mode
+                if *waiting_for_password {
+                    let password = command.clone();
+                    let email = (*blog_email).clone();
+                    let output = output.clone();
+                    let waiting_for_password = waiting_for_password.clone();
+                    let waiting_for_email = waiting_for_email.clone();
+                    let blog_email = blog_email.clone();
+                    let password_attempts = password_attempts.clone();
+                    let auth_state = auth_state_for_keydown.clone();
+                    
+                    // Don't show the password in the terminal output
+                    new_output.push("benjamin@BenjaminNiccum:~$ [hidden]".to_string());
+                    
+                    spawn_local(async move {
+                        match authenticate_admin(&email, &password).await {
+                            Ok(auth) => {
+                                let mut success_output = (*output).clone();
+                                success_output.push("Access granted! 🎉".to_string());
+                                success_output.push("".to_string());
+                                success_output.push("🚀 Loading Blog Administration Panel...".to_string());
+                                success_output.push("".to_string());
+                                output.set(success_output);
+                                waiting_for_password.set(false);
+                                waiting_for_email.set(false);
+                                blog_email.set(String::new());
+                                password_attempts.set(0);
+                                auth_state.set(Some(auth));
+                            }
+                            Err(_) => {
+                                let attempts = *password_attempts + 1;
+                                password_attempts.set(attempts);
+                                
+                                let mut failure_output = (*output).clone();
+                                failure_output.push("Sorry, try again.".to_string());
+                                
+                                if attempts >= 3 {
+                                    failure_output.push("sudo: 3 incorrect password attempts".to_string());
+                                    failure_output.push("".to_string());
+                                    waiting_for_password.set(false);
+                                    waiting_for_email.set(false);
+                                    blog_email.set(String::new());
+                                    password_attempts.set(0);
+                                } else {
+                                    failure_output.push("🔐 [sudo] password for admin: ".to_string());
+                                }
+                                output.set(failure_output);
+                            }
+                        }
+                    });
+                    
+                    input_value.set(String::new());
+                    if let Some(input) = input_ref.cast::<HtmlInputElement>() {
+                        input.set_value("");
+                    }
+                    return;
+                }
+                
+                // Normal command handling
                 new_output.push(format!("benjamin@BenjaminNiccum:~$ {}", command));
                 
                 let response = match command.trim() {
@@ -91,6 +182,23 @@ pub fn terminal() -> Html {
                         "Initiating hiring process...".to_string(),
                         "Please contact benjination2@gmail.com to complete.".to_string(),
                     ],
+                    "sudo blog" => {
+                        waiting_for_email.set(true);
+                        password_attempts.set(0);
+                        blog_email.set(String::new());
+                        
+                        // Add the command line and email prompt
+                        new_output.push(format!("benjamin@BenjaminNiccum:~$ {}", command));
+                        new_output.push("� Enter admin email: ".to_string());
+                        output.set(new_output);
+                        input_value.set(String::new());
+                        
+                        // Clear input field
+                        if let Some(input) = input_ref.cast::<HtmlInputElement>() {
+                            input.set_value("");
+                        }
+                        return;
+                    },
                     "clear" => {
                         output.set(vec![]);
                         input_value.set(String::new());
@@ -125,6 +233,20 @@ pub fn terminal() -> Html {
         })
     };
 
+    let on_logout = {
+        let auth_state_clone = auth_state.clone();
+        Callback::from(move |_| {
+            auth_state_clone.set(None);
+        })
+    };
+
+    // If authenticated, show blog admin instead of terminal
+    if let Some(auth) = (*auth_state).as_ref() {
+        return html! {
+            <BlogAdmin auth_state={auth.clone()} on_logout={on_logout} />
+        };
+    }
+
     html! {
         <div class="terminal-container">
             <div class="terminal-header-bar">
@@ -147,12 +269,20 @@ pub fn terminal() -> Html {
                     <span class="terminal-prompt">{"benjamin@BenjaminNiccum:~$"}</span>
                     <input 
                         ref={input_ref}
-                        type="text"
+                        type={if *waiting_for_password { "password" } else { "text" }}
                         class="terminal-input"
                         value={(*input_value).clone()}
                         oninput={on_input}
                         onkeydown={on_keydown}
-                        placeholder="Type a command..."
+                        placeholder={
+                            if *waiting_for_password {
+                                "Enter password..."
+                            } else if *waiting_for_email {
+                                "Enter email..."
+                            } else {
+                                "Type a command..."
+                            }
+                        }
                     />
                     <span class="terminal-cursor">{"█"}</span>
                 </div>

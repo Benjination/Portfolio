@@ -10,6 +10,8 @@ mod leaderboard;
 mod counter;
 mod spotify;
 mod streaming;
+mod blog_auth;
+mod blog_admin;
 
 pub use header::Header;
 pub use about::About;
@@ -23,3 +25,5 @@ pub use leaderboard::Leaderboard;
 pub use counter::{Counter, CounterType, increment_counter, fetch_counter};
 pub use spotify::SpotifyWidget;
 pub use streaming::Streaming;
+pub use blog_auth::{verify_blog_password, verify_blog_credentials, authenticate_admin, logout, get_stored_auth, verify_token, AuthState};
+pub use blog_admin::{BlogAdmin, BlogPost};

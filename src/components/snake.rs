@@ -456,33 +456,37 @@ pub fn snake() -> Html {
             let force_update = force_update.clone();
             let show_initials_modal = show_initials_modal.clone();
             let listener = EventListener::new(&window, "keydown", move |event| {
-                let event = event.dyn_ref::<web_sys::KeyboardEvent>().unwrap();
-                let key = event.key();
-                let initials_modal_open = *show_initials_modal;
-                // Always prevent default for arrow keys and space to disable page scrolling
-                // Only prevent default for keys we use
-                match key.as_str() {
-                    // WASD, O K L :
-                    "w" | "W" | "a" | "A" | "s" | "S" | "d" | "D" |
-                    "o" | "O" | "k" | "K" | "l" | "L" | ":" | "r" | "R" => {
-                        event.prevent_default();
+                if let Some(event) = event.dyn_ref::<web_sys::KeyboardEvent>() {
+                    let key = event.key();
+                    let initials_modal_open = *show_initials_modal;
+                    
+                    // Always prevent default for arrow keys and space to disable page scrolling
+                    // Only prevent default for keys we use
+                    match key.as_str() {
+                        // WASD, O K L :
+                        "w" | "W" | "a" | "A" | "s" | "S" | "d" | "D" |
+                        "o" | "O" | "k" | "K" | "l" | "L" | ":" | "r" | "R" => {
+                            event.prevent_default();
+                        }
+                        _ => {}
                     }
-                    _ => {}
-                }
-                if initials_modal_open {
-                    // Don't allow game controls while entering initials
-                    return;
-                }
-                let game_rc = game_state.borrow();
-                let mut game = game_rc.borrow_mut();
-                let mut updated = false;
-                web_sys::console::log_4(
-                    &"Game state before:".into(), 
-                    &format!("started={}, game_over={}", game.started, game.game_over).into(),
-                    &"Score:".into(),
-                    &game.score.into()
-                );
-                match key.as_str() {
+                    
+                    if initials_modal_open {
+                        // Don't allow game controls while entering initials
+                        return;
+                    }
+                    
+                    let game_rc = game_state.borrow();
+                    let mut game = game_rc.borrow_mut();
+                    let mut updated = false;
+                    web_sys::console::log_4(
+                        &"Game state before:".into(), 
+                        &format!("started={}, game_over={}", game.started, game.game_over).into(),
+                        &"Score:".into(),
+                        &game.score.into()
+                    );
+                    
+                    match key.as_str() {
                     // Left hand: WASD
                     "w" | "W" => {
                         if !game.started || game.game_over {
@@ -627,6 +631,7 @@ pub fn snake() -> Html {
                     );
                     force_update.set(*force_update + 1);
                     web_sys::console::log_1(&"Game state updated!".into());
+                }
                 }
             });
             move || drop(listener)

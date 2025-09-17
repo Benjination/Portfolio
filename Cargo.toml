@@ -15,11 +15,21 @@ web-sys = { version = "0.3", features = [
   "Element",
   "HtmlElement",
   "HtmlInputElement",
+  "HtmlTextAreaElement",
+  "HtmlSelectElement",
   "Window",
   "KeyboardEvent",
+  "CryptoKey",
+  "SubtleCrypto",
+  "Crypto",
+  "TextEncoder",
+  "File",
+  "FileReader",
+  "Blob",
 ] }
 js-sys = "0.3"
 wasm-bindgen-futures = "0.4"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0.142"
 gloo-net = "0.6.0"
+md5 = "0.7"
