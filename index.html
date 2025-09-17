@@ -43,16 +43,6 @@
 <body>
     <div id="app"></div>
     <script type="module">
-        // Handle redirects from 404.html for SPA routing
-        (function() {
-            var redirectParam = new URLSearchParams(window.location.search).get('redirect');
-            if (redirectParam) {
-                // Clear the redirect parameter and navigate to the intended path
-                var newUrl = window.location.protocol + '//' + window.location.host + redirectParam;
-                window.history.replaceState(null, null, newUrl);
-            }
-        })();
-        
         // Terminal startup effect
         document.body.classList.add('terminal-startup');
         setTimeout(() => {
