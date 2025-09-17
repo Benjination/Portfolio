@@ -23,12 +23,14 @@ const LEADERBOARD_SIZE: usize = 10;
 // Firebase Firestore REST API
 const FIRESTORE_PROJECT_ID: &str = "portfolio-7148b";
 const FIRESTORE_BASE_URL: &str = "https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/snake_leaderboard";
+const FIREBASE_API_KEY: &str = "AIzaSyAsmk3uImdPFOPLZrEsK6J1c20gk8S3hbY";
 
 // --- Global Leaderboard (using Firebase Firestore) ---
 async fn fetch_global_leaderboard() -> Vec<ScoreEntry> {
     web_sys::console::log_1(&"Fetching global leaderboard from Firestore".into());
     
-    match Request::get(FIRESTORE_BASE_URL).send().await {
+    let url = format!("{}?key={}", FIRESTORE_BASE_URL, FIREBASE_API_KEY);
+    match Request::get(&url).send().await {
         Ok(response) => {
             let status = response.status();
             web_sys::console::log_2(&"Firestore fetch status:".into(), &status.into());
@@ -106,7 +108,7 @@ async fn submit_global_score(entry: &ScoreEntry) {
         entry.score
     );
     
-    let url = format!("{}?documentId={}", FIRESTORE_BASE_URL, doc_id);
+    let url = format!("{}?documentId={}&key={}", FIRESTORE_BASE_URL, doc_id, FIREBASE_API_KEY);
     
     web_sys::console::log_2(&"Firestore submit URL:".into(), &url.clone().into());
     web_sys::console::log_2(&"Firestore document:".into(), &document.to_string().into());

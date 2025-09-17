@@ -244,6 +244,9 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                         "https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/blogs"
                     );
                     
+                    web_sys::console::log_1(&format!("Making request to: {}", url).into());
+                    web_sys::console::log_1(&format!("Using token: {}...", &token[..std::cmp::min(20, token.len())]).into());
+                    
                     match Request::get(&url)
                         .header("Authorization", &format!("Bearer {}", token))
                         .send()
@@ -278,8 +281,34 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                 // Collection doesn't exist yet - that's ok for a new blog
                                 web_sys::console::log_1(&"Blog collection doesn't exist yet - creating empty posts list".into());
                                 posts.set(Vec::new());
+                            } else if response.status() == 403 {
+                                web_sys::console::log_1(&"Authentication error (403 Forbidden). This usually means:".into());
+                                web_sys::console::log_1(&"1. Your Firebase auth token has expired".into());
+                                web_sys::console::log_1(&"2. Firestore security rules don't allow read access".into());
+                                web_sys::console::log_1(&"3. The token format is incorrect".into());
+                                
+                                // Try to get the error details from the response
+                                if let Ok(error_text) = response.text().await {
+                                    web_sys::console::log_1(&format!("Error details: {}", error_text).into());
+                                }
+                                
+                                // Clear the token from localStorage since it's not working
+                                if let Some(storage) = window()
+                                    .and_then(|w| w.local_storage().ok())
+                                    .flatten()
+                                {
+                                    let _ = storage.remove_item("blog_auth_token");
+                                    let _ = storage.remove_item("blog_user_id");
+                                    let _ = storage.remove_item("blog_user_email");
+                                }
+                                
+                                // Set empty posts for now
+                                posts.set(Vec::new());
                             } else {
                                 web_sys::console::log_1(&format!("HTTP error: {}", response.status()).into());
+                                if let Ok(error_text) = response.text().await {
+                                    web_sys::console::log_1(&format!("Error details: {}", error_text).into());
+                                }
                             }
                         }
                         Err(e) => {

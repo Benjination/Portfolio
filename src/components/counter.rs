@@ -4,6 +4,7 @@ use serde_json;
 
 const FIRESTORE_PROJECT_ID: &str = "portfolio-7148b";
 const FIRESTORE_COUNTERS_URL: &str = "https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/counters";
+const FIREBASE_API_KEY: &str = "AIzaSyAsmk3uImdPFOPLZrEsK6J1c20gk8S3hbY";
 
 #[derive(Clone, PartialEq, Properties)]
 pub struct CounterProps {
@@ -82,7 +83,7 @@ pub fn counter(props: &CounterProps) -> Html {
 }
 
 pub async fn fetch_counter(counter_type: &CounterType) -> u32 {
-    let url = format!("{}/{}", FIRESTORE_COUNTERS_URL, counter_type.document_id());
+    let url = format!("{}/{}?key={}", FIRESTORE_COUNTERS_URL, counter_type.document_id(), FIREBASE_API_KEY);
     
     // Add some debug logging
     web_sys::console::log_1(&format!("Fetching counter from: {}", url).into());
@@ -149,7 +150,7 @@ pub async fn increment_counter(counter_type: &CounterType) -> u32 {
     });
 
     // Try PATCH first (update existing document)
-    let update_url = format!("{}/{}", FIRESTORE_COUNTERS_URL, doc_id);
+    let update_url = format!("{}/{}?key={}", FIRESTORE_COUNTERS_URL, doc_id, FIREBASE_API_KEY);
     
     web_sys::console::log_1(&format!("Trying PATCH update at: {}", update_url).into());
     
@@ -183,7 +184,7 @@ pub async fn increment_counter(counter_type: &CounterType) -> u32 {
     }
     
     // If PATCH fails, try POST to create document
-    let create_url = format!("{}?documentId={}", FIRESTORE_COUNTERS_URL, doc_id);
+    let create_url = format!("{}?documentId={}&key={}", FIRESTORE_COUNTERS_URL, doc_id, FIREBASE_API_KEY);
     
     web_sys::console::log_1(&format!("Trying POST create at: {}", create_url).into());
     
