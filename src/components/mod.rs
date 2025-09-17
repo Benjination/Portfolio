@@ -12,6 +12,8 @@ mod spotify;
 mod streaming;
 mod blog_auth;
 mod blog_admin;
+mod blog_list;
+mod blog_post;
 
 pub use header::Header;
 pub use about::About;
@@ -27,3 +29,5 @@ pub use spotify::SpotifyWidget;
 pub use streaming::Streaming;
 pub use blog_auth::{verify_blog_password, verify_blog_credentials, authenticate_admin, logout, get_stored_auth, verify_token, AuthState};
 pub use blog_admin::{BlogAdmin, BlogPost};
+pub use blog_list::{BlogList, BlogPost as BlogListPost};
+pub use blog_post::{BlogPost as BlogPostComponent, BlogPostData};
