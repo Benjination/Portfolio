@@ -1,0 +1,257 @@
+#!/usr/bin/env node
+
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+
+// Firebase configuration
+const FIREBASE_API_KEY = 'AIzaSyAsmk3uImdPFOPLZrEsK6J1c20gk8S3hbY';
+const PROJECT_ID = 'portfolio-7148b';
+
+// Fetch blog posts from Firestore
+async function fetchBlogPosts() {
+    const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/blogs?key=${FIREBASE_API_KEY}`;
+    
+    return new Promise((resolve, reject) => {
+        https.get(url, (res) => {
+            let data = '';
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+            res.on('end', () => {
+                try {
+                    const parsed = JSON.parse(data);
+                    resolve(parsed);
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        }).on('error', (err) => {
+            reject(err);
+        });
+    });
+}
+
+// Parse Firestore document to blog post
+function parseBlogPost(doc) {
+    const fields = doc.fields;
+    if (!fields) return null;
+    
+    const getStringValue = (fieldName) => {
+        return fields[fieldName]?.stringValue || '';
+    };
+    
+    const getBoolValue = (fieldName) => {
+        return fields[fieldName]?.booleanValue || false;
+    };
+    
+    const title = getStringValue('title') || 'Untitled Post';
+    const content = getStringValue('main_content') || getStringValue('content') || 'No content available';
+    const excerpt = getStringValue('excerpt') || getStringValue('description') || content.substring(0, 150) + '...';
+    const author = getStringValue('author') || 'Benjamin Niccum';
+    const isPublished = getBoolValue('is_published') || getBoolValue('published');
+    
+    // Extract post ID from document name
+    const postId = doc.name.split('/').pop();
+    
+    return {
+        id: postId,
+        title,
+        content,
+        excerpt,
+        author,
+        isPublished,
+        dateCreated: getStringValue('date_created') || getStringValue('created_at') || '2024-01-01',
+        dateUpdated: getStringValue('date_updated') || getStringValue('updated_at') || '2024-01-01'
+    };
+}
+
+// Generate HTML for a blog post
+function generateBlogPostHTML(post) {
+    const formattedContent = post.content
+        .replace(/\n/g, '<br>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>${post.title} - Benjamin Niccum</title>
+    <meta name="description" content="${post.excerpt}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="${post.author}">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="${post.title}">
+    <meta property="og:description" content="${post.excerpt}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/${post.id}">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${post.title}">
+    <meta name="twitter:description" content="${post.excerpt}">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="${post.author}">
+    <meta property="article:published_time" content="${post.dateCreated}">
+    <meta property="article:modified_time" content="${post.dateUpdated}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/${post.id}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Redirect to main app for full functionality -->
+    <script type="text/javascript">
+        // If JavaScript is enabled, redirect to the main SPA for full functionality
+        // This provides the best user experience with navigation, terminal, etc.
+        setTimeout(function() {
+            if (window.location.pathname !== '/blog/${post.id}') {
+                window.location.href = '/blog/${post.id}';
+            }
+        }, 100);
+    </script>
+    
+    <!-- Fallback styles for no-JS users -->
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-header {
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        .blog-title {
+            color: #00ff00;
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+            font-weight: 700;
+        }
+        .blog-meta {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .blog-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background: #00ff00;
+            color: #0a0a0a;
+        }
+        .js-redirect-notice {
+            background: #1a1a1a;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="js-redirect-notice">
+            <p>For the full interactive experience, this page will redirect to the main portfolio in a moment...</p>
+        </div>
+        
+        <article>
+            <header class="blog-header">
+                <h1 class="blog-title">${post.title}</h1>
+                <div class="blog-meta">
+                    By ${post.author} • ${new Date(post.dateCreated).toLocaleDateString()}
+                </div>
+            </header>
+            
+            <div class="blog-content">
+                ${formattedContent}
+            </div>
+        </article>
+        
+        <a href="/" class="back-link">← Back to Portfolio</a>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>`;
+}
+
+// Main function
+async function generateStaticBlogPages() {
+    try {
+        console.log('Fetching blog posts from Firestore...');
+        const response = await fetchBlogPosts();
+        
+        if (!response.documents) {
+            console.log('No blog posts found.');
+            return;
+        }
+        
+        const blogPosts = response.documents
+            .map(parseBlogPost)
+            .filter(post => post && post.isPublished);
+        
+        console.log(`Found ${blogPosts.length} published blog posts.`);
+        
+        // Create blog directory
+        const blogDir = path.join(__dirname, 'dist', 'blog');
+        if (!fs.existsSync(blogDir)) {
+            fs.mkdirSync(blogDir, { recursive: true });
+        }
+        
+        // Generate static pages for each blog post
+        for (const post of blogPosts) {
+            const postDir = path.join(blogDir, post.id);
+            if (!fs.existsSync(postDir)) {
+                fs.mkdirSync(postDir, { recursive: true });
+            }
+            
+            const htmlContent = generateBlogPostHTML(post);
+            const filePath = path.join(postDir, 'index.html');
+            
+            fs.writeFileSync(filePath, htmlContent);
+            console.log(`Generated: /blog/${post.id}/index.html`);
+        }
+        
+        console.log('✅ Static blog pages generated successfully!');
+        
+    } catch (error) {
+        console.error('Error generating static blog pages:', error);
+        process.exit(1);
+    }
+}
+
+// Run the script
+generateStaticBlogPages();

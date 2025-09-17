@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-static-generator",
+  "version": "1.0.0",
+  "description": "Static blog page generator for Benjamin Niccum's portfolio",
+  "scripts": {
+    "generate-blog-pages": "node generate-blog-pages.js",
+    "build": "trunk build --release && npm run generate-blog-pages"
+  },
+  "keywords": ["blog", "static", "generator", "portfolio"],
+  "author": "Benjamin Niccum",
+  "license": "MIT"
+}

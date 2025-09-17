@@ -26,6 +26,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
       with:
@@ -56,6 +61,9 @@ jobs:
         
     - name: Build with Trunk
       run: trunk build --release
+      
+    - name: Generate static blog pages
+      run: node generate-blog-pages.js
       
     - name: List build output
       run: ls -la dist/
