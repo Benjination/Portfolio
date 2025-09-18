@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Agentic Ai vs Generative Ai - Benjamin Niccum</title>
+    <meta name="description" content="I wrote this when Agentic Ai first hit the scene">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="Agentic Ai vs Generative Ai">
+    <meta property="og:description" content="I wrote this when Agentic Ai first hit the scene">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/agentic-ai-vs-generative-ai">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agentic Ai vs Generative Ai">
+    <meta name="twitter:description" content="I wrote this when Agentic Ai first hit the scene">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2025-09-18T01:32:11.592Z">
+    <meta property="article:modified_time" content="2025-09-18T01:32:11.592Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/agentic-ai-vs-generative-ai">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">Agentic Ai vs Generative Ai</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">9/17/2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p>Generative Ai models like ChatGPT massively accelerated the productivity of development in nearly all creative fields by offering a new method for generating content. Although I have written this article with my own mind, fingers, and MacBook using the information cited below, I could have used generative Ai to handle the task by feeding the articles into a generative Ai model and asking Ai to produce a similar article. Not only would the results have been hard to distinguish from human production, but in most cases the generated article could be more flawlessly executed. According to an article by Dustin Stout in Magai (Not MAGA affiliated), somewhere in the ballpark of “83% of creative professionals have incorporated Ai tools into their processes” (1, Stout). The article goes on to point out that incorporating some form of Ai into the development process on average results in 62% faster task completion with 26% of all tasks being augmented in some way by artificial intelligence. From a project management point of view, this is a massive boost to productivity.<br> A more recent development in the world of artificial intelligence is the introduction of Agentic Ai. This new form of artificial intelligence will be able to act as an agent in a way that generative Ai has not previously been able to do. Like generative Ai, it operates through AI agents that leverage advanced technologies like large language models, machine learning, and natural language processing to achieve specific goals in dynamic environments. Agentic AI exhibits autonomy, adaptability, and goal-oriented behavior, enabling it to interact with external tools and adapt strategies based on changing conditions. The evolution of artificial intelligence has been rapid. Beginning with the introduction of ChatGPT 3.5 in November of ’22, a system capable of taking simple requests and generating text-only responses, and journeying through the development of GPT 4.0, a much more intelligent version, the advent of Dall-e and other image generating versions of Ai, several other releases along the way, and ending with the most recent development of ChatGPT 4.5 released less than one month ago in February of ’25. The concept of Agentic Ai has persisted throughout, but we are only just getting to the point where we are seeing artificial intelligence with the ability to work nearly autonomously levels of human interaction at very little to none. </p>
+
+<p>The recent article by Teaganne Finn and Amanda Downie published on IBM.com (3, IBM), describes the major difference between Agentic and Generative Ai as being that Agentic Ai takes autonomous capabilities to a new level. Agentic Ai has not always appeared as talking robots that can bartend and ballroom dance but rather had more humble beginnings arriving in automated vehicles and copilots for decision making task-oriented goals like we might see in Github’s copilot feature. In the way that generative Ai accelerated the productivity of developers, Agentic Ai aims to have a similar impact on project management. Agentic Ai uses many of the same features as generative Ai such as large language models and natural language processing, but unlike it’s predecessor, Agentic Ai can handle much more complex tasks by learning how to make good decisions without guidance and employing agencies outside their own frameworks to accomplish complicated tasks. As an example, a generative ai model might reach out to hotels and airlines to create an itinerary for an individual, but an agentic ai could book this itinerary for the individual without their assistance. The additional processes that an agentic ai model can handle unburden project managers that would have to arrange these details themselves or employ individuals specifically for these kinds of tasks. The key features of agentic ai according to Finn and Downie are the ability to make decisions, to solve problems, to work autonomously in an interactive way, and the ability to design and implement plans. In addition to project management, agentic Ai can also be employed to develop testing methods for development. Generative Ai could do this with to a certain extent with some clever prompting and repetition, but an ai agent can read the unique code of a given program, develop the necessary tests, create the test files, and alter programs to run the tests. Automating this process alone frees hours of developer’s time and can potentially save employers considerable amounts of time and money. </p>
+
+<p>The two articles that I found to support the information provided on IBM.com were the article by Dustin Stout (1, Stout), and an article posted on the Ui-Path website by Ingo Philipp. In Stout’s article he describes in detail how generative ai specifically is transforming creation spaces across the digital landscape. Stout's article provides strong evidence for the transformative impact of generative AI on creative work, which aligns with the IBM article's discussion of AI's evolving capabilities. This widespread adoption and efficiency improvement in creative fields parallel the potential impact of agentic AI in project management and testing, as described in the IBM article. The UiPath article by Ingo Philipp introduces the concept of "agentic testing," which closely relates to the IBM article's description of agentic AI in software testing. Philipp describes AI agents that can perform complex testing tasks autonomously, such as generating test cases from requirements and converting manual tests into automated ones. This aligns with the IBM article's portrayal of agentic AI's ability to handle complex tasks independently, particularly in the context of software testing and development. Both supporting articles demonstrate the growing capabilities of AI in various domains, from creative work to software testing. They reinforce the IBM article's assertion that AI, particularly agentic AI, is evolving to handle increasingly complex tasks autonomously, potentially revolutionizing project management and software development processes.</p>
+
+<p>Personally, I think the development of initial large language model trained artificial intelligence and the continued evolution of the capabilities of Ai have only just begun. Initially, I think that Ai will replace some need for entry-level software engineering positions, and reduce the amount of opportunity in the industry, but with the inception of artificial intelligence making software development so much more approachable, these changes will create new opportunities to replace and exceed the ones that were lost. Agentic Ai can and should be used to automate positions that were previously held by humans in the way that electronic calculators replaced human calculators in the seventies. The creation and evolution of electronic calculators propelled computer science into the information era that we live in today because innovation does not replace human influence. The most innovative ideas propel growth in societies and I look forward to the future of artificial intelligence as it continues to grow and evolve.</p>
+
+<p>REFERENCES:</p>
+
+<p>1. Stout, D. W. (2025, January 23). How generative AI has transformed creative work: A comprehensive study. Magai. https://magai.co/generative-ai-has-transformed-creative-work/ </p>
+
+<p>2. Inc., U. (n.d.). Agentic testing: Augmenting testers with AI agents for Productivity: Community blog. UiPath RSS. https://www.uipath.com/community-blog/tutorials/agentic-testing-augmenting-testers-with-ai-agents </p>
+
+<p>3. Ibm. (2025, March 11). Agentic AI vs. Generative AI. IBM. https://www.ibm.com/think/topics/agentic-ai-vs-generative-ai </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>
