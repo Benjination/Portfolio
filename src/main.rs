@@ -13,6 +13,28 @@ pub enum Route {
     BlogPost { id: String },
 }
 
+#[function_component(RedirectHandler)]
+fn redirect_handler() -> Html {
+    let navigator = use_navigator().unwrap();
+    
+    use_effect_with((), move |_| {
+        // Check if the current URL path contains a blog post pattern
+        if let Some(window) = web_sys::window() {
+            if let Ok(pathname) = window.location().pathname() {
+                // Check if we're on a blog post URL (like /blog/post_123456)
+                if pathname.starts_with("/blog/post_") {
+                    let post_id = pathname.trim_start_matches("/blog/").to_string();
+                    // Navigate to the blog post route in the Yew app
+                    navigator.push(&Route::BlogPost { id: post_id });
+                }
+            }
+        }
+        || {}
+    });
+    
+    html! {}
+}
+
 fn switch(routes: Route) -> Html {
     match routes {
         Route::Home => html! {
@@ -21,6 +43,7 @@ fn switch(routes: Route) -> Html {
                 <div class="content-wrapper">
                     <Header />
                     <main>
+                        <RedirectHandler />
                         <About />
                         <Skills />
                         <Projects />
@@ -62,15 +85,12 @@ fn app() -> Html {
     }
 }
 
-use wasm_bindgen::prelude::*;
-
-use wasm_bindgen::prelude::*;
-use web_sys::window;
 use gloo::events::EventListener;
+use wasm_bindgen::JsCast;
 
 fn main() {
     // Attach a global keydown event listener to prevent arrow/space scrolling
-    let window = window().unwrap();
+    let window = web_sys::window().unwrap();
     let _listener = EventListener::new(&window, "keydown", move |event| {
         if let Some(event) = event.dyn_ref::<web_sys::KeyboardEvent>() {
             match event.key().as_str() {

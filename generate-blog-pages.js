@@ -107,11 +107,10 @@ function generateBlogPostHTML(post) {
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     
-    <!-- Redirect to main app for full functionality -->
+    <!-- Redirect to home page, let main app handle blog detection -->
     <script type="text/javascript">
-        // Redirect to the main SPA for the full experience
-        // Static pages are only for SEO and social media crawlers
-        window.location.replace('/blog/${post.id}');
+        // Simple redirect to home page - the main app will detect and navigate to the blog post
+        window.location.href = '/';
     </script>
     
     <!-- Fallback styles for no-JS users -->
