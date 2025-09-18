@@ -11,6 +11,9 @@ pub enum Route {
     Home,
     #[at("/blog/:id")]
     BlogPost { id: String },
+    #[not_found]
+    #[at("/404")]
+    NotFound,
 }
 
 #[function_component(RedirectHandler)]
@@ -73,6 +76,24 @@ fn switch(routes: Route) -> Html {
                     <Header />
                     <main>
                         <BlogPostComponent post_id={id} />
+                    </main>
+                    <div class="site-counter">
+                        <Counter counter_type={CounterType::SiteVisits} label="TOTAL SITE VISITS" />
+                    </div>
+                </div>
+            </div>
+        },
+        Route::NotFound => html! {
+            <div class="app">
+                <MatrixRain />
+                <div class="content-wrapper">
+                    <Header />
+                    <main>
+                        <RedirectHandler />
+                        <div style="text-align: center; padding: 2rem;">
+                            <h2>{"Page Not Found"}</h2>
+                            <p>{"The page you're looking for doesn't exist. Checking for blog redirects..."}</p>
+                        </div>
                     </main>
                     <div class="site-counter">
                         <Counter counter_type={CounterType::SiteVisits} label="TOTAL SITE VISITS" />
