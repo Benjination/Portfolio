@@ -17,6 +17,7 @@ pub struct BlogPost {
     pub updated_at: String,
     pub published: bool,
     pub tags: Vec<String>,
+    pub sort_order: i32,
 }
 
 #[derive(Properties, PartialEq)]
@@ -102,6 +103,13 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                                         .and_then(|v| v.as_bool()))
                                                     .unwrap_or(false);
                                                 
+                                                // Get sort order (defaults to 999 if not specified)
+                                                let sort_order = fields.get("sort_order")
+                                                    .and_then(|f| f.get("integerValue"))
+                                                    .and_then(|v| v.as_str())
+                                                    .and_then(|s| s.parse::<i32>().ok())
+                                                    .unwrap_or(999);
+                                                
                                                 if published {
                                                     blog_posts.push(BlogPost {
                                                         id,
@@ -113,12 +121,16 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                                         updated_at: "2024-01-01".to_string(),
                                                         published,
                                                         tags: vec![],
+                                                        sort_order,
                                                     });
                                                 }
                                             }
                                         }
                                     }
                                 }
+                                
+                                // Sort blog posts by sort_order (ascending: 1, 2, 3, etc.)
+                                blog_posts.sort_by(|a, b| a.sort_order.cmp(&b.sort_order));
                                 
                                 posts.set(blog_posts);
                             }
