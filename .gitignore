@@ -3,8 +3,8 @@
 **/*.rs.bk
 Cargo.lock
 
-# Trunk
-/dist/
+# Trunk - Allow dist directory for static blog pages deployment
+# /dist/
 
 # IDE
 .vscode/settings.json

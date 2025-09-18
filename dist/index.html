@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Benjamin Niccum - Software Engineer Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Benjamin Niccum - Software Engineer Portfolio. Rust, WebAssembly, mobile development, and innovative web experiences. Interactive terminal-themed portfolio with Snake game.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://benjaminniccum.com/">
+    <meta property="og:title" content="Benjamin Niccum - Software Engineer Portfolio">
+    <meta property="og:description" content="Software Engineer specializing in Rust, WebAssembly, and mobile development. Interactive portfolio with retro terminal design and Snake game.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Benjination/Portfolio/master/og-image.png">
+    <meta property="og:image:width" content="1210">
+    <meta property="og:image:height" content="700">
+    <meta property="og:image:alt" content="Benjamin Niccum's portfolio website with terminal interface and ASCII art">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://benjaminniccum.com/">
+    <meta property="twitter:title" content="Benjamin Niccum - Software Engineer Portfolio">
+    <meta property="twitter:description" content="Software Engineer specializing in Rust, WebAssembly, and mobile development. Interactive portfolio with retro terminal design.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/Benjination/Portfolio/master/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Additional SEO -->
+    <meta name="author" content="Benjamin Niccum">
+    <meta name="keywords" content="Benjamin Niccum, Software Engineer, Rust, WebAssembly, Mobile Development, Portfolio, JavaScript, Python, Java">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://benjination.github.io/Portfolio/">
+    
+    <link rel="stylesheet" href="./main-8eae1d0f166ce027.css" integrity="sha384-+3iwhKIg3nw9B/0dCBXz8L2GSyVEV747cKqFVbhF5DGsxRXzHTojeY5v0hydaZCy"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="modulepreload" href="./portfolio-1155fd9eebdd22ec.js" crossorigin="anonymous" integrity="sha384-YvyhzDwMuRTLe9SBh7X5J2B9tHEyyAlSw5+z+eL0TNE6S46VwBkcJdYVgJ8Lcf3p"><link rel="preload" href="./portfolio-1155fd9eebdd22ec_bg.wasm" crossorigin="anonymous" integrity="sha384-JUunpWnpViTLrauGEmMNd+yYBYA78fukqB4BIhWW3q+zwho9uJA6LBBQC9A/EzIP" as="fetch" type="application/wasm"></head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        // Terminal startup effect
+        document.body.classList.add('terminal-startup');
+        setTimeout(() => {
+            document.body.classList.remove('terminal-startup');
+        }, 2000);
+    </script>
+
+<script type="module">
+import init, * as bindings from './portfolio-1155fd9eebdd22ec.js';
+const wasm = await init({ module_or_path: './portfolio-1155fd9eebdd22ec_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script></body>
+</html>
