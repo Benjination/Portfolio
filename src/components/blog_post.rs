@@ -131,9 +131,10 @@ pub fn BlogPost(props: &BlogPostProps) -> Html {
         }
 
         spawn_local(async move {
+            // Fetch all blog posts to find the one with matching title-based ID
             let url = format!(
-                "https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/blogs/{}?key={}",
-                post_id, FIREBASE_API_KEY
+                "https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/blogs?key={}",
+                FIREBASE_API_KEY
             );
 
             match Request::get(&url).send().await {
@@ -141,14 +142,45 @@ pub fn BlogPost(props: &BlogPostProps) -> Html {
                     if response.ok() {
                         match response.json::<serde_json::Value>().await {
                             Ok(data) => {
-                                if let Some(blog_post) = parse_firestore_blog_post(&data, &post_id) {
-                                    if blog_post.is_published {
-                                        post.set(Some(blog_post));
-                                    } else {
-                                        error.set(Some("Blog post not found or not published".to_string()));
+                                let mut found = false;
+                                if let Some(documents) = data.get("documents").and_then(|d| d.as_array()) {
+                                    // Look for the blog post with matching title-based ID
+                                    for doc in documents {
+                                        if let Some(fields) = doc.get("fields") {
+                                            let title = fields.get("title")
+                                                .and_then(|f| f.get("stringValue"))
+                                                .and_then(|v| v.as_str())
+                                                .unwrap_or("")
+                                                .to_string();
+                                                
+                                            // Create title-based ID to match
+                                            let title_id = title.to_lowercase()
+                                                .chars()
+                                                .filter(|c| c.is_alphanumeric() || c.is_whitespace())
+                                                .collect::<String>()
+                                                .split_whitespace()
+                                                .collect::<Vec<&str>>()
+                                                .join("-")
+                                                .chars()
+                                                .take(30)
+                                                .collect::<String>()
+                                                .trim_end_matches('-')
+                                                .to_string();
+                                                
+                                            if title_id == post_id {
+                                                if let Some(blog_post) = parse_firestore_blog_post(doc, &title_id) {
+                                                    if blog_post.is_published {
+                                                        post.set(Some(blog_post));
+                                                        found = true;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
-                                } else {
-                                    error.set(Some("Failed to parse blog post data".to_string()));
+                                }
+                                if !found {
+                                    error.set(Some("Blog post not found".to_string()));
                                 }
                             }
                             Err(_) => {

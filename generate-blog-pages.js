@@ -51,11 +51,15 @@ function parseBlogPost(doc) {
     const author = getStringValue('author') || 'Benjamin Niccum';
     const isPublished = getBoolValue('is_published') || getBoolValue('published');
     
-    // Extract post ID from document name
-    const postId = doc.name.split('/').pop();
+    // Create ID from first 30 characters of title (URL-safe)
+    const titleId = title.toLowerCase()
+        .replace(/[^a-z0-9\s]/g, '') // Remove special characters
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .substring(0, 30) // Take first 30 characters
+        .replace(/-+$/, ''); // Remove trailing hyphens
     
     return {
-        id: postId,
+        id: titleId,
         title,
         content,
         excerpt,

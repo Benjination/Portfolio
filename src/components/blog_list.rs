@@ -49,13 +49,26 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                     for doc in documents {
                                         if let Some(fields) = doc.get("fields") {
                                             if let Some(name) = doc.get("name").and_then(|n| n.as_str()) {
-                                                // Simple parsing for now
-                                                let id = name.split('/').last().unwrap_or("").to_string();
                                                 let title = fields.get("title")
                                                     .and_then(|f| f.get("stringValue"))
                                                     .and_then(|v| v.as_str())
                                                     .unwrap_or("Untitled")
                                                     .to_string();
+                                                    
+                                                // Create ID from first 30 characters of title (URL-safe)
+                                                let id = title.to_lowercase()
+                                                    .chars()
+                                                    .filter(|c| c.is_alphanumeric() || c.is_whitespace())
+                                                    .collect::<String>()
+                                                    .split_whitespace()
+                                                    .collect::<Vec<&str>>()
+                                                    .join("-")
+                                                    .chars()
+                                                    .take(30)
+                                                    .collect::<String>()
+                                                    .trim_end_matches('-')
+                                                    .to_string();
+                                                    
                                                 let content = fields.get("main_content")
                                                     .and_then(|f| f.get("stringValue"))
                                                     .and_then(|v| v.as_str())
