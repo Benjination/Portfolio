@@ -1,126 +1,33 @@
-#!/usr/bin/env node
-
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-
-// Firebase configuration
-const FIREBASE_API_KEY = 'AIzaSyAsmk3uImdPFOPLZrEsK6J1c20gk8S3hbY';
-const PROJECT_ID = 'portfolio-7148b';
-
-// Fetch blog posts from Firestore
-async function fetchBlogPosts() {
-    const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/blogs?key=${FIREBASE_API_KEY}`;
-    
-    return new Promise((resolve, reject) => {
-        https.get(url, (res) => {
-            let data = '';
-            res.on('data', (chunk) => {
-                data += chunk;
-            });
-            res.on('end', () => {
-                try {
-                    const parsed = JSON.parse(data);
-                    resolve(parsed);
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        }).on('error', (err) => {
-            reject(err);
-        });
-    });
-}
-
-// Parse Firestore document to blog post
-function parseBlogPost(doc) {
-    const fields = doc.fields;
-    if (!fields) return null;
-    
-    const getStringValue = (fieldName) => {
-        return fields[fieldName]?.stringValue || '';
-    };
-    
-    const getBoolValue = (fieldName) => {
-        return fields[fieldName]?.booleanValue || false;
-    };
-    
-    const title = getStringValue('title') || 'Untitled Post';
-    const content = getStringValue('main_content') || getStringValue('content') || 'No content available';
-    const excerpt = getStringValue('excerpt') || getStringValue('description') || content.substring(0, 150) + '...';
-    const author = getStringValue('author') || 'Benjamin Niccum';
-    const isPublished = getBoolValue('is_published') || getBoolValue('published');
-    
-    // Create ID from first 30 characters of title (URL-safe)
-    const titleId = title.toLowerCase()
-        .replace(/[^a-z0-9\s]/g, '') // Remove special characters
-        .replace(/\s+/g, '-') // Replace spaces with hyphens
-        .substring(0, 30) // Take first 30 characters
-        .replace(/-+$/, ''); // Remove trailing hyphens
-    
-    return {
-        id: titleId,
-        title,
-        content,
-        excerpt,
-        author,
-        isPublished,
-        dateCreated: getStringValue('date_created') || getStringValue('created_at') || '2024-01-01',
-        dateUpdated: getStringValue('date_updated') || getStringValue('updated_at') || '2024-01-01'
-    };
-}
-
-// Generate HTML for a blog post
-function generateBlogPostHTML(post) {
-    // Enhanced content formatting to match main app
-    const formattedContent = post.content
-        // Split into paragraphs and wrap in <p> tags
-        .split(/\n\s*\n/)
-        .map(paragraph => {
-            if (paragraph.trim()) {
-                // Handle bold text
-                let formatted = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                // Handle italic text
-                formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
-                // Handle single line breaks within paragraphs
-                formatted = formatted.replace(/\n/g, '<br>');
-                return `<p>${formatted}</p>`;
-            }
-            return '';
-        })
-        .filter(p => p)
-        .join('\n\n');
-    
-    return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>${post.title} - Benjamin Niccum</title>
-    <meta name="description" content="${post.excerpt}">
+    <title>A Quantum Mystery - Benjamin Niccum</title>
+    <meta name="description" content="An little research into the double slit experiment I wrote in Physics">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="${post.author}">
+    <meta name="author" content="benjination2@gmail.com">
     
     <!-- Open Graph Meta Tags for social sharing -->
-    <meta property="og:title" content="${post.title}">
-    <meta property="og:description" content="${post.excerpt}">
+    <meta property="og:title" content="A Quantum Mystery">
+    <meta property="og:description" content="An little research into the double slit experiment I wrote in Physics">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://benjaminniccum.com/blog/${post.id}">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/a-quantum-mystery">
     <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
     <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${post.title}">
-    <meta name="twitter:description" content="${post.excerpt}">
+    <meta name="twitter:title" content="A Quantum Mystery">
+    <meta name="twitter:description" content="An little research into the double slit experiment I wrote in Physics">
     <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
     
     <!-- Article Meta -->
-    <meta property="article:author" content="${post.author}">
-    <meta property="article:published_time" content="${post.dateCreated}">
-    <meta property="article:modified_time" content="${post.dateUpdated}">
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2025-09-18T01:18:32.248Z">
+    <meta property="article:modified_time" content="2025-09-18T01:18:32.248Z">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://benjaminniccum.com/blog/${post.id}">
+    <link rel="canonical" href="https://benjaminniccum.com/blog/a-quantum-mystery">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -375,18 +282,34 @@ function generateBlogPostHTML(post) {
                 <a href="/#blog" class="back-button" style="margin-left: 1rem;">← Back to Blog List</a>
                 
                 <div class="post-meta">
-                    <h1 class="post-title">${post.title}</h1>
+                    <h1 class="post-title">A Quantum Mystery</h1>
                     <div class="post-info">
-                        <span class="author">${post.author}</span>
+                        <span class="author">benjination2@gmail.com</span>
                         <span class="date-separator">•</span>
-                        <span class="date">${new Date(post.dateCreated).toLocaleDateString()}</span>
+                        <span class="date">9/17/2025</span>
                     </div>
                 </div>
             </div>
 
             <div class="blog-content">
                 <div class="content-text">
-                    ${formattedContent}
+                    <p>Isaac Newton’s work in 1704 called the Corpuscular Theory of Light proposed that light is a particle, and it moves in the same way that electrons may arc through open air. In 1801, Thomas Young showed through his Double-Slit experiment that light is not a particle, but rather it is a wave. Then Albert Einstein, in 1805, came along and proposed the idea that light is both a wave and a particle, and scientists have since found this to be the most reasonable description. The most common belief amongst physicists today says that they are all three at least halfway correct. To better understand the quantum mystery within the double slit experiment, it is important to understand that light is a particle measured in minute packets of electromagnetic radiation called photons and light is an electromagnetic wave. </p>
+
+<p>In the Double-Slit experiment conducted by Thomas Young et al, Young directed a light source through one or two slits and observed the light patterns on a wall behind the slits (Dobrijevic, 2022). Logically, one might think that when the light was directed though a single vertical slit, the light pattern on the wall would be a single vertical line, and when the light was directed through two vertical slits, the pattern would be two vertical lines. If light were a particle, like sand for example, this would be the case. Two slits would create two paths and the particles would land directly opposite the light source on the wall. The light did not behave this way, and so Young believed that light was not acting like a particle. What happened instead is that the light behaved in the way that waves behave. When Young used one slit, the light pattern expanded outward in the way that a wave might expand after moving through a slit in a dam, and when Young used two slits the pattern showed not only that the light wave was expanding outward, or diffracting, but also that the waves interacted with each other like ripples on a pond. The interaction between the waves, called interference, acts in the way that waves interact. Where a crest hits a trough, the energy is cancelled, and where a crest hits a crest it is amplified. This interaction creates a striped pattern on the wall showing that light behaves as a wave, and not a particle as previously imagined by Newton (Shaik, 2016). Then, in 1905, Einstein settled the debate definitively proposing that light is a particle called a photon, and when this particle is moved, it moves as a wave (Inoue, year not found). The relationship of photons to electromagnetic waves is similar to the relationship of electrons to current.</p>
+
+<p>So, if light can be a particle and a wave, are there other particles that can behave as waves also? Quantum physics says that there are. The Double-Slit experiment has been repeated many times by many researchers, myself included. One of these researchers, Thomas Juffman, has been able to send particles 1300 times the size of a proton through a double-slit and found the particles to behave as a wave (Georgescu, 2012). Now, the great mystery that is still unsolved is the Observer Phenomena. In 1978, John Wheeler showed through his Double-Slit experiment that light acts as a particle and a wave, but never both at the same time, and the determining factor is whether or not the particles were being observed (Wogan, 2017). Wheeler found that when he fired particles through a double-slit that with one slit being monitored by a device that determined whether a particle had passed though, 50% of the time the particle would go through that slit, and the pattern on the wall behind the slit showed diffraction instead of interference. When the device was turned off, the particles would pass through either slit and create an interference pattern on the wall. The simple act of observing the behavior changed the results. These particles were fired one at a time, so for the particle to create an interference pattern, it would need to interfere with itself inferring that the particle passes through one slit when being watched, and left unwatched it travels through both slits existing in two places at the same time. As far as my research has led me, I believe this mysterious phenomenon is still unexplained. </p>
+
+<p>References:</p>
+
+<p>Dobrijevic, D. (2022, March 23). The double-slit experiment: Is light a wave or a particle? Space.com. Retrieved May 5, 2022, from https://www.space.com/double-slit-experiment-light-wave-or-particle#:~:text=The%20first%20version%20of%20the,a%20wave%2C%20not%20a%20particle. </p>
+
+<p>Shaik, A. (2016, December 1). Corpuscular theory of light. Physics and RadioElectronics. Retrieved May 5, 2022, from https://www.physics-and-radio-electronics.com/blog/corpuscular-theory-light/ </p>
+
+<p>Inoue, I. (n.d.). Canon : Canon technology: Canon science lab: Light is it a wave or a particle?Canon Global. Retrieved May 5, 2022, from https://global.canon/en/technology/s_labo/light/001/11.html#:~:text=Einstein%20believed%20light%20is%20a,related%20to%20its%20oscillation%20frequency. </p>
+
+<p>Georgescu, I. (2012, May 2). One by one. Nature News. Retrieved May 5, 2022, from https://www.nature.com/articles/nphys2313 </p>
+
+<p>Wogan, T. (2017, August 25). Do atoms going through a double slit 'know' if they are being observed?Physics World. Retrieved May 5, 2022, from https://physicsworld.com/a/do-atoms-going-through-a-double-slit-know-if-they-are-being-observed/ </p>
                 </div>
             </div>
         </div>
@@ -398,59 +321,4 @@ function generateBlogPostHTML(post) {
         </style>
     </noscript>
 </body>
-</html>`;
-}
-
-// Main function
-async function generateStaticBlogPages() {
-    try {
-        console.log('Fetching blog posts from Firestore...');
-        const response = await fetchBlogPosts();
-        
-        if (!response.documents) {
-            console.log('No blog posts found.');
-            return;
-        }
-        
-        const blogPosts = response.documents
-            .map(parseBlogPost)
-            .filter(post => post && post.isPublished);
-        
-        console.log(`Found ${blogPosts.length} published blog posts.`);
-        
-        // Create blog directory
-        const blogDir = path.join(__dirname, 'dist', 'blog');
-        if (!fs.existsSync(blogDir)) {
-            fs.mkdirSync(blogDir, { recursive: true });
-        }
-        
-        // Generate static pages for each blog post
-        for (const post of blogPosts) {
-            const postDir = path.join(blogDir, post.id);
-            if (!fs.existsSync(postDir)) {
-                fs.mkdirSync(postDir, { recursive: true });
-            }
-            
-            const htmlContent = generateBlogPostHTML(post);
-            
-            // Create both /blog/post_id/index.html and /blog/post_id.html
-            const indexFilePath = path.join(postDir, 'index.html');
-            const directFilePath = path.join(blogDir, `${post.id}.html`);
-            
-            fs.writeFileSync(indexFilePath, htmlContent);
-            fs.writeFileSync(directFilePath, htmlContent);
-            
-            console.log(`Generated: /blog/${post.id}/index.html`);
-            console.log(`Generated: /blog/${post.id}.html`);
-        }
-        
-        console.log('✅ Static blog pages generated successfully!');
-        
-    } catch (error) {
-        console.error('Error generating static blog pages:', error);
-        process.exit(1);
-    }
-}
-
-// Run the script
-generateStaticBlogPages();
+</html>

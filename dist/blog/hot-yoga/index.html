@@ -1,126 +1,33 @@
-#!/usr/bin/env node
-
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-
-// Firebase configuration
-const FIREBASE_API_KEY = 'AIzaSyAsmk3uImdPFOPLZrEsK6J1c20gk8S3hbY';
-const PROJECT_ID = 'portfolio-7148b';
-
-// Fetch blog posts from Firestore
-async function fetchBlogPosts() {
-    const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/blogs?key=${FIREBASE_API_KEY}`;
-    
-    return new Promise((resolve, reject) => {
-        https.get(url, (res) => {
-            let data = '';
-            res.on('data', (chunk) => {
-                data += chunk;
-            });
-            res.on('end', () => {
-                try {
-                    const parsed = JSON.parse(data);
-                    resolve(parsed);
-                } catch (e) {
-                    reject(e);
-                }
-            });
-        }).on('error', (err) => {
-            reject(err);
-        });
-    });
-}
-
-// Parse Firestore document to blog post
-function parseBlogPost(doc) {
-    const fields = doc.fields;
-    if (!fields) return null;
-    
-    const getStringValue = (fieldName) => {
-        return fields[fieldName]?.stringValue || '';
-    };
-    
-    const getBoolValue = (fieldName) => {
-        return fields[fieldName]?.booleanValue || false;
-    };
-    
-    const title = getStringValue('title') || 'Untitled Post';
-    const content = getStringValue('main_content') || getStringValue('content') || 'No content available';
-    const excerpt = getStringValue('excerpt') || getStringValue('description') || content.substring(0, 150) + '...';
-    const author = getStringValue('author') || 'Benjamin Niccum';
-    const isPublished = getBoolValue('is_published') || getBoolValue('published');
-    
-    // Create ID from first 30 characters of title (URL-safe)
-    const titleId = title.toLowerCase()
-        .replace(/[^a-z0-9\s]/g, '') // Remove special characters
-        .replace(/\s+/g, '-') // Replace spaces with hyphens
-        .substring(0, 30) // Take first 30 characters
-        .replace(/-+$/, ''); // Remove trailing hyphens
-    
-    return {
-        id: titleId,
-        title,
-        content,
-        excerpt,
-        author,
-        isPublished,
-        dateCreated: getStringValue('date_created') || getStringValue('created_at') || '2024-01-01',
-        dateUpdated: getStringValue('date_updated') || getStringValue('updated_at') || '2024-01-01'
-    };
-}
-
-// Generate HTML for a blog post
-function generateBlogPostHTML(post) {
-    // Enhanced content formatting to match main app
-    const formattedContent = post.content
-        // Split into paragraphs and wrap in <p> tags
-        .split(/\n\s*\n/)
-        .map(paragraph => {
-            if (paragraph.trim()) {
-                // Handle bold text
-                let formatted = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                // Handle italic text
-                formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
-                // Handle single line breaks within paragraphs
-                formatted = formatted.replace(/\n/g, '<br>');
-                return `<p>${formatted}</p>`;
-            }
-            return '';
-        })
-        .filter(p => p)
-        .join('\n\n');
-    
-    return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>${post.title} - Benjamin Niccum</title>
-    <meta name="description" content="${post.excerpt}">
+    <title>Hot Yoga - Benjamin Niccum</title>
+    <meta name="description" content="Poem I had published in the Elephant Jounal">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="${post.author}">
+    <meta name="author" content="benjination2@gmail.com">
     
     <!-- Open Graph Meta Tags for social sharing -->
-    <meta property="og:title" content="${post.title}">
-    <meta property="og:description" content="${post.excerpt}">
+    <meta property="og:title" content="Hot Yoga">
+    <meta property="og:description" content="Poem I had published in the Elephant Jounal">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://benjaminniccum.com/blog/${post.id}">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/hot-yoga">
     <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
     <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${post.title}">
-    <meta name="twitter:description" content="${post.excerpt}">
+    <meta name="twitter:title" content="Hot Yoga">
+    <meta name="twitter:description" content="Poem I had published in the Elephant Jounal">
     <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
     
     <!-- Article Meta -->
-    <meta property="article:author" content="${post.author}">
-    <meta property="article:published_time" content="${post.dateCreated}">
-    <meta property="article:modified_time" content="${post.dateUpdated}">
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2025-09-18T01:13:51.567Z">
+    <meta property="article:modified_time" content="2025-09-18T01:13:51.567Z">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://benjaminniccum.com/blog/${post.id}">
+    <link rel="canonical" href="https://benjaminniccum.com/blog/hot-yoga">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -375,18 +282,22 @@ function generateBlogPostHTML(post) {
                 <a href="/#blog" class="back-button" style="margin-left: 1rem;">← Back to Blog List</a>
                 
                 <div class="post-meta">
-                    <h1 class="post-title">${post.title}</h1>
+                    <h1 class="post-title">Hot Yoga</h1>
                     <div class="post-info">
-                        <span class="author">${post.author}</span>
+                        <span class="author">benjination2@gmail.com</span>
                         <span class="date-separator">•</span>
-                        <span class="date">${new Date(post.dateCreated).toLocaleDateString()}</span>
+                        <span class="date">9/17/2025</span>
                     </div>
                 </div>
             </div>
 
             <div class="blog-content">
                 <div class="content-text">
-                    ${formattedContent}
+                    <p>Mother Earth holds me on her shoulder<br>High above the valleys below.<br>In my mind I feel the planet turning<br>Heat, Air, Water and Stone.<br>The wind dances upon my skin,<br>And I can hear the river’s flow.<br>The sun in the sky is the same as I,<br>Here in my childlike pose.<br>I am patiently set<br>To drip sweat, and forget.</p>
+
+<p>Nothing is as strong as a warrior can be.<br>Crimson red mist swirling from my trauma released.<br>Stone barricades impetuously blocking my energy<br>Come crumbling down, and melt away at my feet.<br>My pulse is slow, and my breath is long.<br>My flesh is screaming, but my mind is strong.<br>The temperature is rising, my body is wet.<br>Drip… Sweat… Forget.</p>
+
+<p>Only for a moment, Respite is granted.<br>I stand on the Earth with trunk firmly planted.<br>I focus my eyes that are filled up with salt.<br>Limbs grow towards the sun without halt.<br>Steadily growing towards me likewise,<br>The moment has passed, he licks out with his fires.<br>I am man, and he is no threat.<br>Drip… Sweat… Forget.</p>
                 </div>
             </div>
         </div>
@@ -398,59 +309,4 @@ function generateBlogPostHTML(post) {
         </style>
     </noscript>
 </body>
-</html>`;
-}
-
-// Main function
-async function generateStaticBlogPages() {
-    try {
-        console.log('Fetching blog posts from Firestore...');
-        const response = await fetchBlogPosts();
-        
-        if (!response.documents) {
-            console.log('No blog posts found.');
-            return;
-        }
-        
-        const blogPosts = response.documents
-            .map(parseBlogPost)
-            .filter(post => post && post.isPublished);
-        
-        console.log(`Found ${blogPosts.length} published blog posts.`);
-        
-        // Create blog directory
-        const blogDir = path.join(__dirname, 'dist', 'blog');
-        if (!fs.existsSync(blogDir)) {
-            fs.mkdirSync(blogDir, { recursive: true });
-        }
-        
-        // Generate static pages for each blog post
-        for (const post of blogPosts) {
-            const postDir = path.join(blogDir, post.id);
-            if (!fs.existsSync(postDir)) {
-                fs.mkdirSync(postDir, { recursive: true });
-            }
-            
-            const htmlContent = generateBlogPostHTML(post);
-            
-            // Create both /blog/post_id/index.html and /blog/post_id.html
-            const indexFilePath = path.join(postDir, 'index.html');
-            const directFilePath = path.join(blogDir, `${post.id}.html`);
-            
-            fs.writeFileSync(indexFilePath, htmlContent);
-            fs.writeFileSync(directFilePath, htmlContent);
-            
-            console.log(`Generated: /blog/${post.id}/index.html`);
-            console.log(`Generated: /blog/${post.id}.html`);
-        }
-        
-        console.log('✅ Static blog pages generated successfully!');
-        
-    } catch (error) {
-        console.error('Error generating static blog pages:', error);
-        process.exit(1);
-    }
-}
-
-// Run the script
-generateStaticBlogPages();
+</html>
