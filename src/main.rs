@@ -47,7 +47,6 @@ fn switch(routes: Route) -> Html {
                     <div class="site-counter">
                         <Counter counter_type={CounterType::SiteVisits} label="TOTAL SITE VISITS" />
                     </div>
-                    <Terminal />
                 </div>
             </div>
         }

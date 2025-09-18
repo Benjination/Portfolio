@@ -109,13 +109,9 @@ function generateBlogPostHTML(post) {
     
     <!-- Redirect to main app for full functionality -->
     <script type="text/javascript">
-        // If JavaScript is enabled, redirect to the main SPA for full functionality
-        // This provides the best user experience with navigation, terminal, etc.
-        setTimeout(function() {
-            if (window.location.pathname !== '/blog/${post.id}') {
-                window.location.href = '/blog/${post.id}';
-            }
-        }, 100);
+        // Redirect to the main SPA for the full experience
+        // Static pages are only for SEO and social media crawlers
+        window.location.replace('/blog/${post.id}');
     </script>
     
     <!-- Fallback styles for no-JS users -->

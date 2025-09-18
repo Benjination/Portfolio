@@ -3,6 +3,7 @@ use yew_router::prelude::*;
 use gloo_net::http::Request;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen_futures::spawn_local;
+use web_sys::window;
 use super::super::Route;
 
 const FIREBASE_API_KEY: &str = "AIzaSyBxK-Lm3gXPWdKh-8Rb7xQLPO-8E_yGMuE";
@@ -123,6 +124,11 @@ pub fn BlogPost(props: &BlogPostProps) -> Html {
         let post = post_clone;
         let loading = loading_clone;
         let error = error_clone;
+
+        // Scroll to top when blog post loads
+        if let Some(window) = window() {
+            let _ = window.scroll_to_with_x_and_y(0.0, 0.0);
+        }
 
         spawn_local(async move {
             let url = format!(
