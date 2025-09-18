@@ -239,10 +239,16 @@ async function generateStaticBlogPages() {
             }
             
             const htmlContent = generateBlogPostHTML(post);
-            const filePath = path.join(postDir, 'index.html');
             
-            fs.writeFileSync(filePath, htmlContent);
+            // Create both /blog/post_id/index.html and /blog/post_id.html
+            const indexFilePath = path.join(postDir, 'index.html');
+            const directFilePath = path.join(blogDir, `${post.id}.html`);
+            
+            fs.writeFileSync(indexFilePath, htmlContent);
+            fs.writeFileSync(directFilePath, htmlContent);
+            
             console.log(`Generated: /blog/${post.id}/index.html`);
+            console.log(`Generated: /blog/${post.id}.html`);
         }
         
         console.log('✅ Static blog pages generated successfully!');

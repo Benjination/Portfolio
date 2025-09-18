@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Page Not Found - Benjamin Niccum Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <style>
+        body {
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .url-info {
+            background: #1a1a1a;
+            border: 1px solid #00ff00;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .action-link {
+            display: inline-block;
+            margin: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .action-link:hover {
+            background: #00ff00;
+            color: #0a0a0a;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        
+        .terminal-prompt {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">404</div>
+        <div class="message">Page Not Found</div>
+        
+        <div class="url-info">
+            <strong>Requested:</strong> <span id="current-url"></span>
+        </div>
+        
+        <div class="message">
+            This page doesn't exist, but you can:
+        </div>
+        
+        <a href="/" class="action-link">← Go Home</a>
+        <a href="/#/blog" class="action-link">View Blog</a>
+        
+        <div class="terminal-prompt">
+            > This is a static 404 page. No automatic redirects to prevent loops.
+        </div>
+    </div>
+    
+    <script>
+        // Display the current URL without any redirects
+        document.getElementById('current-url').textContent = window.location.pathname;
+        
+        // No automatic redirects - user must manually choose
+    </script>
+</body>
+</html>
