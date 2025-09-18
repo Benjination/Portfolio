@@ -209,6 +209,23 @@ fn split_content_for_storage(content: &str) -> (Option<String>, Option<String>, 
     )
 }
 
+// Function to trigger GitHub Actions workflow to regenerate static blog pages
+async fn trigger_static_page_regeneration() {
+    web_sys::console::log_1(&"🔄 Blog post saved successfully!".into());
+    web_sys::console::log_1(&"📝 To update static blog pages for shared links:".into());
+    web_sys::console::log_1(&"   1. Open terminal in your project directory".into());
+    web_sys::console::log_1(&"   2. Run: npm run regenerate-blogs".into());
+    web_sys::console::log_1(&"   3. Commit and push the updated dist/blog/ files".into());
+    web_sys::console::log_1(&"".into());
+    web_sys::console::log_1(&"💡 This will ensure shared blog links show the updated content!".into());
+    
+    // Show an alert to the user as well
+    if let Some(window) = window() {
+        let message = "Blog post saved! \n\nTo update static pages for shared links:\n1. Run 'npm run regenerate-blogs' in terminal\n2. Commit and push the changes\n\nThis ensures shared blog links show updated content.";
+        let _ = window.alert_with_message(message);
+    }
+}
+
 #[derive(Properties, PartialEq)]
 pub struct BlogAdminProps {
     pub auth_state: AuthState,
@@ -510,6 +527,11 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                             show_new_post.set(false);
                                             current_post.set(None); // Clear editing state
                                             web_sys::console::log_1(&"Blog post saved successfully!".into());
+                                            
+                                            // Trigger static page regeneration
+                                            spawn_local(async move {
+                                                trigger_static_page_regeneration().await;
+                                            });
                                             
                                             // Clear form
                                             post_title.set(String::new());
