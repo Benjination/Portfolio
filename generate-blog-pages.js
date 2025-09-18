@@ -111,75 +111,144 @@ function generateBlogPostHTML(post) {
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     
-    <!-- Redirect to home page with blog ID preserved -->
+    <!-- Immediate redirect to prevent static page display -->
     <script type="text/javascript">
-        // Redirect to home page but preserve the blog ID using a hash or query parameter
-        // This allows the main app RedirectHandler to detect and navigate to the blog post
-        const currentPath = window.location.pathname;
-        console.log('🔗 Static page redirect from:', currentPath);
-        
-        // Extract the blog ID from the current path
-        if (currentPath.includes('/blog/')) {
-            const blogId = currentPath.split('/blog/')[1].replace(/\/$/, '').replace('.html', '');
-            console.log('📍 Extracted blog ID:', blogId);
+        // Immediate redirect - don't let users see the static page
+        (function() {
+            const currentPath = window.location.pathname;
+            console.log('🔗 Static page redirect from:', currentPath);
             
-            // Redirect to home with the blog ID in a hash
-            window.location.href = '/#redirect-blog=' + encodeURIComponent(blogId);
-        } else {
-            // Fallback redirect to home
-            window.location.href = '/';
-        }
+            // Extract the blog ID from the current path
+            if (currentPath.includes('/blog/')) {
+                const blogId = currentPath.split('/blog/')[1].replace(/\/$/, '').replace('.html', '');
+                console.log('📍 Extracted blog ID:', blogId);
+                
+                // Immediate redirect to home with the blog ID in a hash
+                window.location.replace('/#redirect-blog=' + encodeURIComponent(blogId));
+            } else {
+                // Fallback redirect to home
+                window.location.replace('/');
+            }
+        })();
     </script>
     
-    <!-- Fallback styles for no-JS users -->
+    <!-- Meta refresh as backup in case JavaScript is disabled -->
+    <meta http-equiv="refresh" content="0; url=/">
+    
+    <!-- Fallback styles for static page -->
     <style>
         body {
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
             background: #0a0a0a;
             color: #e0e0e0;
             line-height: 1.6;
             margin: 0;
             padding: 0;
         }
+        
+        /* Header styles matching main site */
+        .header {
+            background: #0a0a0a;
+            border-bottom: 2px solid #00ff00;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .site-title {
+            color: #00ff00;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #00ff00;
+            border-color: #00ff00;
+        }
+        
+        /* Main content container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem 2rem 2rem;
         }
+        
+        /* Back button */
+        .back-button {
+            background: transparent;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: #00ff00;
+            color: #0a0a0a;
+        }
+        
+        /* Blog content */
         .blog-header {
             border-bottom: 2px solid #00ff00;
             padding-bottom: 2rem;
             margin-bottom: 3rem;
         }
+        
         .blog-title {
             color: #00ff00;
             font-size: 2.5rem;
             margin: 0 0 1rem 0;
             font-weight: 700;
         }
+        
         .blog-meta {
             color: #888;
             font-size: 1rem;
             margin-bottom: 1rem;
         }
+        
         .blog-content {
             font-size: 1.125rem;
             line-height: 1.8;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 3rem;
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 2px solid #00ff00;
-            color: #00ff00;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .back-link:hover {
-            background: #00ff00;
-            color: #0a0a0a;
-        }
+        
         .js-redirect-notice {
             background: #1a1a1a;
             border: 1px solid #00ff00;
@@ -187,20 +256,48 @@ function generateBlogPostHTML(post) {
             padding: 1rem;
             margin-bottom: 2rem;
             text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        /* Terminal-style touches */
+        .terminal-prompt {
+            color: #00ff00;
+            font-family: inherit;
         }
     </style>
 </head>
 <body>
+    <!-- Header matching main portfolio -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="/" class="site-title">Benjamin Niccum</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#skills">Skills</a></li>
+                    <li><a href="/#projects">Projects</a></li>
+                    <li><a href="/#blog">Blog</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
         <div class="js-redirect-notice">
-            <p>For the full interactive experience, this page will redirect to the main portfolio in a moment...</p>
+            <span class="terminal-prompt">user@portfolio:~$</span> Redirecting to full interactive experience...
         </div>
+        
+        <!-- Back to main page button -->
+        <a href="/#blog" class="back-button">← Back to Blog List</a>
         
         <article>
             <header class="blog-header">
                 <h1 class="blog-title">${post.title}</h1>
                 <div class="blog-meta">
-                    By ${post.author} • ${new Date(post.dateCreated).toLocaleDateString()}
+                    <span class="terminal-prompt">author@</span>${post.author} • ${new Date(post.dateCreated).toLocaleDateString()}
                 </div>
             </header>
             
@@ -208,8 +305,6 @@ function generateBlogPostHTML(post) {
                 ${formattedContent}
             </div>
         </article>
-        
-        <a href="/" class="back-link">← Back to Portfolio</a>
     </div>
     
     <noscript>
