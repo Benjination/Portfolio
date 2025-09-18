@@ -111,10 +111,24 @@ function generateBlogPostHTML(post) {
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     
-    <!-- Redirect to home page, let main app handle blog detection -->
+    <!-- Redirect to home page with blog ID preserved -->
     <script type="text/javascript">
-        // Simple redirect to home page - the main app will detect and navigate to the blog post
-        window.location.href = '/';
+        // Redirect to home page but preserve the blog ID using a hash or query parameter
+        // This allows the main app RedirectHandler to detect and navigate to the blog post
+        const currentPath = window.location.pathname;
+        console.log('🔗 Static page redirect from:', currentPath);
+        
+        // Extract the blog ID from the current path
+        if (currentPath.includes('/blog/')) {
+            const blogId = currentPath.split('/blog/')[1].replace(/\/$/, '').replace('.html', '');
+            console.log('📍 Extracted blog ID:', blogId);
+            
+            // Redirect to home with the blog ID in a hash
+            window.location.href = '/#redirect-blog=' + encodeURIComponent(blogId);
+        } else {
+            // Fallback redirect to home
+            window.location.href = '/';
+        }
     </script>
     
     <!-- Fallback styles for no-JS users -->

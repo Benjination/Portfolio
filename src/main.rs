@@ -1,11 +1,13 @@
 use yew::prelude::*;
 use yew_router::prelude::*;
+use wasm_bindgen_futures;
+use gloo::timers::future::TimeoutFuture;
 
 mod components;
 
 use components::{Header, About, Skills, Projects, Contact, Terminal, MatrixRain, Snake, Counter, CounterType, Streaming, BlogList, BlogPostComponent};
 
-#[derive(Clone, Routable, PartialEq)]
+#[derive(Clone, Routable, PartialEq, Debug)]
 pub enum Route {
     #[at("/")]
     Home,
@@ -21,31 +23,72 @@ fn redirect_handler() -> Html {
     let navigator = use_navigator().unwrap();
     
     use_effect_with((), move |_| {
-        // Check if the current URL path contains a blog post pattern
-        if let Some(window) = web_sys::window() {
-            if let Ok(pathname) = window.location().pathname() {
-                // Check if we're on a blog post URL (like /blog/some-id or /blog/some-id/)
-                if pathname.starts_with("/blog/") && pathname.len() > 6 {
-                    // Extract the post ID from the path
-                    let post_path = pathname.trim_start_matches("/blog/");
-                    // Remove trailing slash and .html if present
-                    let post_id = post_path.trim_end_matches('/').trim_end_matches(".html");
+        // Use a more reliable timing approach
+        let navigator_clone = navigator.clone();
+        wasm_bindgen_futures::spawn_local(async move {
+            // Wait longer for everything to initialize
+            gloo::timers::future::TimeoutFuture::new(500).await;
+            
+            if let Some(window) = web_sys::window() {
+                // First check for hash-based redirect (from static pages)
+                if let Ok(hash) = window.location().hash() {
+                    if hash.starts_with("#redirect-blog=") {
+                        let blog_id = hash.trim_start_matches("#redirect-blog=");
+                        let decoded_id = web_sys::js_sys::decode_uri_component(blog_id).ok()
+                            .and_then(|v| v.as_string())
+                            .unwrap_or_else(|| blog_id.to_string());
+                        
+                        web_sys::console::log_1(&format!("🔗 Hash redirect detected for blog ID: '{}'", decoded_id).into());
+                        
+                        if !decoded_id.is_empty() {
+                            // Clear the hash and navigate to blog post
+                            let _ = window.history().unwrap().replace_state_with_url(&wasm_bindgen::JsValue::NULL, "", Some("/"));
+                            navigator_clone.replace(&Route::BlogPost { id: decoded_id });
+                            return;
+                        }
+                    }
+                }
+                
+                // Fallback: check pathname for direct blog URLs
+                if let Ok(pathname) = window.location().pathname() {
+                    web_sys::console::log_1(&format!("🔍 RedirectHandler: Checking pathname '{}'", pathname).into());
                     
-                    // Only navigate if we have a valid post ID (not empty and not just "blog")
-                    if !post_id.is_empty() && post_id != "blog" {
-                        // Navigate to the blog post route in the Yew app
-                        navigator.push(&Route::BlogPost { id: post_id.to_string() });
+                    // More robust blog URL detection
+                    if pathname.starts_with("/blog/") {
+                        let path_after_blog = &pathname[6..]; // Remove "/blog/"
+                        let clean_id = path_after_blog
+                            .trim_end_matches('/')
+                            .trim_end_matches(".html")
+                            .trim_end_matches("/index.html")
+                            .trim_end_matches("/index");
+                            
+                        web_sys::console::log_1(&format!("🔍 Extracted ID from pathname: '{}'", clean_id).into());
+                        
+                        if !clean_id.is_empty() {
+                            web_sys::console::log_1(&format!("🚀 Navigating to blog post: {}", clean_id).into());
+                            
+                            // Use replace instead of push to avoid back button issues
+                            navigator_clone.replace(&Route::BlogPost { id: clean_id.to_string() });
+                        } else {
+                            web_sys::console::log_1(&"❌ Empty blog ID, redirecting to home".into());
+                            navigator_clone.replace(&Route::Home);
+                        }
                     }
                 }
             }
-        }
+        });
         || {}
     });
     
-    html! {}
+    html! {
+        <div style="display: none;">{"<!-- RedirectHandler active -->"}</div>
+    }
 }
 
 fn switch(routes: Route) -> Html {
+    // Add debug logging for route matching
+    web_sys::console::log_1(&format!("🎯 Route matched: {:?}", routes).into());
+    
     match routes {
         Route::Home => html! {
             <div class="app">
