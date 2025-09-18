@@ -21,11 +21,18 @@ fn redirect_handler() -> Html {
         // Check if the current URL path contains a blog post pattern
         if let Some(window) = web_sys::window() {
             if let Ok(pathname) = window.location().pathname() {
-                // Check if we're on a blog post URL (like /blog/post_123456)
-                if pathname.starts_with("/blog/post_") {
-                    let post_id = pathname.trim_start_matches("/blog/").to_string();
-                    // Navigate to the blog post route in the Yew app
-                    navigator.push(&Route::BlogPost { id: post_id });
+                // Check if we're on a blog post URL (like /blog/some-id or /blog/some-id/)
+                if pathname.starts_with("/blog/") && pathname.len() > 6 {
+                    // Extract the post ID from the path
+                    let post_path = pathname.trim_start_matches("/blog/");
+                    // Remove trailing slash and .html if present
+                    let post_id = post_path.trim_end_matches('/').trim_end_matches(".html");
+                    
+                    // Only navigate if we have a valid post ID (not empty and not just "blog")
+                    if !post_id.is_empty() && post_id != "blog" {
+                        // Navigate to the blog post route in the Yew app
+                        navigator.push(&Route::BlogPost { id: post_id.to_string() });
+                    }
                 }
             }
         }
