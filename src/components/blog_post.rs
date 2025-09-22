@@ -170,7 +170,32 @@ pub fn BlogPost(props: &BlogPostProps) -> Html {
                                             if title_id == post_id {
                                                 if let Some(blog_post) = parse_firestore_blog_post(doc, &title_id) {
                                                     if blog_post.is_published {
-                                                        post.set(Some(blog_post));
+                                                        post.set(Some(blog_post.clone()));
+                                                        
+                                                        // Update the browser URL to show the correct blog path
+                                                        if let Some(window) = window() {
+                                                            let location = window.location();
+                                                            let expected_path = format!("/blog/{}", post_id);
+                                                            if let Ok(current_path) = location.pathname() {
+                                                                if current_path != expected_path {
+                                                                    // Update the URL without triggering a page reload
+                                                                    if let Ok(history) = window.history() {
+                                                                        let _ = history.push_state_with_url(
+                                                                            &wasm_bindgen::JsValue::NULL,
+                                                                            &blog_post.title,
+                                                                            Some(&expected_path)
+                                                                        );
+                                                                    }
+                                                                }
+                                                            }
+                                                            
+                                                            // Update the document title
+                                                            if let Some(document) = window.document() {
+                                                                let title = format!("{} - Benjamin Niccum", blog_post.title);
+                                                                document.set_title(&title);
+                                                            }
+                                                        }
+                                                        
                                                         found = true;
                                                         break;
                                                     }
