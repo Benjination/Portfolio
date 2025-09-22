@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dual-Cloud Mastery: AWS and Azure Certification Journey with Technical Blogging (1) - Benjamin Niccum</title>
+    <meta name="description" content="Touring through different Cloud Services (First Post in Series)">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="Dual-Cloud Mastery: AWS and Azure Certification Journey with Technical Blogging (1)">
+    <meta property="og:description" content="Touring through different Cloud Services (First Post in Series)">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/dualcloud-mastery-aws-and-azur">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dual-Cloud Mastery: AWS and Azure Certification Journey with Technical Blogging (1)">
+    <meta name="twitter:description" content="Touring through different Cloud Services (First Post in Series)">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2025-09-22T15:05:39.410Z">
+    <meta property="article:modified_time" content="2025-09-22T15:05:39.410Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/dualcloud-mastery-aws-and-azur">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">Dual-Cloud Mastery: AWS and Azure Certification Journey with Technical Blogging (1)</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">9/22/2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p>This semester I have been given the unique opportunity to explore cloud computing<br>in a way that will certainly benefit me greatly in both Software Testing (CSE 5321) and Cloud<br>Computing & Big Data (CSE 6332). This venture will also add skills to my resume as I enter<br>the industry and add expertise to my arsenal as I navigate unfamiliar waters in my future.<br>Cloud computing allows individuals and organizations to store, access, and process a wide<br>variety of files and data types through host servers on a globally available network. Amazon<br>Web Services (AWS) and Microsoft Azure (Azure) are the two most popular cloud hosting<br>services used in the Software Engineering industry. The similarities are glaringly obvious in<br>that they are both comprehensive services that include a broad set of cloud services:<br>storage, networking, databases, artificial intelligence, security features, etc. Each service<br>oXers global availability and redundancy in their massive service coverage area, and they<br>are very comparable in price structure. AWS has been around four years longer than Azure,<br>but Azure is rapidly making up ground and has become the main competition for the<br>undisputed industry titan. Azure has already gained the support and patronage of major<br>companies like Nike, Dell, and Starbucks. AWS serves Netflix, Adobe, and Spotify. It seems<br>the two are on par and capable of matching the other in every aspect. So, why choose one<br>over the other? What makes the providers diXerent from one another? I aim to find out<br>through my personal journey into cloud computing this semester by learning both<br>platforms and comparing them on a biweekly blog.<br>I am inspired to take this journey of discovery for multiple reasons, but the main<br>interest I have is exploring cloud computing and adding this skill to the talents that I have<br>already acquired in my collegiate experience. I am motivated to learn Azure first because<br>this semester I am taking Cloud Computing & Big Data with Professor Levine. When I asked<br>Dr. Levine which was the industry standard between the two, he told me that a year ago he<br>would have said AWS with no question, but now Azure may be the better of the two. It’s<br>certainly more convenient for UTA students because of a free trial it gives for students (I<br>have not begun with AWS, but I imagine they oXer an intro deal as well). Still, Dr Levine and<br>Dr Levine’s teaching assistant were back and forth about the diXerences, so I left feeling<br>somewhat unsatisfied. To truly find the diXerences would take considerable research, and<br>it would require someone with an inclination, a plan, and eight-weeks to dedicate to the<br>idea. It would seem I am poised perfectly to seize the opportunity.<br>The perspective that I will have on Cloud computing will be unique when this<br>semester is over because I will have experience with both of the major contenders in Cloud<br>computing services, and not only will I be sharing my experience throughout the process on<br>the blog that I maintain on my portfolio available on my website, but when I enter the<br>Software Engineering industry, I will be able to share my expertise with others. I believe this<br>will be a major boon for the lucky company that gives me my first opportunity.<br>In this report I will share the broad strokes of my action plan, but I have a more<br>detailed plan already that I will be implementing and describing throughout the semester in<br>my blog and in the discussion boards. The plan is as follows:<br>Weeks:<br>1. 2. 3. 4. 5. 6. 7. 8. Set up AWS and Azure accounts, establish a blog series, create first blog post.<br>Focus on understanding AWS basics and compare to what I have learned already in<br>Azure (not much so far). Possibly entice classmates in 6332 to participate with me<br>or at least discuss my observations.<br>Continue progress with Azure and create “identical” project/projects on AWS. Blog<br>about similarities and minor or major diXerences.<br>Transform progress so far into online web application on both services. Note<br>challenges with either compared to the other.<br>Finalize deployment on both platforms and create detailed cost and performance<br>analysis blog post.<br>Implement advanced features like monitoring, CI/CD Pipelines, and security while<br>leading knowledge sharing and exam prep with peers<br>Complete the AWS certification, prep for Azure exam, compile some form of<br>comprehensive guide to both cloud services in blog post.<br>Finish Azure certification, wrap up documentation and publish any unspoken<br>conclusions to blog, present project to the community.<br>I recognize that this is a huge undertaking and that most people would prefer to master<br>one service before moving to the next, and I intend to dedicate as much time to this<br>endeavor as I can spare. My expected outcome is two certifications, new avenues of<br>employment by meeting new employer prerequisites, and a much better understanding of<br>cloud computing. There are few services that are not online in some facet in today’s high-<br>tech landscape. By adapting to this environment before joining the ranks, I can use my<br>knowledge of cloud computing in communication with my colleagues to expedite my<br>ascension into industry leadership. I have no doubt there will be challenges in managing<br>my time appropriately, a very minimal starting knowledge base, and in not knowing many<br>people with which I can share and discuss my journey’s progress. Still, what new journey<br>does not come without some trial and tribulation? I am truly excited to begin exploring into<br>cloud computing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>
