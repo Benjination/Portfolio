@@ -1,10 +1,17 @@
-// Terminal-inspired retro theme
-$primary-green: #00ff00;
-$secondary-green: #00cc00;
-$dark-green: #008800;
-$terminal-bg: #0a0a0a;
-$terminal-bg-light: #1a1a1a;
-$amber: #ffb000;
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎨 THEME SYSTEM - Change this variable to switch themes instantly!
+// ═══════════════════════════════════════════════════════════════════════════════
+$current-theme: 'halloween'; // Options: 'retro', 'halloween', 'winter', 'cyberpunk'
+
+// Theme color definitions (inline for simplicity)
+$primary-green: if($current-theme == 'halloween', #ff6600, if($current-theme == 'winter', #00ccff, if($current-theme == 'cyberpunk', #ff0080, #00ff00)));
+$secondary-green: if($current-theme == 'halloween', #cc0000, if($current-theme == 'winter', #0099cc, if($current-theme == 'cyberpunk', #00ffff, #00cc00)));
+$dark-green: if($current-theme == 'halloween', #cc4400, if($current-theme == 'winter', #006699, if($current-theme == 'cyberpunk', #cc0066, #008800)));
+$terminal-bg: if($current-theme == 'halloween', #0d0505, if($current-theme == 'winter', #001122, if($current-theme == 'cyberpunk', #000011, #0a0a0a)));
+$terminal-bg-light: if($current-theme == 'halloween', #1a0a0a, if($current-theme == 'winter', #002244, if($current-theme == 'cyberpunk', #110022, #1a1a1a)));
+$amber: if($current-theme == 'halloween', #ff8800, if($current-theme == 'winter', #66ccff, if($current-theme == 'cyberpunk', #ffff00, #ffb000)));
+
+// Common colors
 $white: #ffffff;
 $gray: #cccccc;
 $light-gray: #999999;
@@ -98,7 +105,7 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: -2;
-  opacity: 0.1;
+  opacity: 1.0; // Full brightness for bright pumpkins!
 }
 
 // App layout

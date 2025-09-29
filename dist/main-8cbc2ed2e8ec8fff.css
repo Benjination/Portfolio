@@ -11,8 +11,8 @@ html {
 
 body {
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
-  background: #0a0a0a;
-  color: #00ff00;
+  background: #0d0505;
+  color: #ff6600;
   line-height: 1.4;
   overflow-x: hidden;
   width: 100%;
@@ -46,7 +46,7 @@ body.terminal-startup * {
   width: 100vw;
   height: 100vh;
   z-index: -2;
-  opacity: 0.1;
+  opacity: 1;
 }
 
 .app {
@@ -75,7 +75,7 @@ body.terminal-startup * {
   box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1), 0 0 50px rgba(0, 255, 0, 0.2);
   background: rgba(26, 26, 26, 0.9);
   padding: 2rem;
-  border: 2px solid #00ff00;
+  border: 2px solid #ff6600;
 }
 .terminal-header::before {
   content: "";
@@ -94,7 +94,7 @@ body.terminal-startup * {
   margin-bottom: 1rem;
 }
 .ascii-art .ascii-name {
-  color: #00ff00;
+  color: #ff6600;
   font-size: 0.7rem;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
   animation: pulse-glow 3s ease-in-out infinite;
@@ -102,10 +102,10 @@ body.terminal-startup * {
 
 @keyframes pulse-glow {
   0%, 100% {
-    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600;
   }
   50% {
-    text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+    text-shadow: 0 0 20px #ff6600, 0 0 30px #ff6600, 0 0 40px #ff6600;
   }
 }
 .terminal-prompt {
@@ -113,19 +113,19 @@ body.terminal-startup * {
   margin-bottom: 1rem;
 }
 .terminal-prompt .prompt-user {
-  color: #00cc00;
+  color: #cc0000;
 }
 .terminal-prompt .prompt-separator {
   color: #ffffff;
 }
 .terminal-prompt .prompt-path {
-  color: #ffb000;
+  color: #ff8800;
 }
 .terminal-prompt .prompt-symbol {
   color: #ffffff;
 }
 .terminal-prompt .cursor {
-  color: #00ff00;
+  color: #ff6600;
   animation: blink 1s infinite;
 }
 
@@ -153,16 +153,16 @@ body.terminal-startup * {
   gap: 2rem;
 }
 .terminal-nav .nav-command {
-  color: #00cc00;
+  color: #cc0000;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border: 1px solid #00cc00;
+  border: 1px solid #cc0000;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 .terminal-nav .nav-command:hover {
-  background: #00cc00;
-  color: #0a0a0a;
+  background: #cc0000;
+  color: #0d0505;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
   transform: translateY(-2px);
 }
@@ -173,7 +173,7 @@ body.terminal-startup * {
   border-radius: 8px;
   box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1), 0 0 50px rgba(0, 255, 0, 0.2);
   background: rgba(26, 26, 26, 0.8);
-  border: 1px solid #008800;
+  border: 1px solid #cc4400;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -191,16 +191,16 @@ body.terminal-startup * {
 }
 
 .section-header {
-  background: #1a1a1a;
+  background: #1a0a0a;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #008800;
+  border-bottom: 1px solid #cc4400;
 }
 .section-header .prompt {
-  color: #00cc00;
+  color: #cc0000;
   margin-right: 1rem;
 }
 .section-header .command {
-  color: #ffb000;
+  color: #ff8800;
 }
 
 .section-content {
@@ -210,8 +210,8 @@ body.terminal-startup * {
 .section-content .skills-content,
 .section-content .projects-intro,
 .section-content .contact-content {
-  background: #1a1a1a;
-  border: 1px solid #00ff00;
+  background: #1a0a0a;
+  border: 1px solid #ff6600;
   border-radius: 4px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -223,7 +223,7 @@ body.terminal-startup * {
 .section-content .skills-content h2,
 .section-content .projects-intro h2,
 .section-content .contact-content h2 {
-  color: #00ff00;
+  color: #ff6600;
   font-size: 1.3rem;
   margin-bottom: 1rem;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
@@ -232,7 +232,7 @@ body.terminal-startup * {
 .section-content .skills-content h3,
 .section-content .projects-intro h3,
 .section-content .contact-content h3 {
-  color: #00cc00;
+  color: #cc0000;
   font-size: 1.1rem;
   margin: 1.5rem 0 0.75rem 0;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
@@ -264,7 +264,7 @@ body.terminal-startup * {
 .section-content .skills-content .online-links .inline-link,
 .section-content .projects-intro .online-links .inline-link,
 .section-content .contact-content .online-links .inline-link {
-  color: #00ff00;
+  color: #ff6600;
   text-decoration: none;
   font-weight: bold;
   position: relative;
@@ -281,7 +281,7 @@ body.terminal-startup * {
 .section-content .projects-intro .online-links .inline-link:hover::after,
 .section-content .contact-content .online-links .inline-link:hover::after {
   content: " →";
-  color: #ffb000;
+  color: #ff8800;
   animation: blink 0.8s infinite;
 }
 .section-content .about-content .online-links .inline-link::before,
@@ -289,14 +289,14 @@ body.terminal-startup * {
 .section-content .projects-intro .online-links .inline-link::before,
 .section-content .contact-content .online-links .inline-link::before {
   content: "[";
-  color: #008800;
+  color: #cc4400;
 }
 .section-content .about-content .online-links .inline-link::after,
 .section-content .skills-content .online-links .inline-link::after,
 .section-content .projects-intro .online-links .inline-link::after,
 .section-content .contact-content .online-links .inline-link::after {
   content: "]";
-  color: #008800;
+  color: #cc4400;
 }
 .section-content .about-content .call-to-action,
 .section-content .skills-content .call-to-action,
@@ -304,7 +304,7 @@ body.terminal-startup * {
 .section-content .contact-content .call-to-action {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #008800;
+  border-top: 1px solid #cc4400;
 }
 .section-content .about-content div,
 .section-content .skills-content div,
@@ -318,7 +318,7 @@ body.terminal-startup * {
 .section-content .skills-content div strong,
 .section-content .projects-intro div strong,
 .section-content .contact-content div strong {
-  color: #00ff00;
+  color: #ff6600;
 }
 
 .code-block {
@@ -344,13 +344,13 @@ body.terminal-startup * {
   line-height: 1.8;
 }
 .file-listing .file-executable {
-  color: #00ff00;
+  color: #ff6600;
 }
 .file-listing .file-directory {
   color: #8be9fd;
 }
 .file-listing .file-size {
-  color: #ffb000;
+  color: #ff8800;
 }
 
 .git-log {
@@ -358,10 +358,10 @@ body.terminal-startup * {
   line-height: 1.6;
 }
 .git-log .git-hash {
-  color: #ffb000;
+  color: #ff8800;
 }
 .git-log .git-branch {
-  color: #00ff00;
+  color: #ff6600;
 }
 .git-log .git-merge {
   color: #ff79c6;
@@ -375,14 +375,14 @@ body.terminal-startup * {
 }
 
 .project-card {
-  background: #1a1a1a;
-  border: 1px solid #008800;
+  background: #1a0a0a;
+  border: 1px solid #cc4400;
   border-radius: 6px;
   padding: 1.5rem;
   transition: all 0.3s ease;
 }
 .project-card:hover {
-  border-color: #00ff00;
+  border-color: #ff6600;
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 255, 0, 0.1);
 }
@@ -397,15 +397,15 @@ body.terminal-startup * {
   font-size: 1.5rem;
 }
 .card-header .project-name {
-  color: #00ff00;
+  color: #ff6600;
   font-weight: bold;
   flex: 1;
 }
 .card-header .language-tag {
-  color: #ffb000;
+  color: #ff8800;
   font-size: 0.8rem;
   padding: 0.25rem 0.5rem;
-  border: 1px solid #ffb000;
+  border: 1px solid #ff8800;
   border-radius: 4px;
 }
 
@@ -421,7 +421,7 @@ body.terminal-startup * {
 }
 
 .tech {
-  color: #00cc00;
+  color: #cc0000;
   font-size: 0.8rem;
   padding: 0.25rem 0.5rem;
   background: rgba(0, 204, 0, 0.1);
@@ -436,10 +436,10 @@ body.terminal-startup * {
 }
 
 .project-link {
-  color: #00ff00;
+  color: #ff6600;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border: 1px solid #00ff00;
+  border: 1px solid #ff6600;
   border-radius: 4px;
   font-size: 0.9rem;
   transition: all 0.3s ease;
@@ -448,8 +448,8 @@ body.terminal-startup * {
   gap: 0.25rem;
 }
 .project-link:hover {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
 }
@@ -469,15 +469,15 @@ body.terminal-startup * {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: #1a1a1a;
-  border: 1px solid #008800;
+  background: #1a0a0a;
+  border: 1px solid #cc4400;
   border-radius: 6px;
-  color: #00ff00;
+  color: #ff6600;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 .contact-link:hover {
-  border-color: #00ff00;
+  border-color: #ff6600;
   background: rgba(0, 255, 0, 0.05);
   transform: translateX(10px);
 }
@@ -491,8 +491,8 @@ body.terminal-startup * {
 .spotify-widget {
   margin: 2rem 0;
   padding: 1.5rem;
-  background: #1a1a1a;
-  border: 1px solid #008800;
+  background: #1a0a0a;
+  border: 1px solid #cc4400;
   border-radius: 8px;
   position: relative;
   border-radius: 8px;
@@ -515,7 +515,7 @@ body.terminal-startup * {
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
-  color: #00ff00;
+  color: #ff6600;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-weight: bold;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
@@ -530,7 +530,7 @@ body.terminal-startup * {
 }
 .spotify-widget .spotify-header .spotify-status {
   font-size: 0.8rem;
-  color: #ffb000;
+  color: #ff8800;
   animation: blink 1.5s infinite;
 }
 .spotify-widget .spotify-content .spotify-image {
@@ -538,7 +538,7 @@ body.terminal-startup * {
   max-width: 400px;
   height: auto;
   border-radius: 6px;
-  border: 1px solid #008800;
+  border: 1px solid #cc4400;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -546,7 +546,7 @@ body.terminal-startup * {
   opacity: 1;
 }
 .spotify-widget .spotify-content .spotify-image:hover {
-  border-color: #00ff00;
+  border-color: #ff6600;
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
 }
 .spotify-widget .spotify-content .spotify-fallback .spotify-placeholder {
@@ -558,7 +558,7 @@ body.terminal-startup * {
   width: 80px;
   height: 80px;
   background: rgba(0, 255, 0, 0.1);
-  border: 1px solid #008800;
+  border: 1px solid #cc4400;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -578,7 +578,7 @@ body.terminal-startup * {
 .spotify-widget .spotify-content .spotify-fallback .spotify-placeholder .spotify-info .spotify-track {
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-weight: bold;
-  color: #00ff00;
+  color: #ff6600;
   margin-bottom: 0.25rem;
 }
 .spotify-widget .spotify-content .spotify-fallback .spotify-placeholder .spotify-info .spotify-artist {
@@ -587,24 +587,24 @@ body.terminal-startup * {
   font-size: 0.9rem;
 }
 .spotify-widget .spotify-content .spotify-fallback .spotify-actions {
-  border-top: 1px solid #008800;
+  border-top: 1px solid #cc4400;
   padding-top: 1rem;
 }
 .spotify-widget .spotify-content .spotify-fallback .spotify-actions .spotify-profile-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #00ff00;
+  color: #ff6600;
   text-decoration: none;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   padding: 0.5rem 1rem;
-  border: 1px solid #008800;
+  border: 1px solid #cc4400;
   border-radius: 4px;
   transition: all 0.3s ease;
   margin-bottom: 0.5rem;
 }
 .spotify-widget .spotify-content .spotify-fallback .spotify-actions .spotify-profile-link:hover {
-  border-color: #00ff00;
+  border-color: #ff6600;
   background: rgba(0, 255, 0, 0.1);
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
@@ -631,7 +631,7 @@ body.terminal-startup * {
   margin-bottom: 2rem;
 }
 .streaming-content h2, .streaming-content h3 {
-  color: #00ff00;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
   margin-bottom: 1rem;
 }
@@ -643,8 +643,8 @@ body.terminal-startup * {
 .twitch-widget {
   margin: 2rem 0;
   padding: 1.5rem;
-  background: #1a1a1a;
-  border: 1px solid #008800;
+  background: #1a0a0a;
+  border: 1px solid #cc4400;
   border-radius: 8px;
   position: relative;
   border-radius: 8px;
@@ -693,7 +693,7 @@ body.terminal-startup * {
   margin: 1rem 0;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid #008800;
+  border: 1px solid #cc4400;
 }
 .twitch-widget .twitch-embed-container iframe {
   width: 100%;
@@ -771,17 +771,17 @@ body.terminal-startup * {
   justify-content: space-between;
   align-items: center;
   padding: 0.8rem;
-  background: #1a1a1a;
-  border: 1px solid #008800;
+  background: #1a0a0a;
+  border: 1px solid #cc4400;
   border-radius: 4px;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
 }
 .streaming-schedule .schedule-grid .schedule-item .day {
   font-weight: bold;
-  color: #00ff00;
+  color: #ff6600;
 }
 .streaming-schedule .schedule-grid .schedule-item .time {
-  color: #ffb000;
+  color: #ff8800;
   font-size: 0.9rem;
 }
 .streaming-schedule .schedule-note {
@@ -814,8 +814,8 @@ body.terminal-startup * {
   right: 2rem;
   width: 600px;
   max-height: 400px;
-  background: #0a0a0a;
-  border: 2px solid #00ff00;
+  background: #0d0505;
+  border: 2px solid #ff6600;
   border-radius: 8px;
   position: relative;
   border-radius: 8px;
@@ -840,9 +840,9 @@ body.terminal-startup * {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1a1a1a;
+  background: #1a0a0a;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid #008800;
+  border-bottom: 1px solid #cc4400;
 }
 
 .terminal-controls {
@@ -893,14 +893,14 @@ body.terminal-startup * {
   gap: 0.5rem;
 }
 .terminal-input-line .terminal-prompt {
-  color: #00cc00;
+  color: #cc0000;
   white-space: nowrap;
 }
 .terminal-input-line .terminal-input {
   flex: 1;
   background: transparent;
   border: none;
-  color: #00ff00;
+  color: #ff6600;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-size: 1rem;
   outline: none;
@@ -913,7 +913,7 @@ body.terminal-startup * {
   text-shadow: none;
 }
 .terminal-input-line .terminal-cursor {
-  color: #00ff00;
+  color: #ff6600;
   animation: blink 1s infinite;
 }
 
@@ -921,7 +921,7 @@ body.terminal-startup * {
   margin-top: 2rem;
   padding: 1rem;
   background: rgba(0, 255, 0, 0.05);
-  border-left: 4px solid #00ff00;
+  border-left: 4px solid #ff6600;
 }
 .skill-highlight .comment {
   color: #666666;
@@ -1115,15 +1115,15 @@ body.terminal-startup * {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #0d0505;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #008800;
+  background: #cc4400;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00cc00;
+  background: #cc0000;
 }
 
 #snake-game {
@@ -1151,15 +1151,15 @@ body.terminal-startup * {
   color: #cccccc;
 }
 #snake-game .game-info .score .value {
-  color: #00ff00;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 #snake-game .game-info .status .playing {
-  color: #00ff00;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 #snake-game .game-info .status .paused {
-  color: #ffb000;
+  color: #ff8800;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 #snake-game .game-info .status .game-over {
@@ -1170,8 +1170,8 @@ body.terminal-startup * {
   position: relative;
   border-radius: 8px;
   box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1), 0 0 50px rgba(0, 255, 0, 0.2);
-  border: 2px solid #00ff00;
-  background: #0a0a0a;
+  border: 2px solid #ff6600;
+  background: #0d0505;
   max-width: 100%;
   height: auto;
   cursor: pointer;
@@ -1193,11 +1193,11 @@ body.terminal-startup * {
 }
 #snake-game .game-canvas:focus {
   outline: none;
-  border-color: #ffb000;
+  border-color: #ff8800;
   box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1), 0 0 50px rgba(0, 255, 0, 0.2), 0 0 20px rgba(255, 176, 0, 0.5);
 }
 #snake-game .game-canvas:hover {
-  border-color: #33ff33;
+  border-color: rgb(255, 132.6, 51);
 }
 #snake-game .game-controls {
   display: flex;
@@ -1210,7 +1210,7 @@ body.terminal-startup * {
   flex: 1;
 }
 #snake-game .game-controls .controls-info h4 {
-  color: #00ff00;
+  color: #ff6600;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
@@ -1225,12 +1225,12 @@ body.terminal-startup * {
 }
 #snake-game .game-controls .controls-info ul li::before {
   content: "> ";
-  color: #00ff00;
+  color: #ff6600;
 }
 #snake-game .game-controls .restart-btn {
   background: transparent;
-  border: 2px solid #00ff00;
-  color: #00ff00;
+  border: 2px solid #ff6600;
+  color: #ff6600;
   padding: 0.5rem 1rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   cursor: pointer;
@@ -1238,9 +1238,9 @@ body.terminal-startup * {
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 #snake-game .game-controls .restart-btn:hover {
-  background: #00ff00;
-  color: #0a0a0a;
-  box-shadow: 0 0 20px #00ff00;
+  background: #ff6600;
+  color: #0d0505;
+  box-shadow: 0 0 20px #ff6600;
 }
 
 .mobile-controls {
@@ -1248,7 +1248,7 @@ body.terminal-startup * {
   margin: 1.5rem 0;
   padding: 1rem;
   background: rgba(0, 255, 0, 0.05);
-  border: 1px solid #008800;
+  border: 1px solid #cc4400;
   border-radius: 8px;
 }
 .mobile-controls .mobile-control-grid {
@@ -1268,10 +1268,10 @@ body.terminal-startup * {
 .mobile-controls .mobile-control-btn {
   width: 60px;
   height: 60px;
-  background: #0a0a0a;
-  border: 2px solid #00ff00;
+  background: #0d0505;
+  border: 2px solid #ff6600;
   border-radius: 8px;
-  color: #00ff00;
+  color: #ff6600;
   font-size: 1.5rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   cursor: pointer;
@@ -1290,9 +1290,9 @@ body.terminal-startup * {
 }
 .mobile-controls .mobile-control-btn:hover, .mobile-controls .mobile-control-btn:active {
   background: rgba(0, 255, 0, 0.1);
-  border-color: #00cc00;
+  border-color: #cc0000;
   transform: scale(0.95);
-  box-shadow: 0 0 10px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 10px #ff6600, inset 0 0 20px rgba(0, 255, 0, 0.1);
 }
 .mobile-controls .mobile-control-btn:active {
   transform: scale(0.9);
@@ -1300,13 +1300,13 @@ body.terminal-startup * {
 }
 .mobile-controls .pause-btn {
   background: rgba(255, 176, 0, 0.1);
-  border-color: #ffb000;
-  color: #ffb000;
+  border-color: #ff8800;
+  color: #ff8800;
 }
 .mobile-controls .pause-btn:hover, .mobile-controls .pause-btn:active {
   background: rgba(255, 176, 0, 0.2);
-  border-color: rgb(255, 191.8, 51);
-  box-shadow: 0 0 10px #ffb000, inset 0 0 20px rgba(255, 176, 0, 0.1);
+  border-color: rgb(255, 159.8, 51);
+  box-shadow: 0 0 10px #ff8800, inset 0 0 20px rgba(255, 176, 0, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -1354,7 +1354,7 @@ body.terminal-startup * {
   gap: 1rem;
 }
 #leaderboard .leaderboard-header .leaderboard-title {
-  color: #00ff00;
+  color: #ff6600;
   font-size: 1.5rem;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
@@ -1364,7 +1364,7 @@ body.terminal-startup * {
 }
 #leaderboard .leaderboard-header .mode-toggle .mode-btn {
   background: transparent;
-  border: 2px solid #008800;
+  border: 2px solid #cc4400;
   color: #cccccc;
   padding: 0.4rem 0.8rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
@@ -1373,8 +1373,8 @@ body.terminal-startup * {
   transition: all 0.3s ease;
 }
 #leaderboard .leaderboard-header .mode-toggle .mode-btn.active {
-  border-color: #00ff00;
-  color: #00ff00;
+  border-color: #ff6600;
+  color: #ff6600;
   background: rgba(0, 255, 0, 0.1);
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
@@ -1382,12 +1382,12 @@ body.terminal-startup * {
   cursor: default;
 }
 #leaderboard .leaderboard-header .mode-toggle .mode-btn:not(:disabled):hover {
-  border-color: #00cc00;
-  color: #00cc00;
+  border-color: #cc0000;
+  color: #cc0000;
 }
 #leaderboard .loading {
   text-align: center;
-  color: #ffb000;
+  color: #ff8800;
   padding: 2rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
@@ -1406,10 +1406,10 @@ body.terminal-startup * {
   gap: 1rem;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
-  border-bottom: 2px solid #008800;
+  border-bottom: 2px solid #cc4400;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-weight: bold;
-  color: #ffb000;
+  color: #ff8800;
   font-size: 0.9rem;
 }
 #leaderboard .scores-list .scores-header .rank-header,
@@ -1433,19 +1433,19 @@ body.terminal-startup * {
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
 }
 #leaderboard .scores-list .score-entry.top-three {
-  border-left-color: #00ff00;
+  border-left-color: #ff6600;
   background: rgba(0, 255, 0, 0.05);
 }
 #leaderboard .scores-list .score-entry:hover {
   background: rgba(0, 255, 0, 0.1);
 }
 #leaderboard .scores-list .score-entry .rank {
-  color: #ffb000;
+  color: #ff8800;
   font-weight: bold;
   min-width: 3rem;
 }
 #leaderboard .scores-list .score-entry .name {
-  color: #00ff00;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 #leaderboard .scores-list .score-entry .score {
@@ -1460,7 +1460,7 @@ body.terminal-startup * {
 }
 #leaderboard .score-form {
   background: rgba(0, 255, 0, 0.1);
-  border: 2px solid #00ff00;
+  border: 2px solid #ff6600;
   padding: 1.5rem;
   margin: 1rem 0;
   text-align: center;
@@ -1481,7 +1481,7 @@ body.terminal-startup * {
   z-index: 1;
 }
 #leaderboard .score-form h4 {
-  color: #00ff00;
+  color: #ff6600;
   margin-bottom: 1rem;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
@@ -1500,9 +1500,9 @@ body.terminal-startup * {
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
 }
 #leaderboard .score-form .form-group .name-input {
-  background: #0a0a0a;
-  border: 2px solid #008800;
-  color: #00ff00;
+  background: #0d0505;
+  border: 2px solid #cc4400;
+  color: #ff6600;
   padding: 0.5rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-size: 1rem;
@@ -1512,8 +1512,8 @@ body.terminal-startup * {
 }
 #leaderboard .score-form .form-group .name-input:focus {
   outline: none;
-  border-color: #00ff00;
-  box-shadow: 0 0 10px #00ff00;
+  border-color: #ff6600;
+  box-shadow: 0 0 10px #ff6600;
 }
 #leaderboard .score-form .form-group .checkbox-label {
   display: flex;
@@ -1526,30 +1526,30 @@ body.terminal-startup * {
   appearance: none;
   width: 16px;
   height: 16px;
-  border: 2px solid #008800;
-  background: #0a0a0a;
+  border: 2px solid #cc4400;
+  background: #0d0505;
   cursor: pointer;
   position: relative;
 }
 #leaderboard .score-form .form-group .checkbox-label .global-checkbox:checked {
-  border-color: #00ff00;
-  background: #00ff00;
+  border-color: #ff6600;
+  background: #ff6600;
 }
 #leaderboard .score-form .form-group .checkbox-label .global-checkbox:checked::after {
   content: "✓";
   position: absolute;
   top: -2px;
   left: 2px;
-  color: #0a0a0a;
+  color: #0d0505;
   font-size: 12px;
   font-weight: bold;
 }
 #leaderboard .score-form .form-group .checkbox-label .global-checkbox:focus {
   outline: none;
-  box-shadow: 0 0 5px #00ff00;
+  box-shadow: 0 0 5px #ff6600;
 }
 #leaderboard .score-form .form-group .checkbox-label .checkbox-text {
-  color: #00ff00;
+  color: #ff6600;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
@@ -1573,14 +1573,14 @@ body.terminal-startup * {
   transition: all 0.3s ease;
 }
 #leaderboard .score-form .form-buttons button.submit-btn {
-  border-color: #00ff00;
-  color: #00ff00;
+  border-color: #ff6600;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 #leaderboard .score-form .form-buttons button.submit-btn:hover {
-  background: #00ff00;
-  color: #0a0a0a;
-  box-shadow: 0 0 20px #00ff00;
+  background: #ff6600;
+  color: #0d0505;
+  box-shadow: 0 0 20px #ff6600;
 }
 #leaderboard .score-form .form-buttons button.cancel-btn {
   border-color: #ff0000;
@@ -1602,10 +1602,10 @@ body.terminal-startup * {
   font-size: 0.9rem;
 }
 #leaderboard .leaderboard-info p:first-child {
-  color: #ffb000;
+  color: #ff8800;
 }
 #leaderboard .leaderboard-info p:nth-child(2) {
-  color: #00cc00;
+  color: #cc0000;
 }
 @media (max-width: 768px) {
   #leaderboard .leaderboard-header {
@@ -1628,8 +1628,8 @@ body.terminal-startup * {
   position: relative;
   border-radius: 8px;
   box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1), 0 0 50px rgba(0, 255, 0, 0.2);
-  background: #0a0a0a;
-  border: 2px solid #00ff00;
+  background: #0d0505;
+  border: 2px solid #ff6600;
   padding: 1rem;
   margin: 1rem 0;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
@@ -1649,7 +1649,7 @@ body.terminal-startup * {
   z-index: 1;
 }
 .counter-display .counter-label {
-  color: #ffb000;
+  color: #ff8800;
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 2px;
@@ -1657,19 +1657,19 @@ body.terminal-startup * {
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .counter-display .counter-value {
-  color: #00ff00;
+  color: #ff6600;
   font-size: 2rem;
   font-weight: bold;
   letter-spacing: 3px;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .counter-display .counter-value .loading {
-  color: #00cc00;
+  color: #cc0000;
   animation: pulse 1.5s infinite;
 }
 .counter-display .counter-value .number {
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+  text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
 }
 .counter-display::before {
   content: "╔═══════════════════════════════════╗";
@@ -1677,7 +1677,7 @@ body.terminal-startup * {
   top: -1px;
   left: 50%;
   transform: translateX(-50%);
-  color: #00ff00;
+  color: #ff6600;
   font-size: 0.8rem;
   white-space: nowrap;
   z-index: 2;
@@ -1688,7 +1688,7 @@ body.terminal-startup * {
   bottom: -1px;
   left: 50%;
   transform: translateX(-50%);
-  color: #00ff00;
+  color: #ff6600;
   font-size: 0.8rem;
   white-space: nowrap;
   z-index: 2;
@@ -1699,7 +1699,7 @@ body.terminal-startup * {
   max-width: 600px;
 }
 .site-counter .counter-display {
-  background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+  background: linear-gradient(135deg, #0d0505 0%, #0f0f0f 100%);
   box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1), 0 0 50px rgba(0, 255, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -1707,18 +1707,18 @@ body.terminal-startup * {
   margin: 1rem 0;
 }
 .game-counter .counter-display {
-  background: linear-gradient(135deg, #0a0a0a 0%, #001100 100%);
-  border-color: #00cc00;
+  background: linear-gradient(135deg, #0d0505 0%, #001100 100%);
+  border-color: #cc0000;
 }
 .game-counter .counter-display .counter-label {
-  color: #00cc00;
+  color: #cc0000;
 }
 .game-counter .counter-display .counter-value .number {
-  color: #00cc00;
-  text-shadow: 0 0 5px #00cc00, 0 0 10px #00cc00, 0 0 20px #00cc00;
+  color: #cc0000;
+  text-shadow: 0 0 5px #cc0000, 0 0 10px #cc0000, 0 0 20px #cc0000;
 }
 .game-counter .counter-display::before, .game-counter .counter-display::after {
-  color: #00cc00;
+  color: #cc0000;
 }
 
 @keyframes pulse {
@@ -1785,8 +1785,8 @@ body.terminal-startup * {
   }
 }
 .blog-admin {
-  background: #0a0a0a;
-  color: #00ff00;
+  background: #0d0505;
+  color: #ff6600;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   min-height: 100vh;
   padding: 2rem;
@@ -1797,10 +1797,10 @@ body.terminal-startup * {
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #00ff00;
+  border-bottom: 1px solid #ff6600;
 }
 .blog-admin .blog-admin-header h1 {
-  color: #00ff00;
+  color: #ff6600;
   margin: 0;
   font-size: 1.5rem;
 }
@@ -1814,41 +1814,41 @@ body.terminal-startup * {
 }
 .blog-admin .blog-admin-header .admin-info .logout-btn {
   background: transparent;
-  border: 1px solid #00ff00;
-  color: #00ff00;
+  border: 1px solid #ff6600;
+  color: #ff6600;
   padding: 0.5rem 1rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 .blog-admin .blog-admin-header .admin-info .logout-btn:hover {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
 }
 .blog-admin .admin-actions {
   margin-bottom: 2rem;
 }
 .blog-admin .admin-actions .new-post-btn {
   background: transparent;
-  border: 1px solid #00ff00;
-  color: #00ff00;
+  border: 1px solid #ff6600;
+  color: #ff6600;
   padding: 0.75rem 1.5rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 .blog-admin .admin-actions .new-post-btn:hover {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
 }
 .blog-admin .post-editor {
   background: rgba(0, 255, 0, 0.05);
-  border: 1px solid #00ff00;
+  border: 1px solid #ff6600;
   padding: 2rem;
   margin-bottom: 2rem;
 }
 .blog-admin .post-editor h2 {
-  color: #00ff00;
+  color: #ff6600;
   margin-top: 0;
   margin-bottom: 1.5rem;
 }
@@ -1857,22 +1857,22 @@ body.terminal-startup * {
 }
 .blog-admin .post-editor .form-group label {
   display: block;
-  color: #00ff00;
+  color: #ff6600;
   margin-bottom: 0.5rem;
   font-weight: bold;
 }
 .blog-admin .post-editor .form-group .form-input, .blog-admin .post-editor .form-group .form-textarea {
   width: 100%;
-  background: #0a0a0a;
-  border: 1px solid #00ff00;
-  color: #00ff00;
+  background: #0d0505;
+  border: 1px solid #ff6600;
+  color: #ff6600;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   padding: 0.75rem;
   font-size: 0.9rem;
 }
 .blog-admin .post-editor .form-group .form-input:focus, .blog-admin .post-editor .form-group .form-textarea:focus {
   outline: none;
-  border-color: #66ff66;
+  border-color: rgb(255, 163.2, 102);
   box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.2);
 }
 .blog-admin .post-editor .form-group .form-input::placeholder, .blog-admin .post-editor .form-group .form-textarea::placeholder {
@@ -1891,7 +1891,7 @@ body.terminal-startup * {
   color: #999999;
 }
 .blog-admin .post-editor .form-group .content-stats .char-count:contains("⚠️") {
-  color: #ffb000;
+  color: #ff8800;
 }
 .blog-admin .post-editor .form-group .content-stats .word-count {
   opacity: 0.7;
@@ -1903,12 +1903,12 @@ body.terminal-startup * {
   cursor: pointer;
 }
 .blog-admin .post-editor .form-group .checkbox-label input[type=checkbox] {
-  accent-color: #00ff00;
+  accent-color: #ff6600;
 }
 .blog-admin .post-editor .form-actions .save-btn {
-  background: #00ff00;
+  background: #ff6600;
   border: none;
-  color: #0a0a0a;
+  color: #0d0505;
   padding: 0.75rem 2rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-weight: bold;
@@ -1916,10 +1916,10 @@ body.terminal-startup * {
   transition: all 0.2s ease;
 }
 .blog-admin .post-editor .form-actions .save-btn:hover {
-  background: #33ff33;
+  background: rgb(255, 132.6, 51);
 }
 .blog-admin .posts-list h2 {
-  color: #00ff00;
+  color: #ff6600;
   margin-bottom: 1.5rem;
 }
 .blog-admin .posts-list .loading, .blog-admin .posts-list .no-posts {
@@ -1935,12 +1935,12 @@ body.terminal-startup * {
 }
 .blog-admin .posts-list .posts-grid .post-card {
   background: rgba(0, 255, 0, 0.05);
-  border: 1px solid #00ff00;
+  border: 1px solid #ff6600;
   padding: 1.5rem;
   transition: all 0.2s ease;
 }
 .blog-admin .posts-list .posts-grid .post-card:hover {
-  border-color: #66ff66;
+  border-color: rgb(255, 163.2, 102);
   transform: translateY(-2px);
 }
 .blog-admin .posts-list .posts-grid .post-card .post-header {
@@ -1950,7 +1950,7 @@ body.terminal-startup * {
   margin-bottom: 1rem;
 }
 .blog-admin .posts-list .posts-grid .post-card .post-header h3 {
-  color: #00ff00;
+  color: #ff6600;
   margin: 0;
   font-size: 1.1rem;
   flex: 1;
@@ -1983,7 +1983,7 @@ body.terminal-startup * {
 }
 .blog-admin .posts-list .posts-grid .post-card .post-meta .post-tags .tag {
   background: rgba(0, 255, 0, 0.2);
-  color: #00ff00;
+  color: #ff6600;
   padding: 0.2rem 0.5rem;
   font-size: 0.7rem;
   border-radius: 2px;
@@ -1994,8 +1994,8 @@ body.terminal-startup * {
 }
 .blog-admin .posts-list .posts-grid .post-card .post-actions .edit-btn, .blog-admin .posts-list .posts-grid .post-card .post-actions .delete-btn {
   background: transparent;
-  border: 1px solid #00ff00;
-  color: #00ff00;
+  border: 1px solid #ff6600;
+  color: #ff6600;
   padding: 0.5rem 1rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-size: 0.8rem;
@@ -2003,8 +2003,8 @@ body.terminal-startup * {
   transition: all 0.2s ease;
 }
 .blog-admin .posts-list .posts-grid .post-card .post-actions .edit-btn:hover, .blog-admin .posts-list .posts-grid .post-card .post-actions .delete-btn:hover {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
 }
 .blog-admin .posts-list .posts-grid .post-card .post-actions .delete-btn {
   border-color: #ff4444;
@@ -2012,15 +2012,15 @@ body.terminal-startup * {
 }
 .blog-admin .posts-list .posts-grid .post-card .post-actions .delete-btn:hover {
   background: #ff4444;
-  color: #0a0a0a;
+  color: #0d0505;
 }
 .blog-admin .posts-list .posts-grid .file-input {
   padding: 0.5rem;
   cursor: pointer;
 }
 .blog-admin .posts-list .posts-grid .file-input::file-selector-button {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
   border: none;
   padding: 0.5rem 1rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
@@ -2028,7 +2028,7 @@ body.terminal-startup * {
   cursor: pointer;
 }
 .blog-admin .posts-list .posts-grid .file-input::file-selector-button:hover {
-  background: #33ff33;
+  background: rgb(255, 132.6, 51);
 }
 .blog-admin .posts-list .posts-grid .image-preview {
   margin-top: 1rem;
@@ -2037,8 +2037,8 @@ body.terminal-startup * {
 .blog-admin .posts-list .posts-grid .image-preview img {
   max-width: 100%;
   max-height: 200px;
-  border: 1px solid #00ff00;
-  background: #0a0a0a;
+  border: 1px solid #ff6600;
+  background: #0d0505;
 }
 .blog-admin .posts-list .posts-grid .image-preview .remove-image-btn {
   display: block;
@@ -2053,7 +2053,7 @@ body.terminal-startup * {
 }
 .blog-admin .posts-list .posts-grid .image-preview .remove-image-btn:hover {
   background: #ff4444;
-  color: #0a0a0a;
+  color: #0d0505;
 }
 .blog-admin .posts-list .posts-grid .post-card .post-image {
   margin-bottom: 1rem;
@@ -2062,8 +2062,8 @@ body.terminal-startup * {
   width: 100%;
   height: 150px;
   object-fit: cover;
-  border: 1px solid #00ff00;
-  background: #0a0a0a;
+  border: 1px solid #ff6600;
+  background: #0d0505;
 }
 
 @media (max-width: 768px) {
@@ -2090,9 +2090,9 @@ body.terminal-startup * {
   margin-bottom: 2rem;
 }
 .blog-post-container .blog-post-header .back-button {
-  background: #1a1a1a;
-  color: #00ff00;
-  border: 1px solid #00ff00;
+  background: #1a0a0a;
+  color: #ff6600;
+  border: 1px solid #ff6600;
   padding: 0.5rem 1rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-size: 0.9rem;
@@ -2101,12 +2101,12 @@ body.terminal-startup * {
   transition: all 0.3s ease;
 }
 .blog-post-container .blog-post-header .back-button:hover {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .blog-post-container .blog-post-header .post-title {
-  color: #00ff00;
+  color: #ff6600;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-size: 2rem;
   margin: 0 0 1rem 0;
@@ -2130,11 +2130,11 @@ body.terminal-startup * {
 }
 .blog-post-container .blog-post-header .post-info .author::before, .blog-post-container .blog-post-header .post-info .date::before {
   content: "[";
-  color: #00cc00;
+  color: #cc0000;
 }
 .blog-post-container .blog-post-header .post-info .author::after, .blog-post-container .blog-post-header .post-info .date::after {
   content: "]";
-  color: #00cc00;
+  color: #cc0000;
 }
 @media (max-width: 768px) {
   .blog-post-container .blog-post-header .post-info {
@@ -2150,11 +2150,11 @@ body.terminal-startup * {
   color: #999999;
 }
 .blog-post-container .blog-post-header .tags .tag {
-  color: #ffb000;
+  color: #ff8800;
   margin-right: 0.5rem;
 }
 .blog-post-container .blog-post-header .tags .tag:hover {
-  color: #00ff00;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .blog-post-container .blog-content .content-wrapper {
@@ -2162,20 +2162,20 @@ body.terminal-startup * {
   line-height: 1.6;
 }
 .blog-post-container .blog-content .content-wrapper .formatted-content .content-h2 {
-  color: #00ff00;
+  color: #ff6600;
   font-size: 1.5rem;
   margin: 2rem 0 1rem 0;
-  border-bottom: 1px solid #00ff00;
+  border-bottom: 1px solid #ff6600;
   padding-bottom: 0.5rem;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .blog-post-container .blog-content .content-wrapper .formatted-content .content-h3 {
-  color: #00cc00;
+  color: #cc0000;
   font-size: 1.25rem;
   margin: 1.5rem 0 1rem 0;
 }
 .blog-post-container .blog-content .content-wrapper .formatted-content .content-h4 {
-  color: #ffb000;
+  color: #ff8800;
   font-size: 1.1rem;
   margin: 1rem 0 0.5rem 0;
 }
@@ -2187,11 +2187,11 @@ body.terminal-startup * {
   margin-bottom: 0;
 }
 .blog-post-container .blog-content .content-wrapper .formatted-content .code-block-delimiter {
-  color: #ffb000;
+  color: #ff8800;
   font-weight: bold;
   margin: 1rem 0;
   padding: 0.5rem;
-  background: #1a1a1a;
+  background: #1a0a0a;
   border: 1px solid #666666;
 }
 .blog-post-container .blog-content .content-wrapper .formatted-content .list-item {
@@ -2201,7 +2201,7 @@ body.terminal-startup * {
 }
 .blog-post-container .blog-content .content-wrapper .formatted-content .list-item::before {
   content: ">";
-  color: #00ff00;
+  color: #ff6600;
   position: absolute;
   left: -1rem;
 }
@@ -2210,12 +2210,12 @@ body.terminal-startup * {
   font-style: italic;
   margin: 1rem 0;
   padding-left: 1rem;
-  border-left: 3px solid #00ff00;
+  border-left: 3px solid #ff6600;
   background: rgba(0, 255, 0, 0.05);
 }
 .blog-post-container .loading-indicator {
   text-align: center;
-  color: #00ff00;
+  color: #ff6600;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
 }
 .blog-post-container .loading-indicator p {
@@ -2231,9 +2231,9 @@ body.terminal-startup * {
   margin: 1rem 0;
 }
 .blog-post-container .error-message .terminal-button {
-  background: #1a1a1a;
-  color: #00ff00;
-  border: 1px solid #00ff00;
+  background: #1a0a0a;
+  color: #ff6600;
+  border: 1px solid #ff6600;
   padding: 0.75rem 1.5rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   cursor: pointer;
@@ -2241,8 +2241,8 @@ body.terminal-startup * {
   transition: all 0.3s ease;
 }
 .blog-post-container .error-message .terminal-button:hover {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 @media (max-width: 768px) {
@@ -2269,11 +2269,11 @@ body.terminal-startup * {
   transition: all 0.3s ease;
 }
 .blog-section .blog-posts .blog-post-item:hover .blog-link {
-  color: #00ff00;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .blog-section .blog-posts .blog-post-item:hover .post-number {
-  color: #ffb000;
+  color: #ff8800;
 }
 .blog-section .blog-posts .blog-post-item .blog-post-line {
   display: flex;
@@ -2281,7 +2281,7 @@ body.terminal-startup * {
   gap: 0.5rem;
 }
 .blog-section .blog-posts .blog-post-item .blog-post-line .post-number {
-  color: #00cc00;
+  color: #cc0000;
   font-weight: bold;
   min-width: 2rem;
   text-align: right;
@@ -2294,7 +2294,7 @@ body.terminal-startup * {
   transition: color 0.3s ease;
 }
 .blog-section .blog-posts .blog-post-item .blog-post-line .blog-link:hover {
-  color: #00ff00;
+  color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .blog-section .blog-posts .blog-post-item .blog-post-description {
@@ -2346,12 +2346,12 @@ body.terminal-startup * {
 .blog-post-page .blog-header {
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
   padding: 2rem;
-  border-bottom: 2px solid #00ff00;
+  border-bottom: 2px solid #ff6600;
 }
 .blog-post-page .blog-header .back-button {
   background: transparent;
-  border: 2px solid #00ff00;
-  color: #00ff00;
+  border: 2px solid #ff6600;
+  color: #ff6600;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
@@ -2361,8 +2361,8 @@ body.terminal-startup * {
   margin-bottom: 2rem;
 }
 .blog-post-page .blog-header .back-button:hover {
-  background: #00ff00;
-  color: #0a0a0a;
+  background: #ff6600;
+  color: #0d0505;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .blog-post-page .blog-header .post-meta .post-title {
@@ -2382,7 +2382,7 @@ body.terminal-startup * {
   color: #999999;
 }
 .blog-post-page .blog-header .post-meta .post-info .author {
-  color: #00ff00;
+  color: #ff6600;
   font-weight: 500;
 }
 .blog-post-page .blog-header .post-meta .post-info .date-separator {
@@ -2402,7 +2402,7 @@ body.terminal-startup * {
 }
 .blog-post-page .blog-header .post-meta .tags .tag {
   background: rgba(0, 255, 0, 0.1);
-  color: #00ff00;
+  color: #ff6600;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -2442,24 +2442,24 @@ body.terminal-startup * {
   font-size: 1.25rem;
 }
 .blog-post-page .blog-content .content-text strong {
-  color: #00ff00;
+  color: #ff6600;
   font-weight: 600;
 }
 .blog-post-page .blog-content .content-text em {
-  color: #ffb000;
+  color: #ff8800;
   font-style: italic;
 }
 .blog-post-page .blog-content .content-text code {
   background: rgba(0, 255, 0, 0.1);
-  color: #00ff00;
+  color: #ff6600;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
   font-size: 0.9em;
 }
 .blog-post-page .blog-content .content-text pre {
-  background: #0a0a0a;
-  color: #00ff00;
+  background: #0d0505;
+  color: #ff6600;
   padding: 1.5rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -2471,7 +2471,7 @@ body.terminal-startup * {
   padding: 0;
 }
 .blog-post-page .blog-content .content-text blockquote {
-  border-left: 4px solid #00ff00;
+  border-left: 4px solid #ff6600;
   padding-left: 1.5rem;
   margin: 1.5rem 0;
   font-style: italic;
@@ -2489,13 +2489,13 @@ body.terminal-startup * {
   color: #e0e0e0;
 }
 .blog-post-page .blog-content .content-text a {
-  color: #00ff00;
+  color: #ff6600;
   text-decoration: none;
   border-bottom: 1px solid rgba(0, 255, 0, 0.3);
   transition: all 0.3s ease;
 }
 .blog-post-page .blog-content .content-text a:hover {
-  border-bottom-color: #00ff00;
+  border-bottom-color: #ff6600;
   text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
 }
 .blog-post-page .loading-content, .blog-post-page .error-content {
@@ -2503,7 +2503,7 @@ body.terminal-startup * {
   text-align: center;
 }
 .blog-post-page .loading-content .loading-indicator h2, .blog-post-page .loading-content .error-message h2, .blog-post-page .error-content .loading-indicator h2, .blog-post-page .error-content .error-message h2 {
-  color: #00ff00;
+  color: #ff6600;
   font-size: 1.5rem;
   margin-bottom: 1rem;
   font-family: "Fira Code", "JetBrains Mono", "Courier New", monospace;
@@ -2539,4 +2539,4 @@ body.terminal-startup * {
   }
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../styles/main.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%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EACA,YA9ekB;EA+elB;EACA;EAheA;EAqBA;EACA,YACE;;AArBF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AAodF;EACE;EACA;EACA;EACA;EACA,OA5fY;EA6fZ,aAjfQ;EAkfR;EA9eF;;AAifE;EACE;EACA;;AAGF;EACE;EACA;;AAGF;EACE;EACA,OAxgBE;EAygBF;;AAKF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE;;AAGF;EACE,cAjiBQ;EAkiBR;;AAKF;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA,OAjjBL;EAkjBK;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EACE,aAxjBA;EAyjBA;EACA,OAtkBI;EAukBJ;;AAGF;EACE,aA/jBA;EAgkBA,OArkBL;EAskBK;;AAKN;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA,OA1lBM;EA2lBN;EACA,aAhlBE;EAilBF;EACA;EACA;EACA;EACA;;AAEA;EACE,cApmBI;EAqmBJ;EArlBV;;AA0lBM;EACE;EACA,aAhmBE;EAimBF;EACA,OArmBE;EAsmBF;EACA;;;AAOV;EACE;IACE;IACA;;EAEF;IACE;IACA;;;AAKJ;EACE;;AAEA;EACE,OAvoBY;EAgBd;EAynBE;;AAGF;EACE;EACA;;;AAIJ;EACE;EACA;EACA,YAjpBkB;EAkpBlB;EACA;EAnoBA;EAqBA;EACA,YACE;;AArBF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AAunBF;EACE;EACA;EACA;EACA;EACA;EACA,aAppBQ;EAqpBR;EAjpBF;;AAopBE;EACE;EACA;;AAGF;EACE;EACA;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;;AAIJ;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA,aAxsBM;EAysBN;EACA;EACA;EACA;EACA;;AAEA;EACE;EA5sBN;EA8sBM;;AAKF;EACE;EACA;EACA;;AAGF;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;;;AAQZ;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;EAzvBF;;AA6vBA;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA,YAnxBc;EAoxBd;EACA;EACA,aA9wBM;;AAgxBN;EACE;EACA,OA9xBQ;;AAiyBV;EACE,OA7xBA;EA8xBA;;AAKN;EACE;EACA,OAjyBQ;EAkyBR;EACA;;;AAKJ;EACE;IACE;IACA;;EAEA;IACE;;EAIJ;IACE;;EAGF;IACE;IACA;IACA;;;AAKJ;EACE;EACA;EACA;EACA;EACA;EACA,YA10BY;EA20BZ;EACA;EA3zBA;EAqBA;EACA,YACE;EAsyBF;EACA;;AA5zBA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;;AAkzBJ;EACE;EACA;EACA;EACA,YAr1BkB;EAs1BlB;EACA;;;AAGF;EACE;EACA;;AAEA;EACE;EACA;EACA;;AAEA;EAAU;;AACV;EAAa;;AACb;EAAa;;;AAIjB;EACE,OAv2BK;EAw2BL;;;AAGF;EACE;EACA;EACA;;;AAGF;EACE;;;AAGF;EACE,OAt3BK;EAu3BL;;AAEA;EACE;;;AAIJ;EACE;EACA;EACA;;AAEA;EACE,OA14Bc;EA24Bd;;AAGF;EACE;EACA;EACA;EACA,OAn5BY;EAo5BZ,aAx4BQ;EAy4BR;EACA;;AAEA;EACE,OAh5BM;;AAo5BR;EACE;EACA;;AAIJ;EACE,OAp6BY;EAq6BZ;;;AAKJ;EACE;EACA;EACA;EACA;;AAEA;EACE,OAx6BQ;EAy6BR;;;AAKJ;EACE;IACE;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAGF;IACE;;EAME;IACE;IACA;;EAIJ;IACE;;EAGF;IACE;IACA;;EAEA;IACE;IACA;;EAIJ;IACE;IACA;IACA;IACA;;EAKE;IACE;;EAGF;IACE;IACA;;EAEA;IACE;IACA;;EAMJ;IACE;IACA;;EAMN;IACE;IACA;IACA;;EAEA;IACE;IACA;;EAEA;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAEA;IACE;IACA;;EAGF;IACE;;EAGF;IACE;;EAGF;IACE;IACA;;EAOR;IACE;;EAEA;IACE;IACA;IACA;;EAEA;IACE;IACA;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;IACA;IACA;;EAGF;IACE;IACA;IACA;;EAOR;IACE;;EAEA;IACE;IACA;IACA;;EAMF;IACE;IACA;;EAKJ;IACE;IACA;;EAEA;IACE;IACA;;EAMF;IACE;;EAGF;IACE;IACA;;EAGF;IACE;;EAEA;IACE;IACA;;EAIJ;IACE;IACA;;EAEA;IACE;IACA;IACA;;EAQF;IACE;;EAIJ;IACE;;EAEA;IACE;;EAEA;IACE;;;AAQV;EACE;;;AAGF;EACE,YAvrCY;;;AA0rCd;EACE,YA5rCW;EA6rCX;;AAEA;EACE,YAjsCc;;;AAssClB;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;AAGF;EACE;EACA;EACA;EACA;EACA,aA9sCQ;EA+sCR;;AAGE;EACE,OAxtCD;;AA0tCD;EACE,OAluCQ;EAgBd;;AAwtCI;EACE,OAzuCQ;EAgBd;;AA4tCI;EACE,OAxuCA;EAWN;;AAguCI;EACE;EAjuCN;;AAuuCA;EAnuCA;EAqBA;EACA,YACE;EA8sCA;EACA,YAvvCU;EAwvCV;EACA;EACA;EACA;EACA;EACA;;AA1uCF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AA+tCA;EACE;EACA,cA/vCE;EAgwCF,YACE;;AAKJ;EACE;;AAIJ;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;;AAEA;EACE,OA3xCQ;EA4xCR;EA5wCN;;AAgxCI;EACE;;AAEA;EACE,OA7xCH;EA8xCG;EACA,aA1xCE;EA2xCF;;AAEA;EACE;EACA,OA3yCI;;AAizCZ;EACE;EACA;EACA,OApzCU;EAqzC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;EACA,OAjjEK;;AAojEH;EACE,OAxjEJ;;AA4jEA;EACE;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EACE,cA7kEM;;AAmlEV;EACE,YAplEQ;EAqlER;EACA,OAnlEM;EAolEN;EACA,aA5kEI;EA6kEJ;EACA;EACA;;AAEA;EACE;;AAON;EACE,OAtmEU;EAumEV;;AAGF;EACE;EACA,OApmEO;EAqmEP;EACA;;AAGF;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE,OAxoEI;EAyoEJ;EACA;EACA;;AAGF;EACE;EACA,OAxoEC;EAyoED;EACA;;AAIJ;EACE,OA/oEG;EAgpEH;EACA;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE,OA1pEA;EA2pEA;;AAGF;EACE;EACA;EACA;;AAEA;EACE;EACA,OA9qEE;EA+qEF;EACA;EACA;;AAKN;EACE;EACA;;AAEA;EACE;EACA;EACA,OA7rEI;EA8rEJ;EACA,aAnrEA;EAorEA;EACA;EACA;;AAEA;EACE,YArsEE;EAssEF,OAnsEA;;AAusEJ;EACE;EACA;;AAEA;EACE;EACA,OA7sEA;;AAotER;EACE;EACA;;AAEA;EACE,YA5tEM;EA6tEN,OA1tEI;EA2tEJ;EACA;EACA,aAptEE;EAqtEF;EACA;;AAEA;EACE;;AAKN;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA,YA/uEI;;AAkvEN;EACE;EACA;EACA;EACA;EACA;EACA;EACA,aAhvEE;EAivEF;EACA;;AAEA;EACE;EACA,OA/vEE;;AAuwEN;EACE;;AAEA;EACE;EACA;EACA;EACA;EACA,YA/wEE;;;AAuxEd;EACE;IACE;;EAEA;IACE;IACA;IACA;;EAGF;IACE;;;AAMN;EACE;;AAEA;EACE;EACA;;AAGF;EACE;;AAEA;EACE,YAnzEc;EAozEd,OAxzEU;EAyzEV;EACA;EACA,aA/yEM;EAgzEN;EACA;EACA;EACA;;AAEA;EACE,YAl0EQ;EAm0ER,OAh0EM;EAaZ;;AAwzEE;EACE,OAz0EU;EA0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%22,%22file%22:%22main.css%22%7D */
+/*# sourceMappingURL=data:application/json;charset=utf-8,%7B%22version%22:3,%22sourceRoot%22:%22%22,%22sources%22:%5B%22../../styles/main.scss%22%5D,%22names%22:%5B%5D,%22mappings%22:%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EACA,YAhfkB;EAiflB;EACA;EAheA;EAqBA;EACA,YACE;;AArBF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AAodF;EACE;EACA;EACA;EACA;EACA,OA9fY;EA+fZ,aAjfQ;EAkfR;EA9eF;;AAifE;EACE;EACA;;AAGF;EACE;EACA;;AAGF;EACE;EACA,OA1gBE;EA2gBF;;AAKF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE;;AAGF;EACE,cAniBQ;EAoiBR;;AAKF;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA,OAjjBL;EAkjBK;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EACE,aAxjBA;EAyjBA;EACA,OAxkBI;EAykBJ;;AAGF;EACE,aA/jBA;EAgkBA,OArkBL;EAskBK;;AAKN;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA,OA5lBM;EA6lBN;EACA,aAhlBE;EAilBF;EACA;EACA;EACA;EACA;;AAEA;EACE,cAtmBI;EAumBJ;EArlBV;;AA0lBM;EACE;EACA,aAhmBE;EAimBF;EACA,OArmBE;EAsmBF;EACA;;;AAOV;EACE;IACE;IACA;;EAEF;IACE;IACA;;;AAKJ;EACE;;AAEA;EACE,OAzoBY;EAkBd;EAynBE;;AAGF;EACE;EACA;;;AAIJ;EACE;EACA;EACA,YAnpBkB;EAopBlB;EACA;EAnoBA;EAqBA;EACA,YACE;;AArBF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AAunBF;EACE;EACA;EACA;EACA;EACA;EACA,aAppBQ;EAqpBR;EAjpBF;;AAopBE;EACE;EACA;;AAGF;EACE;EACA;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;;AAIJ;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA,aAxsBM;EAysBN;EACA;EACA;EACA;EACA;;AAEA;EACE;EA5sBN;EA8sBM;;AAKF;EACE;EACA;EACA;;AAGF;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;;;AAQZ;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;EAzvBF;;AA6vBA;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA,YArxBc;EAsxBd;EACA;EACA,aA9wBM;;AAgxBN;EACE;EACA,OAhyBQ;;AAmyBV;EACE,OA/xBA;EAgyBA;;AAKN;EACE;EACA,OAjyBQ;EAkyBR;EACA;;;AAKJ;EACE;IACE;IACA;;EAEA;IACE;;EAIJ;IACE;;EAGF;IACE;IACA;IACA;;;AAKJ;EACE;EACA;EACA;EACA;EACA;EACA,YA50BY;EA60BZ;EACA;EA3zBA;EAqBA;EACA,YACE;EAsyBF;EACA;;AA5zBA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;;AAkzBJ;EACE;EACA;EACA;EACA,YAv1BkB;EAw1BlB;EACA;;;AAGF;EACE;EACA;;AAEA;EACE;EACA;EACA;;AAEA;EAAU;;AACV;EAAa;;AACb;EAAa;;;AAIjB;EACE,OAv2BK;EAw2BL;;;AAGF;EACE;EACA;EACA;;;AAGF;EACE;;;AAGF;EACE,OAt3BK;EAu3BL;;AAEA;EACE;;;AAIJ;EACE;EACA;EACA;;AAEA;EACE,OA54Bc;EA64Bd;;AAGF;EACE;EACA;EACA;EACA,OAr5BY;EAs5BZ,aAx4BQ;EAy4BR;EACA;;AAEA;EACE,OAh5BM;;AAo5BR;EACE;EACA;;AAIJ;EACE,OAt6BY;EAu6BZ;;;AAKJ;EACE;EACA;EACA;EACA;;AAEA;EACE,OAx6BQ;EAy6BR;;;AAKJ;EACE;IACE;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAGF;IACE;;EAME;IACE;IACA;;EAIJ;IACE;;EAGF;IACE;IACA;;EAEA;IACE;IACA;;EAIJ;IACE;IACA;IACA;IACA;;EAKE;IACE;;EAGF;IACE;IACA;;EAEA;IACE;IACA;;EAMJ;IACE;IACA;;EAMN;IACE;IACA;IACA;;EAEA;IACE;IACA;;EAEA;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAEA;IACE;IACA;;EAGF;IACE;;EAGF;IACE;;EAGF;IACE;IACA;;EAOR;IACE;;EAEA;IACE;IACA;IACA;;EAEA;IACE;IACA;;EAGF;IACE;IACA;IACA;;EAGF;IACE;IACA;IACA;IACA;;EAGF;IACE;IACA;IACA;;EAOR;IACE;;EAEA;IACE;IACA;IACA;;EAMF;IACE;IACA;;EAKJ;IACE;IACA;;EAEA;IACE;IACA;;EAMF;IACE;;EAGF;IACE;IACA;;EAGF;IACE;;EAEA;IACE;IACA;;EAIJ;IACE;IACA;;EAEA;IACE;IACA;IACA;;EAQF;IACE;;EAIJ;IACE;;EAEA;IACE;;EAEA;IACE;;;AAQV;EACE;;;AAGF;EACE,YAzrCY;;;AA4rCd;EACE,YA9rCW;EA+rCX;;AAEA;EACE,YAnsCc;;;AAwsClB;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;AAGF;EACE;EACA;EACA;EACA;EACA,aA9sCQ;EA+sCR;;AAGE;EACE,OAxtCD;;AA0tCD;EACE,OApuCQ;EAkBd;;AAwtCI;EACE,OA3uCQ;EAkBd;;AA4tCI;EACE,OA1uCA;EAaN;;AAguCI;EACE;EAjuCN;;AAuuCA;EAnuCA;EAqBA;EACA,YACE;EA8sCA;EACA,YAzvCU;EA0vCV;EACA;EACA;EACA;EACA;EACA;;AA1uCF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AA+tCA;EACE;EACA,cAjwCE;EAkwCF,YACE;;AAKJ;EACE;;AAIJ;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;;AAEA;EACE,OA7xCQ;EA8xCR;EA5wCN;;AAgxCI;EACE;;AAEA;EACE,OA7xCH;EA8xCG;EACA,aA1xCE;EA2xCF;;AAEA;EACE;EACA,OA7yCI;;AAmzCZ;EACE;EACA;EACA,OAtzCU;EAuzCV;EACA,aA1yCM;EA2yCN;EACA;EAxyCJ;;AA2yCI;EACE,YA9zCQ;EA+zCR,OA5zCM;EA6zCN;;;AASR;EACE;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;;AAGF;EACE;EACA;EACA;EACA;;AAGF;EACE;EACA;EACA,YAj2CU;EAk2CV;EACA;EACA,OAv2CY;EAw2CZ;EACA,aA31CQ;EA41CR;EACA;EACA;EACA;EACA;EACA;EA71CF;EA+2CE;EACA;EACA;EACA;EACA;EACA;;AApBA;EACE;EACA,cAn3CY;EAo3CZ;EACA,YACE;;AAIJ;EACE;EACA;;AAYJ;EACE;EACA,cAt4CI;EAu4CJ,OAv4CI;;AAy4CJ;EACE;EACA;EACA,YACE;;;AAOR;EACE;IACE;;EAKA;IACE;;EAGE;IACE;;EAEA;IACE;;;AAQZ;EACE;IACE;IACA;;EAEA;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAGF;IACE;;;AAOJ;EACE;EACA;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE,OAt9CU;EAu9CV;EAr8CJ;;AAy8CE;EACE;EACA;;AAEA;EACE;EACA;EACA,OAz9CD;EA09CC;EACA,aAt9CI;EAu9CJ;EACA;EACA;;AAEA;EACE,cA1+CM;EA2+CN,OA3+CM;EA4+CN;EA19CR;;AA89CM;EACE;;AAGF;EACE,cAp/CQ;EAq/CR,OAr/CQ;;AA2/ChB;EACE;EACA,OAz/CI;EA0/CJ;EACA,aAl/CQ;EAIV;;AAk/CA;EACE;EACA,OA7/CG;EA8/CH;;AAEA;EACE;;AAKF;EACE;EACA;EACA;EACA;EACA;EACA;EACA,aAxgDM;EAygDN;EACA,OAnhDE;EAohDF;;AAEA;AAAA;AAAA;AAAA;EAzgDJ;;AAghDI;AAAA;EAEE;;AAIJ;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EACA,aAliDM;;AAoiDN;EACE,mBAnjDQ;EAojDR;;AAGF;EACE;;AAGF;EACE,OAvjDA;EAwjDA;EACA;;AAGF;EACE,OAlkDQ;EAkBd;;AAojDI;EACE,OA/jDA;EAgkDA;EACA;;AAGF;EACE,OApkDD;EAqkDC;EACA;;AAKN;EACE;EACA;EACA;EACA;EACA;EAnkDF;EAqBA;EACA,YACE;;AArBF;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AAujDA;EACE,OA7lDU;EA8lDV;EA5kDJ;;AAglDE;EACE,OA3lDE;EA4lDF;;AAGF;EACE;EACA;;AAEA;EACE;EACA,OApmDD;EAqmDC;EACA,aAjmDI;;AAomDN;EACE,YAhnDM;EAinDN;EACA,OArnDQ;EAsnDR;EACA,aAzmDI;EA0mDJ;EACA;EACA;EAxmDN;;AA2mDM;EACE;EACA,cA/nDM;EAgoDN;;AAIJ;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA,YA7oDI;EA8oDJ;EACA;;AAEA;EACE,cArpDI;EAspDJ,YAtpDI;;AAwpDJ;EACE;EACA;EACA;EACA;EACA,OA1pDA;EA2pDA;EACA;;AAIJ;EACE;EACA;;AAIJ;EACE,OA1qDM;EA2qDN,aA7pDE;EAIV;;AA8pDI;EACE;EACA,OAzqDD;EA0qDC;EACA;;AAIJ;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA,aAnrDI;EAorDJ;EACA;;AAEA;EACE,cAtsDM;EAusDN,OAvsDM;EAkBd;;AAwrDQ;EACE,YA3sDI;EA4sDJ,OAzsDE;EA0sDF;;AAIJ;EACE;EACA;;AAEA;EACE;EACA,OA/sDJ;;AAstDN;EACE;EACA;EACA,OAxtDG;EAytDH;EACA,aArtDQ;;AAutDR;EACE;EACA;;AAEA;EACE,OAruDA;;AAwuDF;EACE,OA7uDU;;AAkvDhB;EACE;IACE;IACA;;EAIA;AAAA;IAEE;;EAEA;AAAA;AAAA;AAAA;IAEE;;;;AAQV;EAlvDE;EAqBA;EACA,YACE;EA6tDF,YAvwDY;EAwwDZ;EACA;EACA;EACA,aAhwDU;EAiwDV;EACA;;AAxvDA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;EAIA;EACA;EACA;;AA6uDF;EACE,OA9wDI;EA+wDJ;EACA;EACA;EACA;EArwDF;;AAywDA;EACE,OA5xDY;EA6xDZ;EACA;EACA;EA7wDF;;AAgxDE;EACE,OAlyDY;EAmyDZ;;AAGF;EACE;EACA,aACE;;AAON;EACE;EACA;EACA;EACA;EACA;EACA,OAvzDY;EAwzDZ;EACA;EACA;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA,OAn0DY;EAo0DZ;EACA;EACA;;;AAIJ;EACE;EACA;;AAEA;EACE;EACA,YACE;;;AAMN;EACE;;AAEA;EACE;EACA,cA31Dc;;AA61Dd;EACE,OA91DY;;AAi2Dd;EACE,OAl2DY;EAm2DZ,aACE;;AAKJ;EAEE,OA32DY;;;AAg3DlB;EACE;IAAW;;EACX;IAAM;;;AAGR;EACE;IACE;IACA;IACA;;EAEA;IACE;IACA;IACA;;EAGF;IACE;IACA;;EAGF;IAEE;IACA;;EAIJ;IACE;IACA;;EAGF;IACE;;;AAKJ;EACE;IACE;;EAIA;IACE;;EAIA;IACE;;EAEA;IACE;;EAKN;IACE;IACA;;EAIJ;IACE;IACA;;EAIA;IACE;;EAGF;IACE;;;AAMN;EACE,YAl8DY;EAm8DZ,OAt8Dc;EAu8Dd,aAz7DU;EA07DV;EACA;;AAEA;EACE;EACA;EACA;EACA;EACA;EACA;;AAEA;EACE,OAp9DU;EAq9DV;EACA;;AAGF;EACE;EACA;EACA;;AAEA;EACE,OAr9DK;;AAw9DP;EACE;EACA;EACA,OAr+DQ;EAs+DR;EACA,aAz9DI;EA09DJ;EACA;;AAEA;EACE,YA5+DM;EA6+DN,OA1+DI;;AAg/DZ;EACE;;AAEA;EACE;EACA;EACA,OAz/DU;EA0/DV;EACA,aA7+DM;EA8+DN;EACA;;AAEA;EACE,YAhgEQ;EAigER,OA9/DM;;AAmgEZ;EACE;EACA;EACA;EACA;;AAEA;EACE,OA7gEU;EA8gEV;EACA;;AAGF;EACE;;AAEA;EACE;EACA,OAvhEQ;EAwhER;EACA;;AAGF;EACE;EACA,YA3hEM;EA4hEN;EACA,OAhiEQ;EAiiER,aAnhEI;EAohEJ;EACA;;AAEA;EACE;EACA;EACA;;AAGF;EACE,OAjiEE;;AAqiEN;EACE;EACA;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA,OAjjEK;;AAojEH;EACE,OA1jEJ;;AA8jEA;EACE;;AAIJ;EACE;EACA;EACA;EACA;;AAEA;EACE,cA/kEM;;AAqlEV;EACE,YAtlEQ;EAulER;EACA,OArlEM;EAslEN;EACA,aA5kEI;EA6kEJ;EACA;EACA;;AAEA;EACE;;AAON;EACE,OAxmEU;EAymEV;;AAGF;EACE;EACA,OApmEO;EAqmEP;EACA;;AAGF;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA;EACA;;AAEA;EACE;EACA;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE,OA1oEI;EA2oEJ;EACA;EACA;;AAGF;EACE;EACA,OAxoEC;EAyoED;EACA;;AAIJ;EACE,OA/oEG;EAgpEH;EACA;;AAGF;EACE;EACA;EACA;EACA;;AAEA;EACE,OA1pEA;EA2pEA;;AAGF;EACE;EACA;EACA;;AAEA;EACE;EACA,OAhrEE;EAirEF;EACA;EACA;;AAKN;EACE;EACA;;AAEA;EACE;EACA;EACA,OA/rEI;EAgsEJ;EACA,aAnrEA;EAorEA;EACA;EACA;;AAEA;EACE,YAvsEE;EAwsEF,OArsEA;;AAysEJ;EACE;EACA;;AAEA;EACE;EACA,OA/sEA;;AAstER;EACE;EACA;;AAEA;EACE,YA9tEM;EA+tEN,OA5tEI;EA6tEJ;EACA;EACA,aAptEE;EAqtEF;EACA;;AAEA;EACE;;AAKN;EACE;EACA;;AAEA;EACE;EACA;EACA;EACA,YAjvEI;;AAovEN;EACE;EACA;EACA;EACA;EACA;EACA;EACA,aAhvEE;EAivEF;EACA;;AAEA;EACE;EACA,OAjwEE;;AAywEN;EACE;;AAEA;EACE;EACA;EACA;EACA;EACA,YAjxEE;;;AAyxEd;EACE;IACE;;EAEA;IACE;IACA;IACA;;EAGF;IACE;;;AAMN;EACE;;AAEA;EACE;EACA;;AAGF;EACE;;AAEA;EACE,YArzEc;EAszEd,OA1zEU;EA2zEV;EACA;EACA,aA/yEM;EAgzEN;EACA;EACA;EACA;;AAEA;EACE,YAp0EQ;EAq0ER,OAl0EM;EAeZ;;AAwzEE;EACE,OA30EU;EA40EV,aA9zEM;EA+zEN;EACA;EA5zEJ;;AA+zEI;EAPF;IAQI;;;AAIJ;EACE;EACA;EACA;EACA;EACA,aA70EM;EA80EN;;AAEA;EACE,OAr1EK;;AAu1EL;EACE;EACA,OAl2EQ;;AAq2EV;EACE;EACA,OAv2EQ;;AA22EZ;EAtBF;IAuBI;IACA;;;AAIJ;EACE,aAr2EM;EAs2EN;;AAEA;EACE,OA72EK;;AAg3EP;EACE,OAt3EA;EAu3EA;;AAEA;EACE,OA/3EM;EAkBd;;AAq3EE;EACE,aA13EM;EA23EN;;AAGE;EACE,OA74EM;EA84EN;EACA;EACA;EACA;EA/3ER;;AAm4EM;EACE,OAr5EQ;EAs5ER;EACA;;AAGF;EACE,OAv5EF;EAw5EE;EACA;;AAGF;EACE,OAz5EH;EA05EG;;AAEA;EACE;;AAIJ;EACE,OAt6EF;EAu6EE;EACA;EACA;EACA,YA36EU;EA46EV;;AAGF;EACE,OA36EH;EA46EG;EACA;;AAEA;EACE;EACA,OA17EI;EA27EJ;EACA;;AAIJ;EACE,OAv7EG;EAw7EH;EACA;EACA;EACA;EACA;;AAMR;EACE;EACA,OA98EY;EA+8EZ,aAj8EQ;;AAm8ER;EACE;EAh8EJ;;AAq8EA;EACE;EACA;EACA,aA58EQ;;AA88ER;EACE;;AAGF;EACE,YA79Ec;EA89Ed,OAl+EU;EAm+EV;EACA;EACA,aAv9EM;EAw9EN;EACA;EACA;;AAEA;EACE,YA3+EQ;EA4+ER,OAz+EM;EAeZ;;AAg+EA;EArMF;IAsMI;;EAEA;IACE;;EAIA;IACE;;EAGF;IACE;;;;AAOR;EACE;;AAGE;EACE;EACA;EACA;;AAGE;EACE,OAjhFM;EAkBd;;AAmgFM;EACE,OAjhFF;;AAqhFF;EACE;EACA;EACA;;AAEA;EACE,OA/hFQ;EAgiFR;EACA;EACA;EACA,aAthFE;;AAyhFJ;EACE,OA/hFH;EAgiFG,aA3hFE;EA4hFF;EACA;;AAEA;EACE,OA9iFI;EAkBd;;AAkiFI;EACE;EACA;;AAEA;EACE,OA/iFG;EAgjFH;EACA;EACA,aA9iFE;;AAojFV;EACE;EACA;EACA,OA3jFS;EA4jFT,aAxjFQ;;AA0jFR;EACE;;AAGF;EACE;;;AAKN;EACE;IAAU;;EACV;IAAY;;;AAId;EACE;EACA;EACA;EACA;EACA,OArlFM;;AAulFN;EACE;EACA;EACA;EACA;EACA;EACA;;AAGF;EACE;EACA;EACA;;AAEA;EACE;EACA;EACA,OAhnFU;EAinFV;EACA;EACA,aArmFM;EAsmFN;EACA;EACA;EACA;;AAEA;EACE,YA1nFQ;EA2nFR,OAxnFM;EAeZ;;AA+mFI;EACE;EACA;EACA;EACA;EACA,OA9nFA;EA+nFA;;AAGF;EACE;EACA;EACA;EACA;EACA;EACA,OAtoFK;;AAwoFL;EACE,OAnpFM;EAopFN;;AAGF;EACE;EACA,OA9oFE;;AAipFJ;EACE,OAnpFG;;AAqpFH;EACE;;AAKN;EACE;EACA;EACA;;AAEA;EACE;EACA,OA5qFM;EA6qFN;EACA;EACA;EACA;EACA,aAnqFE;;AAyqFV;EACE;;AAEA;EACE;EACA;EACA;;AAEA;EACE;EACA;;AAGF;EACE,OA7rFA;EA8rFA;EACA;;AAEA;EACE;;AAIJ;EAAK;;AACL;EAAK;;AACL;EAAK;;AACL;EAAK;;AAEL;EACE,OAptFQ;EAqtFR;;AAGF;EACE,OAptFA;EAqtFA;;AAGF;EACE;EACA,OA/tFQ;EAguFR;EACA;EACA,aAptFI;EAqtFJ;;AAGF;EACE,YApuFM;EAquFN,OAxuFQ;EAyuFR;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;;AAIJ;EACE;EACA;EACA;EACA;EACA,OAhvFK;EAivFL;EACA;EACA;;AAGF;EACE;EACA;;AAEA;EACE;EACA;;AAIJ;EACE,OA3wFQ;EA4wFR;EACA;EACA;;AAEA;EACE,qBAjxFM;EAkBd;;AAswFA;EACE;EACA;;AAGE;EACE,OA9xFQ;EA+xFR;EACA;EACA,aAnxFI;;AAsxFN;EACE,OA3xFK;EA4xFL;EACA;;AAKF;EACE;;AAMN;EA3NF;IA4NI;;EAEA;IACE;IACA;;EAGF;IACE;;EAEA;IACE;;EAIJ;IACE;;EAEA;IACE;IACA%22,%22file%22:%22main.css%22%7D */

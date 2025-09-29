@@ -1,0 +1,23 @@
+// Theme Configuration
+// This file is auto-generated based on the current theme selection
+// It provides theme variables that can be accessed by Rust components
+
+:root {
+  // Current theme identifier
+  --current-theme: '#{$theme-name}';
+  
+  // Color variables
+  --primary-color: #{$primary-green};
+  --secondary-color: #{$secondary-green};
+  --dark-color: #{$dark-green};
+  --bg-color: #{$terminal-bg};
+  --bg-light-color: #{$terminal-bg-light};
+  --accent-color: #{$amber};
+  
+  // Theme-specific content
+  --matrix-chars: '#{$matrix-characters}';
+  --terminal-prompt: '#{$terminal-prompt}';
+  --welcome-message: '#{$welcome-message}';
+  --header-decoration: '#{$header-decoration}';
+  --theme-description: '#{$theme-description}';
+}

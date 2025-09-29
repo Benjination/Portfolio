@@ -1,5 +1,5 @@
 use yew::prelude::*;
-use web_sys::HtmlInputElement;
+use web_sys::{HtmlInputElement, window};
 use gloo::timers::callback::Timeout;
 use wasm_bindgen_futures::spawn_local;
 use crate::components::blog_auth::{verify_blog_password, verify_blog_credentials, authenticate_admin, AuthState};
@@ -9,8 +9,9 @@ use crate::components::blog_admin::BlogAdmin;
 pub fn terminal() -> Html {
     let input_ref = use_node_ref();
     let output = use_state(|| vec![
-        "Welcome to Benjamin's Portfolio Terminal!".to_string(),
-        "Type 'help' for available commands.".to_string(),
+        "🎃 Welcome to Benjamin's SPOOKY Portfolio Terminal! 👻".to_string(),
+        "The ghosts whisper... type 'help' for available commands.".to_string(),
+        "Beware: some commands may be... haunted 💀".to_string(),
         "".to_string(),
     ]);
     let input_value = use_state(|| String::new());
@@ -19,6 +20,52 @@ pub fn terminal() -> Html {
     let blog_email = use_state(|| String::new());
     let password_attempts = use_state(|| 0u32);
     let auth_state = use_state(|| None::<AuthState>);
+
+    // Auto-run a stored terminal command (e.g., "treat") after a page reload
+    use_effect_with((), {
+        let output = output.clone();
+        move |_| {
+            if let Some(window) = window() {
+                if let Ok(Some(storage)) = window.local_storage() {
+                    if let Ok(Some(cmd)) = storage.get_item("terminal-auto-run") {
+                        if cmd == "treat" {
+                            // Clear the auto-run flag to avoid loops
+                            let _ = storage.remove_item("terminal-auto-run");
+
+                            // Re-apply treat side effects
+                            let _ = storage.remove_item("halloween-trick");
+                            let _ = storage.set_item("halloween-treat", "true");
+
+                            // Echo command and output
+                            let mut new_output = (*output).clone();
+                            new_output.push("👻benjamin@SpookyTown:~/haunted💀 treat".to_string());
+                            new_output.extend(vec![
+                                "🍬 TREAT! 🍭".to_string(),
+                                "The ghosts fade away... 👻💨".to_string(),
+                                "Pumpkins return to the autumn rain! �".to_string(),
+                                "Sweet dreams... if you can sleep! 😈".to_string(),
+                                "".to_string(),
+                            ]);
+                            output.set(new_output);
+
+                            // Scroll to bottom after render
+                            let timeout = Timeout::new(50, move || {
+                                if let Some(win) = web_sys::window() {
+                                    if let Some(doc) = win.document() {
+                                        if let Some(body) = doc.body() {
+                                            win.scroll_to_with_x_and_y(0.0, body.scroll_height() as f64);
+                                        }
+                                    }
+                                }
+                            });
+                            timeout.forget();
+                        }
+                    }
+                }
+            }
+            || {}
+        }
+    });
     
     let on_input = {
         let input_value = input_value.clone();
@@ -121,21 +168,25 @@ pub fn terminal() -> Html {
                 }
                 
                 // Normal command handling
-                new_output.push(format!("benjamin@BenjaminNiccum:~$ {}", command));
+                new_output.push(format!("👻benjamin@SpookyTown:~/haunted💀 {}", command));
                 
                 let response = match command.trim() {
                     "help" => vec![
-                        "Available commands:".to_string(),
-                        "  help        - Show this help message".to_string(),
-                        "  about       - Learn about Benjamin".to_string(),
-                        "  skills      - View technical skills".to_string(),
-                        "  projects    - See recent projects".to_string(),
-                        "  contact     - Get contact information".to_string(),
-                        "  clear       - Clear terminal".to_string(),
-                        "  whoami      - Display user info".to_string(),
-                        "  ls          - List portfolio sections".to_string(),
-                        "  cat resume  - Display resume summary".to_string(),
-                        "  sudo hire   - You know what this does 😉".to_string(),
+                        "🎃 Available spooky commands: 👻".to_string(),
+                        "  help        - Show this haunted help message".to_string(),
+                        "  about       - Learn about the ghost of Benjamin".to_string(),
+                        "  skills      - View supernatural technical abilities".to_string(),
+                        "  projects    - See cursed recent projects".to_string(),
+                        "  contact     - Get contact info (if you dare)".to_string(),
+                        "  clear       - Banish the terminal spirits".to_string(),
+                        "  whoami      - Display phantom user info".to_string(),
+                        "  ls          - List haunted portfolio sections".to_string(),
+                        "  cat resume  - Display ghostly resume summary".to_string(),
+                        "  sudo hire   - Summon employment magic 🧙‍♂️".to_string(),
+                        "  boo         - 👻 BOO! (Halloween special)".to_string(),
+                        "  trick       - Get a trick 🎭".to_string(),
+                        "  treat       - Get a treat 🍬".to_string(),
+                        "  reset       - Reset Halloween effects to default 🔄".to_string(),
                     ],
                     "about" => vec![
                         "Benjamin Niccum - Software Engineer".to_string(),
@@ -204,10 +255,90 @@ pub fn terminal() -> Html {
                         input_value.set(String::new());
                         return;
                     },
+                    "boo" => vec![
+                        "👻 BOOOOOO! 👻".to_string(),
+                        "Did I scare you? 🎃".to_string(),
+                        "Happy Halloween! 🦇🕷️💀".to_string(),
+                    ],
+                    "trick" => {
+                        web_sys::console::log_1(&"TRICK command executed".into());
+                        // Use a simple state sharing approach instead of custom events
+                        // Store trick state in local storage for the matrix rain to read
+                        if let Some(window) = window() {
+                            if let Ok(Some(storage)) = window.local_storage() {
+                                let _ = storage.set_item("halloween-trick", "true");
+                                // Clear any existing treat flag
+                                let _ = storage.remove_item("halloween-treat");
+                                web_sys::console::log_1(&"Set halloween-trick, removed halloween-treat".into());
+                                // Ghosts will persist until treat command is used
+                            }
+                        }
+                        
+                        vec![
+                            "🎭 TRICK! 🎭".to_string(),
+                            "🎃 The pumpkins transform into floating ghosts! 👻".to_string(),
+                            "Watch the matrix rain change above... 🦇".to_string(),
+                        ]
+                    },
+                    "treat" => {
+                        web_sys::console::log_1(&"TREAT command executed".into());
+                        // Set treat flag to stop ghosts and return to pumpkins
+                        if let Some(window) = window() {
+                            if let Ok(Some(storage)) = window.local_storage() {
+                                // Clear ALL Halloween flags first
+                                let _ = storage.remove_item("halloween-trick");
+                                let _ = storage.remove_item("halloween-treat");
+                                // Then set the treat flag
+                                let _ = storage.set_item("halloween-treat", "true");
+                                web_sys::console::log_1(&"Cleared all flags and set halloween-treat".into());
+                                
+                                // Verify it was set
+                                if let Ok(Some(value)) = storage.get_item("halloween-treat") {
+                                    web_sys::console::log_2(&"Verified halloween-treat set to:".into(), &value.into());
+                                } else {
+                                    web_sys::console::log_1(&"ERROR: halloween-treat was not set!".into());
+                                }
+
+                                // Ensure terminal shows the treat command after a full page reload
+                                let _ = storage.set_item("terminal-auto-run", "treat");
+                            }
+                        }
+
+                        // Perform a short delayed reload to guarantee the MatrixRain re-initializes to pumpkins
+                        let reload_timeout = Timeout::new(50, move || {
+                            if let Some(win) = window() {
+                                let _ = win.location().reload();
+                            }
+                        });
+                        reload_timeout.forget();
+                        vec![
+                            "🍬 TREAT! 🍭".to_string(),
+                            "The ghosts fade away... 👻💨".to_string(),
+                            "Pumpkins return to the autumn rain! �".to_string(),
+                            "Sweet dreams... if you can sleep! 😈".to_string(),
+                        ]
+                    },
+                    "reset" => {
+                        web_sys::console::log_1(&"RESET command executed".into());
+                        
+                        // Clear all Halloween flags to reset to default
+                        if let Some(window) = window() {
+                            if let Ok(Some(storage)) = window.local_storage() {
+                                let _ = storage.remove_item("halloween-trick");
+                                let _ = storage.remove_item("halloween-treat");
+                                web_sys::console::log_1(&"Cleared all Halloween flags - reset to default".into());
+                            }
+                        }
+                        vec![
+                            "🔄 Reset Complete! 🔄".to_string(),
+                            "Halloween effects have been cleared.".to_string(),
+                            "Back to the default spooky rain... 🎃".to_string(),
+                        ]
+                    },
                     "" => vec![],
                     _ => vec![
-                        format!("bash: {}: command not found", command),
-                        "Type 'help' for available commands.".to_string(),
+                        format!("👻 bash: {}: command not found in the haunted realm", command),
+                        "Type 'help' to summon the command spirits.".to_string(),
                     ],
                 };
                 

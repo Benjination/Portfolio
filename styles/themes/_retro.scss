@@ -1,0 +1,26 @@
+// Retro Terminal Theme
+// Classic green-on-black terminal aesthetic
+
+// Theme Colors
+$primary-green: #00ff00;        // Classic terminal green
+$secondary-green: #00cc00;      // Darker green
+$dark-green: #008800;           // Even darker green
+$terminal-bg: #0a0a0a;          // Pure black background
+$terminal-bg-light: #1a1a1a;    // Slightly lighter black
+$amber: #ffb000;                // Amber for highlights
+
+// Matrix Rain Characters (classic code characters)
+$matrix-characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+
+// Terminal Prompt
+$terminal-prompt: 'necro@retro-terminal:~$';
+
+// Welcome Message
+$welcome-message: 'Welcome to the retro terminal... Type "help" for available commands.';
+
+// Theme-specific ASCII Art Elements
+$header-decoration: '';
+
+// Theme Metadata
+$theme-name: 'retro';
+$theme-description: 'Classic green terminal aesthetic';

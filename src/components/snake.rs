@@ -27,18 +27,15 @@ const FIREBASE_API_KEY: &str = "AIzaSyAsmk3uImdPFOPLZrEsK6J1c20gk8S3hbY";
 
 // --- Global Leaderboard (using Firebase Firestore) ---
 async fn fetch_global_leaderboard() -> Vec<ScoreEntry> {
-    web_sys::console::log_1(&"Fetching global leaderboard from Firestore".into());
     
     let url = format!("{}?key={}", FIRESTORE_BASE_URL, FIREBASE_API_KEY);
     match Request::get(&url).send().await {
         Ok(response) => {
             let status = response.status();
-            web_sys::console::log_2(&"Firestore fetch status:".into(), &status.into());
             
             if status == 200 {
                 if let Ok(text) = response.text().await {
                     let text_clone = text.clone();
-                    web_sys::console::log_2(&"Firestore response:".into(), &text.into());
                     
                     if let Ok(firestore_response) = serde_json::from_str::<serde_json::Value>(&text_clone) {
                         if let Some(documents) = firestore_response["documents"].as_array() {
@@ -56,17 +53,14 @@ async fn fetch_global_leaderboard() -> Vec<ScoreEntry> {
                                 .collect();
                             scores.sort_by(|a, b| b.score.cmp(&a.score));
                             scores.truncate(LEADERBOARD_SIZE);
-                            web_sys::console::log_2(&"Parsed Firestore scores:".into(), &format!("{:?}", scores).into());
                             return scores;
                         }
                     }
                 }
             } else {
-                web_sys::console::log_2(&"Firestore fetch failed with status:".into(), &status.into());
             }
         }
         Err(e) => {
-            web_sys::console::log_2(&"Firestore fetch error:".into(), &format!("{:?}", e).into());
         }
     }
     
@@ -76,12 +70,10 @@ async fn fetch_global_leaderboard() -> Vec<ScoreEntry> {
         ScoreEntry { initials: "PRO".to_string(), score: 180 },
         ScoreEntry { initials: "WIN".to_string(), score: 120 },
     ];
-    web_sys::console::log_1(&"Using demo scores (Firestore empty or failed)".into());
     demo_scores
 }
 
 async fn submit_global_score(entry: &ScoreEntry) {
-    web_sys::console::log_2(&"Submitting score to Firestore:".into(), &format!("{:?}", entry).into());
     
     // Create Firestore document format
     let timestamp = js_sys::Date::new_0().to_iso_string();
@@ -110,8 +102,6 @@ async fn submit_global_score(entry: &ScoreEntry) {
     
     let url = format!("{}?documentId={}&key={}", FIRESTORE_BASE_URL, doc_id, FIREBASE_API_KEY);
     
-    web_sys::console::log_2(&"Firestore submit URL:".into(), &url.clone().into());
-    web_sys::console::log_2(&"Firestore document:".into(), &document.to_string().into());
 
     match Request::post(&url)
         .header("Content-Type", "application/json")
@@ -121,25 +111,19 @@ async fn submit_global_score(entry: &ScoreEntry) {
             match request.send().await {
                 Ok(response) => {
                     let status = response.status();
-                    web_sys::console::log_2(&"Firestore submit status:".into(), &status.into());
                     
                     if let Ok(text) = response.text().await {
-                        web_sys::console::log_2(&"Firestore submit response:".into(), &text.into());
                     }
                     
                     if status == 200 {
-                        web_sys::console::log_1(&"Successfully saved score to Firestore!".into());
                     } else {
-                        web_sys::console::log_1(&"Firestore submit failed - see response above".into());
                     }
                 }
                 Err(e) => {
-                    web_sys::console::log_2(&"Firestore request send error:".into(), &format!("{:?}", e).into());
                 }
             }
         }
         Err(e) => {
-            web_sys::console::log_2(&"Firestore request creation error:".into(), &format!("{:?}", e).into());
         }
     }
 }
@@ -244,26 +228,17 @@ impl SnakeGame {
             Direction::Right => Position { x: head.x + 1, y: head.y },
         };
 
-        web_sys::console::log_4(
-            &"Snake update:".into(),
-            &format!("head=({},{})", head.x, head.y).into(),
-            &format!("new_head=({},{})", new_head.x, new_head.y).into(),
-            &format!("direction={:?}", self.direction).into()
-        );
+
 
         // Check wall collision
         if new_head.x < 0 || new_head.x >= 30 || new_head.y < 0 || new_head.y >= 20 {
-            web_sys::console::log_2(
-                &"WALL COLLISION!".into(),
-                &format!("new_head=({},{}) bounds=(0-29, 0-19)", new_head.x, new_head.y).into()
-            );
+
             self.game_over = true;
             return;
         }
 
         // Check self collision
         if self.snake.iter().any(|segment| segment == &new_head) {
-            web_sys::console::log_1(&"SELF COLLISION!".into());
             self.game_over = true;
             return;
         }
@@ -295,17 +270,9 @@ impl SnakeGame {
             Direction::Left => Direction::Right,
             Direction::Right => Direction::Left,
         };
-        web_sys::console::log_4(
-            &"Direction change: (queue)".into(),
-            &format!("current={:?}", self.direction).into(),
-            &format!("requested={:?}", new_direction).into(),
-            &format!("opposite={:?}", opposite).into()
-        );
         if new_direction != opposite && new_direction != last_dir {
             self.direction_queue.push_back(new_direction);
-            web_sys::console::log_2(&"Direction queued:".into(), &format!("{:?}", new_direction).into());
         } else {
-            web_sys::console::log_1(&"Direction change blocked - would reverse into body or repeat".into());
         }
     }
 
@@ -372,7 +339,6 @@ pub fn snake() -> Html {
                 .unwrap();
             // Force initial render immediately
             render_game(&context, &game_state.borrow().borrow());
-            web_sys::console::log_1(&"Snake game initialized and rendered".into());
             move || {}
         });
     }
@@ -388,7 +354,6 @@ pub fn snake() -> Html {
         let global_leaderboard = global_leaderboard.clone();
         let pending_score = pending_score.clone();
         use_effect_with((), move |_| {
-            web_sys::console::log_1(&"Setting up game loop...".into());
             let game_interval = {
                 let game_state = game_state.clone();
                 let canvas_ref = canvas_ref.clone();
@@ -439,7 +404,6 @@ pub fn snake() -> Html {
                 if let Ok(Some(context)) = canvas.get_context("2d") {
                     if let Ok(context) = context.dyn_into::<CanvasRenderingContext2d>() {
                         render_game(&context, &game_state.borrow().borrow());
-                        web_sys::console::log_1(&"Initial render completed".into());
                     }
                 }
             }
@@ -452,7 +416,6 @@ pub fn snake() -> Html {
         let force_update = force_update.clone();
         let show_initials_modal = show_initials_modal.clone();
         use_effect_with((), move |_| {
-            web_sys::console::log_1(&"Setting up keyboard event listener".into());
             let window = web_sys::window().unwrap();
             let game_state = game_state.clone();
             let force_update = force_update.clone();
@@ -481,12 +444,6 @@ pub fn snake() -> Html {
                     let game_rc = game_state.borrow();
                     let mut game = game_rc.borrow_mut();
                     let mut updated = false;
-                    web_sys::console::log_4(
-                        &"Game state before:".into(), 
-                        &format!("started={}, game_over={}", game.started, game.game_over).into(),
-                        &"Score:".into(),
-                        &game.score.into()
-                    );
                     
                     match key.as_str() {
                     // Left hand: WASD
@@ -499,7 +456,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with W key".into());
                         }
                         game.change_direction(Direction::Up);
                         updated = true;
@@ -513,7 +469,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with S key".into());
                         }
                         game.change_direction(Direction::Down);
                         updated = true;
@@ -527,7 +482,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with A key".into());
                         }
                         game.change_direction(Direction::Left);
                         updated = true;
@@ -541,7 +495,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with D key".into());
                         }
                         game.change_direction(Direction::Right);
                         updated = true;
@@ -556,7 +509,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with O key".into());
                         }
                         game.change_direction(Direction::Up);
                         updated = true;
@@ -570,7 +522,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with L key".into());
                         }
                         game.change_direction(Direction::Down);
                         updated = true;
@@ -584,7 +535,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with K key".into());
                         }
                         game.change_direction(Direction::Left);
                         updated = true;
@@ -598,7 +548,6 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game started with : or ; key".into());
                         }
                         game.change_direction(Direction::Right);
                         updated = true;
@@ -618,21 +567,13 @@ pub fn snake() -> Html {
                             wasm_bindgen_futures::spawn_local(async {
                                 increment_counter(&CounterType::GamePlays).await;
                             });
-                            web_sys::console::log_1(&"Game restarted".into());
                             updated = true;
                         }
                     }
                     _ => {}
                 }
                 if updated {
-                    web_sys::console::log_4(
-                        &"Game state after:".into(), 
-                        &format!("started={}, game_over={}", game.started, game.game_over).into(),
-                        &"Score:".into(),
-                        &game.score.into()
-                    );
                     force_update.set(*force_update + 1);
-                    web_sys::console::log_1(&"Game state updated!".into());
                 }
                 }
             });
@@ -676,12 +617,10 @@ pub fn snake() -> Html {
         let game_state = game_state.clone();
         let force_update = force_update.clone();
         Callback::from(move |_: web_sys::MouseEvent| {
-            web_sys::console::log_1(&"Canvas clicked!".into());
             let game_rc = game_state.borrow();
             let mut game = game_rc.borrow_mut();
             if !game.started {
                 game.start();
-                web_sys::console::log_1(&"Game started from canvas click".into());
                 force_update.set(*force_update + 1);
                 
                 // Increment game counter when starting a new game
@@ -1050,11 +989,6 @@ pub fn snake() -> Html {
 }
 
 fn render_game(context: &CanvasRenderingContext2d, game: &SnakeGame) {
-    web_sys::console::log_3(
-        &"Rendering game:".into(),
-        &format!("started={}", game.started).into(),
-        &format!("snake_length={}", game.snake.len()).into()
-    );
     
     let cell_size = 20.0;
     let canvas_width = 600.0;
