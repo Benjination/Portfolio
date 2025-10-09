@@ -327,9 +327,19 @@ pub fn BlogPost(props: &BlogPostProps) -> Html {
                         if src.starts_with("blog/") { src = format!("/{}", src); }
                         src = src.replace("/Images/", "/images/").replace("blog/Images/", "blog/images/");
                         // Prefer an SVG sibling if the provided path is a raster extension
-                        let svg_candidate = if src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif") {
-                            Some(src.replace(|c: char| c == '.' && (src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif")), ".svg"))
-                        } else { None };
+                        let svg_candidate = if src.ends_with(".png") {
+                            Some(src.replace(".png", ".svg"))
+                        } else if src.ends_with(".jpg") {
+                            Some(src.replace(".jpg", ".svg"))
+                        } else if src.ends_with(".jpeg") {
+                            Some(src.replace(".jpeg", ".svg"))
+                        } else if src.ends_with(".webp") {
+                            Some(src.replace(".webp", ".svg"))
+                        } else if src.ends_with(".gif") {
+                            Some(src.replace(".gif", ".svg"))
+                        } else { 
+                            None 
+                        };
                         html! {
                             <div class="blog-header-image">
                                 { if let Some(svg) = svg_candidate {
@@ -407,9 +417,19 @@ fn format_content(content: &str) -> Html {
                         if src.starts_with("blog/") { src = format!("/{}", src); }
                         src = src.replace("/Images/", "/images/").replace("blog/Images/", "blog/images/");
                         // SVG candidate path
-                        let svg_candidate = if src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif") {
-                            Some(src.replace(|c: char| c == '.' && (src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif")), ".svg"))
-                        } else { None };
+                        let svg_candidate = if src.ends_with(".png") {
+                            Some(src.replace(".png", ".svg"))
+                        } else if src.ends_with(".jpg") {
+                            Some(src.replace(".jpg", ".svg"))
+                        } else if src.ends_with(".jpeg") {
+                            Some(src.replace(".jpeg", ".svg"))
+                        } else if src.ends_with(".webp") {
+                            Some(src.replace(".webp", ".svg"))
+                        } else if src.ends_with(".gif") {
+                            Some(src.replace(".gif", ".svg"))
+                        } else { 
+                            None 
+                        };
                         html! {
                             <div class="content-image">
                                 { if let Some(svg) = svg_candidate {

@@ -201,9 +201,19 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                                     let mut src = header_image.clone();
                                                     if src.starts_with("blog/") { src = format!("/{}", src); }
                                                     src = src.replace("/Images/", "/images/").replace("blog/Images/", "blog/images/");
-                                                    let svg_candidate = if src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif") {
-                                                        Some(src.replace(|c: char| c == '.' && (src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif")), ".svg"))
-                                                    } else { None };
+                                                    let svg_candidate = if src.ends_with(".png") {
+                                                        Some(src.replace(".png", ".svg"))
+                                                    } else if src.ends_with(".jpg") {
+                                                        Some(src.replace(".jpg", ".svg"))
+                                                    } else if src.ends_with(".jpeg") {
+                                                        Some(src.replace(".jpeg", ".svg"))
+                                                    } else if src.ends_with(".webp") {
+                                                        Some(src.replace(".webp", ".svg"))
+                                                    } else if src.ends_with(".gif") {
+                                                        Some(src.replace(".gif", ".svg"))
+                                                    } else { 
+                                                        None 
+                                                    };
                                                     html! {
                                                         <span class="blog-thumbnail">
                                                             { if let Some(svg) = svg_candidate {
