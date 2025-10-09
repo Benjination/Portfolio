@@ -5,7 +5,8 @@
   "scripts": {
     "generate-blog-pages": "node generate-blog-pages.js",
     "regenerate-blogs": "node generate-blog-pages.js",
-    "build": "trunk build --release && npm run generate-blog-pages"
+    "generate-image-manifest": "node generate-image-manifest.js",
+    "build": "trunk build --release && npm run generate-blog-pages && npm run generate-image-manifest"
   },
   "keywords": ["blog", "static", "generator", "portfolio"],
   "author": "Benjamin Niccum",

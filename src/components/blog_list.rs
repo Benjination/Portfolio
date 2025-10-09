@@ -198,9 +198,23 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                             <div class="blog-post-line">
                                                 <span class="post-number">{format!("{}.", index + 1)}</span>
                                                 {if let Some(header_image) = &post.header_image {
+                                                    let mut src = header_image.clone();
+                                                    if src.starts_with("blog/") { src = format!("/{}", src); }
+                                                    src = src.replace("/Images/", "/images/").replace("blog/Images/", "blog/images/");
+                                                    let svg_candidate = if src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif") {
+                                                        Some(src.replace(|c: char| c == '.' && (src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif")), ".svg"))
+                                                    } else { None };
                                                     html! {
                                                         <span class="blog-thumbnail">
-                                                            <img src={header_image.clone()} alt="Post thumbnail" class="thumbnail-image" />
+                                                            { if let Some(svg) = svg_candidate {
+                                                                html!{<picture>
+                                                                    <source srcset={svg.clone()} r#type="image/svg+xml" />
+                                                                    <img src={src} alt="Post thumbnail" class="thumbnail-image" />
+                                                                </picture>}
+                                                              } else {
+                                                                html!{<img src={src} alt="Post thumbnail" class="thumbnail-image" />}
+                                                              }
+                                                            }
                                                         </span>
                                                     }
                                                 } else {

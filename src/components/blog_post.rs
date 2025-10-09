@@ -322,9 +322,25 @@ pub fn BlogPost(props: &BlogPostProps) -> Html {
                         </div>
                     </div>
                     {if let Some(header_image) = &blog_post.header_image {
+                        // Normalize path: force lowercase "images" and ensure root-absolute path
+                        let mut src = header_image.clone();
+                        if src.starts_with("blog/") { src = format!("/{}", src); }
+                        src = src.replace("/Images/", "/images/").replace("blog/Images/", "blog/images/");
+                        // Prefer an SVG sibling if the provided path is a raster extension
+                        let svg_candidate = if src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif") {
+                            Some(src.replace(|c: char| c == '.' && (src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif")), ".svg"))
+                        } else { None };
                         html! {
                             <div class="blog-header-image">
-                                <img src={header_image.clone()} alt="Blog post header" class="header-image" />
+                                { if let Some(svg) = svg_candidate {
+                                    html!{<picture>
+                                        <source srcset={svg.clone()} r#type="image/svg+xml" />
+                                        <img src={src} alt="Blog post header" class="header-image" />
+                                    </picture>}
+                                  } else {
+                                    html!{<img src={src} alt="Blog post header" class="header-image" />}
+                                  }
+                                }
                             </div>
                         }
                     } else {
@@ -386,9 +402,25 @@ fn format_content(content: &str) -> Html {
                 } else if line.trim().starts_with("![") && line.contains("](") && line.contains(")") {
                     // Parse image syntax: ![alt text](image_path)
                     if let Some(parsed_image) = parse_image_syntax(line) {
+                        // Normalize inline image src similarly to header images
+                        let mut src = parsed_image.src.clone();
+                        if src.starts_with("blog/") { src = format!("/{}", src); }
+                        src = src.replace("/Images/", "/images/").replace("blog/Images/", "blog/images/");
+                        // SVG candidate path
+                        let svg_candidate = if src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif") {
+                            Some(src.replace(|c: char| c == '.' && (src.ends_with(".png") || src.ends_with(".jpg") || src.ends_with(".jpeg") || src.ends_with(".webp") || src.ends_with(".gif")), ".svg"))
+                        } else { None };
                         html! {
                             <div class="content-image">
-                                <img src={parsed_image.src.clone()} alt={parsed_image.alt.clone()} class="inline-image" />
+                                { if let Some(svg) = svg_candidate {
+                                    html!{<picture>
+                                        <source srcset={svg.clone()} r#type="image/svg+xml" />
+                                        <img src={src} alt={parsed_image.alt.clone()} class="inline-image" />
+                                    </picture>}
+                                  } else {
+                                    html!{<img src={src} alt={parsed_image.alt.clone()} class="inline-image" />}
+                                  }
+                                }
                                 {if !parsed_image.alt.is_empty() {
                                     html! { <div class="image-caption">{&parsed_image.alt}</div> }
                                 } else {

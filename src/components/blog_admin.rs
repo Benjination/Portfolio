@@ -251,12 +251,14 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
     let post_tags = use_state(|| String::new());
     let post_published = use_state(|| false);
     let post_header_image = use_state(|| String::new());
+    let available_images = use_state(|| Vec::<(String, String)>::new()); // (label, path)
 
     // Load posts on component mount
     {
         let posts = posts.clone();
         let loading = loading.clone();
         let auth_token = props.auth_state.token.clone();
+        let available_images = available_images.clone();
         
         use_effect_with((), move |_| {
             if let Some(token) = auth_token {
@@ -339,6 +341,29 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                         }
                     }
                     loading.set(false);
+                });
+            }
+            // Load image manifest (doesn't require auth).
+            {
+                let available_images = available_images.clone();
+                spawn_local(async move {
+                    if let Ok(resp) = Request::get("/blog/images.json").send().await {
+                        if resp.ok() {
+                            if let Ok(json) = resp.json::<serde_json::Value>().await {
+                                if let Some(arr) = json.as_array() {
+                                    let mut imgs = vec![];
+                                    for item in arr {
+                                        let label = item.get("label").and_then(|v| v.as_str()).unwrap_or("").to_string();
+                                        let path = item.get("path").and_then(|v| v.as_str()).unwrap_or("").to_string();
+                                        if !label.is_empty() && !path.is_empty() {
+                                            imgs.push((label, path));
+                                        }
+                                    }
+                                    available_images.set(imgs);
+                                }
+                            }
+                        }
+                    }
                 });
             }
             || ()
@@ -659,9 +684,73 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                 class="form-input"
                             >
                                 <option value="">{"No header image"}</option>
-                                <option value="/blog/Images/firebaseCeiling.png">{"Firebase Ceiling"}</option>
-                                // Add more images here as you upload them
+                                { for (*available_images).iter().map(|(label, path)| html!{
+                                    <option value={path.clone()}>{label.clone()}</option>
+                                }) }
                             </select>
+                            { if !post_header_image.is_empty() {
+                                html! { <div class="image-preview"><img src={(*post_header_image).clone()} alt="Header preview" style="max-width: 100%; margin-top: 8px; border: 1px solid #003300;"/></div> }
+                              } else {
+                                html!{}
+                              }
+                            }
+                        </div>
+
+                        <div class="form-group">
+                            <label>{"Insert Image into Content:"}</label>
+                            <div class="inline">
+                                <select id="inline-image-picker" class="form-input" onchange={Callback::from(|_| {})}>
+                                    <option value="">{"Select image..."}</option>
+                                    { for (*available_images).iter().map(|(label, path)| html!{
+                                        <option value={path.clone()}>{label.clone()}</option>
+                                    }) }
+                                </select>
+                                <button class="secondary-btn" onclick={
+                                    let post_content = post_content.clone();
+                                    Callback::from(move |_| {
+                                        if let Some(document) = window().and_then(|w| w.document()) {
+                                            let picker = document.get_element_by_id("inline-image-picker");
+                                            let textarea = document.get_element_by_id("post-content");
+                                            if let (Some(picker), Some(textarea)) = (picker, textarea) {
+                                                if let (Ok(picker), Ok(textarea)) = (picker.dyn_into::<web_sys::HtmlSelectElement>(), textarea.dyn_into::<web_sys::HtmlTextAreaElement>()) {
+                                                    let path = picker.value();
+                                                    if !path.is_empty() {
+                                                        // Try to use the selected option's text as alt; fallback to filename
+                                                        // Derive alt text from filename: turn hyphens/underscores into spaces and Title Case
+                                                        let mut alt_text = "Image".to_string();
+                                                        if let Some(file) = path.rsplit('/').next() {
+                                                            let base = file.split('.').next().unwrap_or(file);
+                                                            let cleaned = base.replace(['-', '_'], " ");
+                                                            let titled: String = cleaned
+                                                                .split_whitespace()
+                                                                .map(|w| {
+                                                                    let mut chars = w.chars();
+                                                                    match chars.next() {
+                                                                        Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+                                                                        None => String::new(),
+                                                                    }
+                                                                })
+                                                                .collect::<Vec<_>>()
+                                                                .join(" ");
+                                                            if !titled.is_empty() { alt_text = titled; }
+                                                        }
+                                                        // Insert at cursor: ![Alt Text](path)
+                                                        let start = textarea.selection_start().unwrap_or(None).unwrap_or(textarea.value().len() as u32) as usize;
+                                                        let end = textarea.selection_end().unwrap_or(None).unwrap_or(start as u32) as usize;
+                                                        let mut current = textarea.value();
+                                                        let prefix = &current[..start];
+                                                        let suffix = &current[end..];
+                                                        let snippet = format!("![{}]({})", alt_text, path);
+                                                        current = format!("{}{}{}", prefix, snippet, suffix);
+                                                        textarea.set_value(&current);
+                                                        post_content.set(current);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    })
+                                }>{"Insert"}</button>
+                            </div>
                         </div>
                         
                         <div class="form-group">

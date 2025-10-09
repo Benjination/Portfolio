@@ -18,7 +18,7 @@
         },
         {
             "args": [],
-            "command": "source ~/.cargo/env && trunk build --release",
+            "command": "npm run build",
             "group": "build",
             "isBackground": false,
             "label": "Build Portfolio",
