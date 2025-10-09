@@ -18,6 +18,7 @@ pub struct BlogPost {
     pub updated_at: String,
     pub published: bool,
     pub tags: Vec<String>,
+    pub header_image: Option<String>,
     // Split content fields for large blog posts
     pub main_content: Option<String>,
     pub overflow1: Option<String>,
@@ -122,6 +123,10 @@ fn parse_firestore_blog_post(fields: &Value, doc_name: &str) -> Result<BlogPost,
         updated_at: get_string_field("updated_at"),
         published: get_bool_field("published"),
         tags: get_array_field("tags"),
+        header_image: {
+            let img = get_string_field("header_image");
+            if img.is_empty() { None } else { Some(img) }
+        },
         main_content,
         overflow1,
         overflow2,
@@ -245,6 +250,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
     let post_excerpt = use_state(|| String::new());
     let post_tags = use_state(|| String::new());
     let post_published = use_state(|| false);
+    let post_header_image = use_state(|| String::new());
 
     // Load posts on component mount
     {
@@ -347,6 +353,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
         let post_excerpt = post_excerpt.clone();
         let post_tags = post_tags.clone();
         let post_published = post_published.clone();
+        let post_header_image = post_header_image.clone();
         
         Callback::from(move |_| {
             // Reset form
@@ -355,6 +362,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
             post_excerpt.set(String::new());
             post_tags.set(String::new());
             post_published.set(false);
+            post_header_image.set(String::new());
             current_post.set(None);
             show_new_post.set(!*show_new_post);
         })
@@ -369,6 +377,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
         let post_excerpt = post_excerpt.clone();
         let post_tags = post_tags.clone();
         let post_published = post_published.clone();
+        let post_header_image = post_header_image.clone();
         let auth_token = props.auth_state.token.clone();
         let author_email = props.auth_state.email.clone();
         
@@ -380,6 +389,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                 let excerpt = (*post_excerpt).clone();
                 let tags_str = (*post_tags).clone();
                 let published = *post_published;
+                let header_image = (*post_header_image).clone();
                 
                 if !title.trim().is_empty() && !content.trim().is_empty() {
                     let posts = posts.clone();
@@ -390,6 +400,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                     let post_excerpt = post_excerpt.clone();
                     let post_tags = post_tags.clone();
                     let post_published = post_published.clone();
+                    let post_header_image = post_header_image.clone();
                     let current_post_data = (*current_post).clone();
                     
                     spawn_local(async move {
@@ -430,6 +441,10 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                             updated_at: now,
                             published,
                             tags: tags.clone(),
+                            header_image: {
+                                let img = (*post_header_image).clone();
+                                if img.is_empty() { None } else { Some(img) }
+                            },
                             main_content: main_content.clone(),
                             overflow1: overflow1.clone(),
                             overflow2: overflow2.clone(),
@@ -451,6 +466,11 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                 }
                             }
                         });
+                        
+                        // Add header image if present
+                        if let Some(ref header_img) = updated_post.header_image {
+                            firestore_fields["header_image"] = json!({"stringValue": header_img});
+                        }
                         
                         // Add content fields (new split system or legacy single field)
                         if main_content.is_some() || overflow1.is_some() || overflow2.is_some() || overflow3.is_some() || overflow4.is_some() {
@@ -539,6 +559,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                             post_excerpt.set(String::new());
                                             post_tags.set(String::new());
                                             post_published.set(false);
+                                            post_header_image.set(String::new());
                                         } else {
                                             // Try to get more detailed error information
                                             let status = response.status();
@@ -621,6 +642,26 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                 placeholder="Enter blog post title..."
                                 class="form-input"
                             />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="post-header-image">{"Header Image:"}</label>
+                            <select 
+                                id="post-header-image"
+                                value={(*post_header_image).clone()}
+                                onchange={
+                                    let post_header_image = post_header_image.clone();
+                                    Callback::from(move |e: Event| {
+                                        let select: web_sys::HtmlSelectElement = e.target_unchecked_into();
+                                        post_header_image.set(select.value());
+                                    })
+                                }
+                                class="form-input"
+                            >
+                                <option value="">{"No header image"}</option>
+                                <option value="/blog/Images/firebaseCeiling.png">{"Firebase Ceiling"}</option>
+                                // Add more images here as you upload them
+                            </select>
                         </div>
                         
                         <div class="form-group">
@@ -751,6 +792,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                                     let post_excerpt = post_excerpt.clone();
                                                     let post_tags = post_tags.clone();
                                                     let post_published = post_published.clone();
+                                                    let post_header_image = post_header_image.clone();
                                                     
                                                     Callback::from(move |_| {
                                                         // Set current post for editing
@@ -762,6 +804,7 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                                         post_excerpt.set(post_clone.excerpt.clone());
                                                         post_tags.set(post_clone.tags.join(", "));
                                                         post_published.set(post_clone.published);
+                                                        post_header_image.set(post_clone.header_image.clone().unwrap_or_default());
                                                         
                                                         // Show the form
                                                         show_new_post.set(true);
@@ -769,7 +812,70 @@ pub fn blog_admin(props: &BlogAdminProps) -> Html {
                                                 }}>
                                                 {"Edit"}
                                             </button>
-                                            <button class="delete-btn">{"Delete"}</button>
+                                            <button class="delete-btn" 
+                                                onclick={{
+                                                    let post_clone = post.clone();
+                                                    let posts = posts.clone();
+                                                    let auth_state = props.auth_state.clone();
+                                                    
+                                                    Callback::from(move |_| {
+                                                        let post_id = post_clone.id.clone();
+                                                        let post_title = post_clone.title.clone();
+                                                        let posts = posts.clone();
+                                                        let auth_state = auth_state.clone();
+                                                        
+                                                        // Confirm deletion
+                                                        if let Some(window) = web_sys::window() {
+                                                            if window.confirm_with_message(&format!("Are you sure you want to delete '{}'?", post_title)).unwrap_or(false) {
+                                                                spawn_local(async move {
+                                                                    if let Some(token) = auth_state.token.as_ref() {
+                                                                        let url = format!(
+                                                                            "https://firestore.googleapis.com/v1/projects/portfolio-7148b/databases/(default)/documents/blogs/{}",
+                                                                            post_id
+                                                                        );
+                                                                        
+                                                                        match Request::delete(&url)
+                                                                            .header("Authorization", &format!("Bearer {}", token))
+                                                                            .send()
+                                                                            .await
+                                                                        {
+                                                                            Ok(response) => {
+                                                                                if response.status() == 204 || response.status() == 200 {
+                                                                                    // Remove post from local state
+                                                                                    let mut current_posts = (*posts).clone();
+                                                                                    current_posts.retain(|p| p.id != post_id);
+                                                                                    posts.set(current_posts);
+                                                                                    
+                                                                                    web_sys::console::log_1(&"Blog post deleted successfully!".into());
+                                                                                    if let Some(window) = web_sys::window() {
+                                                                                        let _ = window.alert_with_message("Blog post deleted successfully!");
+                                                                                    }
+                                                                                } else {
+                                                                                    web_sys::console::log_1(&format!("Delete failed with status: {}", response.status()).into());
+                                                                                    if let Some(window) = web_sys::window() {
+                                                                                        let _ = window.alert_with_message("Failed to delete blog post. Please try again.");
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            Err(err) => {
+                                                                                web_sys::console::log_1(&format!("Delete error: {:?}", err).into());
+                                                                                if let Some(window) = web_sys::window() {
+                                                                                    let _ = window.alert_with_message("Error deleting blog post. Please check your connection.");
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    } else {
+                                                                        if let Some(window) = web_sys::window() {
+                                                                            let _ = window.alert_with_message("You must be logged in to delete posts.");
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
+                                                        }
+                                                    })
+                                                }}>
+                                                {"Delete"}
+                                            </button>
                                         </div>
                                     </div>
                                 }

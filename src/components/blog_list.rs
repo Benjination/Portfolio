@@ -18,6 +18,7 @@ pub struct BlogPost {
     pub published: bool,
     pub tags: Vec<String>,
     pub sort_order: i32,
+    pub header_image: Option<String>,
 }
 
 #[derive(Properties, PartialEq)]
@@ -111,6 +112,12 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                                     .unwrap_or(999);
                                                 
                                                 if published {
+                                                    // Get header image if present
+                                                    let header_image = fields.get("header_image")
+                                                        .and_then(|f| f.get("stringValue"))
+                                                        .and_then(|v| v.as_str())
+                                                        .map(|s| s.to_string());
+                                                    
                                                     blog_posts.push(BlogPost {
                                                         id,
                                                         title,
@@ -122,6 +129,7 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                                         published,
                                                         tags: vec![],
                                                         sort_order,
+                                                        header_image,
                                                     });
                                                 }
                                             }
@@ -189,6 +197,15 @@ pub fn blog_list(_props: &BlogListProps) -> Html {
                                         <div key={index} class="blog-post-item" onclick={on_click}>
                                             <div class="blog-post-line">
                                                 <span class="post-number">{format!("{}.", index + 1)}</span>
+                                                {if let Some(header_image) = &post.header_image {
+                                                    html! {
+                                                        <span class="blog-thumbnail">
+                                                            <img src={header_image.clone()} alt="Post thumbnail" class="thumbnail-image" />
+                                                        </span>
+                                                    }
+                                                } else {
+                                                    html! {}
+                                                }}
                                                 <span class="file-name blog-link">
                                                     {&post.title}
                                                 </span>

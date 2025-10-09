@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Batteries: Past, Present, and Future - Benjamin Niccum</title>
+    <meta name="description" content="A description of possible conflict that may come from the need for battery resources">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="Batteries: Past, Present, and Future">
+    <meta property="og:description" content="A description of possible conflict that may come from the need for battery resources">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/batteries-past-present-and-fut">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Batteries: Past, Present, and Future">
+    <meta name="twitter:description" content="A description of possible conflict that may come from the need for battery resources">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2025-09-18T01:21:33.599Z">
+    <meta property="article:modified_time" content="2025-10-01T16:07:27.193Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/batteries-past-present-and-fut">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">Batteries: Past, Present, and Future</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">9/17/2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p>Abstract: Capacitors (Batteries) were invented by Alessandro Volta in 1799 and since then have made vast strides in technology improvement. The battery technology of today can power homes, vehicles, cellular devices, camping equipment, and anything you can imagine that may have a power switch, and the electricity to charge the batteries can be provided by sources outside of traditional fossil fuels. The components used in the batteries of today are extraordinarily valuable at a national level. Currently, the sources of these components are monopolized by an arrangement of nations, and that will likely create a clash of nations in the future if international trade is not delicately considered.</p>
+
+<p>The invention of the battery is often credited to Benjamin Franklin because fifty years prior to Alessandro Volta’s copper and Zinc capacitor Franklin was experimenting with electricity and did in fact invent the lightning rod. The reason that Volta actually deserves the credit for the battery specifically is because he was the first to store electricity to be discharged at a later time on command, thus inventing the battery. </p>
+
+<p>To better understand where our battery technology currently stands, we need to consider where battery technology began and how a battery does the job it is meant to do. In 1799, Volta constructed a battery using circular plates of Copper and Zinc alternatingly stacked and separated by an insulator (I found some information saying it was cardboard and some saying it was fabric) that was soaked in saltwater. This may seem like wizardry creating electricity from nothing, but what is actually happening is natural and extraordinary. The copper piece is positively charged, and the zinc is negatively charged. The saltwater soaked fabric acts as an electrolyte that lets copper ions travel through the fabric to the negatively charged zinc while preventing the electrons from passing. The electrons want to go from the copper to the zinc but are not able unless another path is provided. When we attach a conducting material that circumvents the electrolyte via a power switch, the electrons will race down the new path. Most importantly if there is some type of resistance, such as a light bulb for example, some of the electrons will be used to power that light bulb. There is a little more to it than just that, in that there is a chemical reaction that happens within the battery that prevents a good amount of the ions from traveling backwards through the electrolyte that can cause swelling in batteries and sometimes explosions, and that a power source must be used for batteries to be effectively charged, but that is at least the fundamentals of battery operation. This type of battery is extremely basic and can be safely duplicating using common materials at home, but the advanced technology of today that can be found in cell phones and tesla car batteries etc. uses a very similar process with components that are much more difficult to acquire. </p>
+
+<p>As the world moves towards a greener future, the uses of battery technology have become widespread, extremely valuable, and highly in demand. By 2040, energy analysts estimate over half of all passenger vehicles sold worldwide could be electric, according to 2021 report by Bloomberg New Energy Finance, and nearly all vehicles by 2050 (McKerracher, 2021). The frontrunner on this ambitious pursuit is Elon Musk with his brand of electric cars named after another inventor: Tesla. In the history of the modern man, we have lived on this planet peacefully for the past 200-300 thousand years and somehow in the past 200 years we have damaged our planet to a critical turning point that very well could be detrimental to the continued existence of our species. To put that into perspective, if the existence of the modern man were a 24-hour period, we would have brought our planet to the brink of disaster in the last 70 seconds of our day. We accomplished this grave task, of course, by way of industrialization and manufacturing. Along with our ambivalent course of destruction came advances in technology that have made our lives considerably better. Education, communication, and general quality of life has reached a level no one could have anticipated, and no rational person would want things to go back to the way they were before. So, instead of throwing out new ideas and technology, we must find a way to make our lifestyle sustainable. Batteries have a huge role in making that future, or any future as far as humans are concerned, a reality. </p>
+
+<p>The batteries of today, as I stated before, work in a very similar fashion to the Volta ‘s battery from 1799. The difference in today’s battery is the components used as the positively charged, negatively charged, and electrolyte materials. The battery that you will find in most handheld devices, tablets, cellphones, cameras, and even electric cars is the Lithium-Ion battery. The desired components for this type of battery are graphite and, as you may have guessed, Lithium. Organic fluoro-compounds are one of the most promising electrolyte solvents for high voltage condition, because fluorinated molecules have higher oxidation potentials due to the strong electron-withdrawing effect of the fluorine atom (Zhang et al., 2013). The electrolytes are not the biggest concern because a wide range of different materials or blends of materials can be used including ceramics which are relatively easy to acquire. However, the widespread use of graphite and Lithium in modern batteries is concerning because one nation has monopolized the production of both materials, and our trade relations with this country have declined due in part to the actions of our previous administration. Macroeconomics and Politics are relevant to this topic, but are not the subject of this essay, so I will attempt to use broad strokes while outlining the issue. I will also link a very interesting essay from the congressional research service that goes into further details on trade relations between China and the United States (CRS, 2018). </p>
+
+<p>According to statista.com, in 2020 the top five producers of graphite in the world were China, Mozambique, Brazil, Madagascar, and India (Garside, 2021). China produced more than twice as much graphite than the other four nations combined.  The three nations that mostly supply the world’s Lithium are China, Australia, and Chile. The Chinese government has recognized this opportunity and has purchased stakes in mining operations in both of the other Lithium mining countries meaning that they own the greatest portion of the two primary components of producing Litium-ion batteries. As the world moves towards green energy, the value of these materials is going to skyrocket, and it has already begun. It seems strange to consider that altercation could arise in the noble pursuit of creating a less polluted world, but as a nation, our trade relations with China need to be heavily scrutinized and valued or we could be heading towards a clash similar to the oil wars we have fought in the past. </p>
+
+<p>References:</p>
+
+<p>Xie, J. (2020, September 1). How china dominates global battery supply chain. VOA. Retrieved March 21, 2022, from https://www.voanews.com/a/silicon-valley-technology_how-china-dominates-global-battery-supply-chain/6195257.html </p>
+
+<p>Hutchins, M. (2021, April 13). Silicon for batteries moves to commercial production. pv magazine International. Retrieved March 21, 2022, from https://www.pv-magazine.com/2021/04/13/silicon-for-batteries-moves-to-commercial-production/ </p>
+
+<p>McKerracher, C. (2021). Evo report 2021: Bloombergnef: Bloomberg finance LP. BloombergNEF. Retrieved March 29, 2022, from https://about.bnef.com/electric-vehicle-outlook/ </p>
+
+<p>Z. Zhang, L. Hu, H. Wu, W. Weng, M. Koh, P.C. Redfern, L.A. Curtiss, K. Amine Energy & Environ. Sci., 6 (2013), pp. 1806-1810</p>
+
+<p>[Congressional Research Service]. (2018, July 30). China-U.S. trade issues. EveryCRSReport.com. Retrieved March 29, 2022, from https://www.everycrsreport.com/reports/RL33536.html</p>
+
+<p>Garside, M. (2021, December 9). Graphite mine production top countries 2020. Statista. Retrieved March 29, 2022, from https://www.statista.com/statistics/267366/world-graphiteproduction/#:~:text=China%20was%20the%20leading%20graphite,650%2C000%20metric%20tons%20of%20graphite</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>

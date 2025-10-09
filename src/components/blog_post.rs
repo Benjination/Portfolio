@@ -18,6 +18,7 @@ pub struct BlogPostData {
     pub date_updated: String,
     pub is_published: bool,
     pub tags: Vec<String>,
+    pub header_image: Option<String>,
 }
 
 fn parse_firestore_blog_post(doc: &serde_json::Value, doc_id: &str) -> Option<BlogPostData> {
@@ -100,6 +101,11 @@ fn parse_firestore_blog_post(doc: &serde_json::Value, doc_id: &str) -> Option<Bl
                 .filter_map(|v| v.get("stringValue")?.as_str().map(|s| s.to_string()))
                 .collect())
             .unwrap_or_else(Vec::new),
+        header_image: fields
+            .get("header_image")
+            .and_then(|f| f.get("stringValue"))
+            .and_then(|v| v.as_str())
+            .map(|s| s.to_string()),
     })
 }
 
@@ -315,6 +321,15 @@ pub fn BlogPost(props: &BlogPostProps) -> Html {
                             }}
                         </div>
                     </div>
+                    {if let Some(header_image) = &blog_post.header_image {
+                        html! {
+                            <div class="blog-header-image">
+                                <img src={header_image.clone()} alt="Blog post header" class="header-image" />
+                            </div>
+                        }
+                    } else {
+                        html! {}
+                    }}
                     <div class="blog-content">
                         <div class="content-text">
                             {format_content(&blog_post.content)}
@@ -368,10 +383,55 @@ fn format_content(content: &str) -> Html {
                     html! { <div class="list-item">{line}</div> }
                 } else if line.starts_with("> ") {
                     html! { <div class="blockquote">{&line[2..]}</div> }
+                } else if line.trim().starts_with("![") && line.contains("](") && line.contains(")") {
+                    // Parse image syntax: ![alt text](image_path)
+                    if let Some(parsed_image) = parse_image_syntax(line) {
+                        html! {
+                            <div class="content-image">
+                                <img src={parsed_image.src.clone()} alt={parsed_image.alt.clone()} class="inline-image" />
+                                {if !parsed_image.alt.is_empty() {
+                                    html! { <div class="image-caption">{&parsed_image.alt}</div> }
+                                } else {
+                                    html! {}
+                                }}
+                            </div>
+                        }
+                    } else {
+                        html! { <p class="content-paragraph" key={i}>{line}</p> }
+                    }
                 } else {
                     html! { <p class="content-paragraph" key={i}>{line}</p> }
                 }
             })}
         </div>
     }
+}
+
+struct ParsedImage {
+    alt: String,
+    src: String,
+}
+
+fn parse_image_syntax(line: &str) -> Option<ParsedImage> {
+    let line = line.trim();
+    
+    // Find the pattern ![alt](src)
+    if let Some(start) = line.find("![") {
+        if let Some(alt_end) = line[start + 2..].find("](") {
+            let alt_start = start + 2;
+            let alt_end = alt_start + alt_end;
+            let src_start = alt_end + 2;
+            
+            if let Some(src_end) = line[src_start..].find(")") {
+                let src_end = src_start + src_end;
+                
+                let alt = line[alt_start..alt_end].to_string();
+                let src = line[src_start..src_end].to_string();
+                
+                return Some(ParsedImage { alt, src });
+            }
+        }
+    }
+    
+    None
 }
