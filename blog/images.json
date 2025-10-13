@@ -1,8 +1,8 @@
 [
   {
     "label": "AgenticvGenerative",
-    "path": "/blog/images/AgenticvGenerative.webp",
-    "file": "AgenticvGenerative.webp"
+    "path": "/blog/images/AgenticvGenerative.svg",
+    "file": "AgenticvGenerative.svg"
   },
   {
     "label": "FirebaseCeiling",
@@ -11,27 +11,27 @@
   },
   {
     "label": "HotYoga",
-    "path": "/blog/images/HotYoga.webp",
-    "file": "HotYoga.webp"
+    "path": "/blog/images/HotYoga.svg",
+    "file": "HotYoga.svg"
   },
   {
     "label": "Malloc",
-    "path": "/blog/images/Malloc.webp",
-    "file": "Malloc.webp"
+    "path": "/blog/images/Malloc.svg",
+    "file": "Malloc.svg"
   },
   {
     "label": "Nightshade",
-    "path": "/blog/images/Nightshade.webp",
-    "file": "Nightshade.webp"
+    "path": "/blog/images/Nightshade.svg",
+    "file": "Nightshade.svg"
   },
   {
     "label": "TmobileSpaceX",
-    "path": "/blog/images/TmobileSpaceX.webp",
-    "file": "TmobileSpaceX.webp"
+    "path": "/blog/images/TmobileSpaceX.svg",
+    "file": "TmobileSpaceX.svg"
   },
   {
     "label": "Upskilling",
-    "path": "/blog/images/Upskilling.webp",
-    "file": "Upskilling.webp"
+    "path": "/blog/images/Upskilling.svg",
+    "file": "Upskilling.svg"
   }
 ]
