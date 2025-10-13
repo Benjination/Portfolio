@@ -1,7 +1,37 @@
 [
   {
+    "label": "AgenticvGenerative",
+    "path": "/blog/images/AgenticvGenerative.svg",
+    "file": "AgenticvGenerative.svg"
+  },
+  {
     "label": "FirebaseCeiling",
     "path": "/blog/images/firebaseCeiling.svg",
     "file": "firebaseCeiling.svg"
+  },
+  {
+    "label": "HotYoga",
+    "path": "/blog/images/HotYoga.svg",
+    "file": "HotYoga.svg"
+  },
+  {
+    "label": "Malloc",
+    "path": "/blog/images/Malloc.svg",
+    "file": "Malloc.svg"
+  },
+  {
+    "label": "Nightshade",
+    "path": "/blog/images/Nightshade.svg",
+    "file": "Nightshade.svg"
+  },
+  {
+    "label": "TmobileSpaceX",
+    "path": "/blog/images/TmobileSpaceX.svg",
+    "file": "TmobileSpaceX.svg"
+  },
+  {
+    "label": "Upskilling",
+    "path": "/blog/images/Upskilling.svg",
+    "file": "Upskilling.svg"
   }
 ]
