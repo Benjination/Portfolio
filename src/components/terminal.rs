@@ -2,6 +2,7 @@ use yew::prelude::*;
 use web_sys::{HtmlInputElement, window};
 use gloo::timers::callback::Timeout;
 use wasm_bindgen_futures::spawn_local;
+use wasm_bindgen::JsCast;
 use crate::components::blog_auth::{verify_blog_password, verify_blog_credentials, authenticate_admin, AuthState};
 use crate::components::blog_admin::BlogAdmin;
 
@@ -211,16 +212,34 @@ pub fn terminal() -> Html {
                     "ls" => vec![
                         "about.md  contact.sh  projects/  skills/  README.md".to_string(),
                     ],
-                    "cat resume" => vec![
-                        "BENJAMIN NICCUM".to_string(),
-                        "Software Engineer | Recent Graduate".to_string(),
-                        "".to_string(),
-                        "EXPERIENCE:".to_string(),
-                        "• Cross-industry project experience".to_string(),
-                        "• Mobile app development (iOS/Android)".to_string(),
-                        "• Modern web technologies".to_string(),
-                        "• Team collaboration and management".to_string(),
-                    ],
+                    "cat resume" => {
+                        // Trigger download
+                        if let Some(window) = web_sys::window() {
+                            if let Some(document) = window.document() {
+                                if let Ok(link) = document.create_element("a") {
+                                    let link = link.dyn_into::<web_sys::HtmlAnchorElement>().unwrap();
+                                    link.set_href("/BenjaminNiccum.pdf");
+                                    link.set_download("Benjamin_Niccum_Resume.pdf");
+                                    link.click();
+                                }
+                            }
+                        }
+                        
+                        vec![
+                            "💾 Downloading resume data stream...".to_string(),
+                            "".to_string(),
+                            "BENJAMIN NICCUM".to_string(),
+                            "Software Engineer | Recent Graduate".to_string(),
+                            "".to_string(),
+                            "EXPERIENCE:".to_string(),
+                            "• Cross-industry project experience".to_string(),
+                            "• Mobile app development (iOS/Android)".to_string(),
+                            "• Modern web technologies".to_string(),
+                            "• Team collaboration and management".to_string(),
+                            "".to_string(),
+                            "📄 Full resume downloaded to your downloads folder.".to_string(),
+                        ]
+                    },
                     "sudo hire" => vec![
                         "[sudo] password for benjamin: ********".to_string(),
                         "".to_string(),

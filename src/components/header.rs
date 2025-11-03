@@ -31,6 +31,12 @@ pub fn header() -> Html {
                 <span class="comment">{"# Software Engineer | Code Enthusiast | Problem Solver"}</span>
             </div>
             
+            <div class="resume-download">
+                <a href="/BenjaminNiccum.pdf" download="Benjamin_Niccum_Resume.pdf" class="download-btn">
+                    {"💾 Download Resume"}
+                </a>
+            </div>
+            
             <nav class="terminal-nav">
                 <ul>
                     <li><a href="#about" class="nav-command">{"./about.sh"}</a></li>

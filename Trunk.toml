@@ -3,6 +3,10 @@ target = "index.html"
 dist = "dist"
 public_url = "./"
 
+[[build.assets]]
+location = "static"
+output_dir = ""
+
 [serve]
 address = "0.0.0.0"
 port = 8080
