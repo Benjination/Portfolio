@@ -9,9 +9,8 @@ use crate::components::blog_admin::BlogAdmin;
 pub fn terminal() -> Html {
     let input_ref = use_node_ref();
     let output = use_state(|| vec![
-        "🎃 Welcome to Benjamin's SPOOKY Portfolio Terminal! 👻".to_string(),
-        "The ghosts whisper... type 'help' for available commands.".to_string(),
-        "Beware: some commands may be... haunted 💀".to_string(),
+        "Welcome to Benjamin's Terminal! ".to_string(),
+        "Type 'help' for available commands.".to_string(),
         "".to_string(),
     ]);
     let input_value = use_state(|| String::new());
@@ -168,25 +167,21 @@ pub fn terminal() -> Html {
                 }
                 
                 // Normal command handling
-                new_output.push(format!("👻benjamin@SpookyTown:~/haunted💀 {}", command));
+                new_output.push(format!("👻benjamin@CyberPunk:~/cyber {}", command));
                 
                 let response = match command.trim() {
                     "help" => vec![
-                        "🎃 Available spooky commands: 👻".to_string(),
-                        "  help        - Show this haunted help message".to_string(),
-                        "  about       - Learn about the ghost of Benjamin".to_string(),
-                        "  skills      - View supernatural technical abilities".to_string(),
-                        "  projects    - See cursed recent projects".to_string(),
-                        "  contact     - Get contact info (if you dare)".to_string(),
-                        "  clear       - Banish the terminal spirits".to_string(),
-                        "  whoami      - Display phantom user info".to_string(),
-                        "  ls          - List haunted portfolio sections".to_string(),
-                        "  cat resume  - Display ghostly resume summary".to_string(),
-                        "  sudo hire   - Summon employment magic 🧙‍♂️".to_string(),
-                        "  boo         - 👻 BOO! (Halloween special)".to_string(),
-                        "  trick       - Get a trick 🎭".to_string(),
-                        "  treat       - Get a treat 🍬".to_string(),
-                        "  reset       - Reset Halloween effects to default 🔄".to_string(),
+                        "⚡ Available neural commands: 🤖".to_string(),
+                        "  help        - Show this digital help interface".to_string(),
+                        "  about       - Learn about the cyber Benjamin".to_string(),
+                        "  skills      - View enhanced technical abilities".to_string(),
+                        "  projects    - See recent code projects".to_string(),
+                        "  contact     - Get contact info (direct neural link)".to_string(),
+                        "  clear       - Clear the terminal buffer".to_string(),
+                        "  whoami      - Display user profile data".to_string(),
+                        "  ls          - List portfolio modules".to_string(),
+                        "  cat resume  - Display resume data stream".to_string(),
+                        "  sudo hire   - Execute employment protocol 💾".to_string(),
                     ],
                     "about" => vec![
                         "Benjamin Niccum - Software Engineer".to_string(),
