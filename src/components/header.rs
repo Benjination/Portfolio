@@ -7,24 +7,24 @@ pub fn header() -> Html {
             <div class="ascii-art">
                 <pre class="ascii-name">
 {r#"
-    🎃  ██████╗ ███████╗███╗   ██╗     ███╗   ██╗██╗ ██████╗  ██████╗██╗   ██╗███╗   ███╗  👻
-   💀   ██╔══██╗██╔════╝████╗  ██║     ████╗  ██║██║██╔════╝██╔════╝██║   ██║████╗ ████║   🦇
-  🕷️    ██████╔╝█████╗  ██╔██╗ ██║     ██╔██╗ ██║██║██║     ██║     ██║   ██║██╔████╔██║    🕸️
- 🎃     ██╔══██╗██╔══╝  ██║╚██╗██║     ██║╚██╗██║██║██║     ██║     ██║   ██║██║╚██╔╝██║     👻
-💀      ██████╔╝███████╗██║ ╚████║     ██║ ╚████║██║╚██████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║      🦇
+    ⚡  ██████╗ ███████╗███╗   ██╗     ███╗   ██╗██╗ ██████╗  ██████╗██╗   ██╗███╗   ███╗  �
+   🤖   ██╔══██╗██╔════╝████╗  ██║     ████╗  ██║██║██╔════╝██╔════╝██║   ██║████╗ ████║   💾
+  ⚡    ██████╔╝█████╗  ██╔██╗ ██║     ██╔██╗ ██║██║██║     ██║     ██║   ██║██╔████╔██║    �
+ 🤖     ██╔══██╗██╔══╝  ██║╚██╗██║     ██║╚██╗██║██║██║     ██║     ██║   ██║██║╚██╔╝██║     �
+⚡      ██████╔╝███████╗██║ ╚████║     ██║ ╚████║██║╚██████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║      🔥
         ╚═════╝ ╚══════╝╚═╝  ╚═══╝     ╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝        
                                                                                     
-                      🎃 SPOOKY HALLOWEEN EDITION 🎃 BenjaminNiccum.com 👻
+                      ⚡ CYBERPUNK NEURAL EDITION ⚡ BenjaminNiccum.com 🤖
 "#}
                 </pre>
             </div>
             
             <div class="terminal-prompt">
-                <span class="prompt-user">{"👻benjamin@SpookyTown🎃"}</span>
+                <span class="prompt-user">{"⚡benjamin@CyberNet💾"}</span>
                 <span class="prompt-separator">{":"}</span>
-                <span class="prompt-path">{"~/haunted"}</span>
-                <span class="prompt-symbol">{"💀"}</span>
-                <span class="cursor">{"🦇"}</span>
+                <span class="prompt-path">{"~/neural-link"}</span>
+                <span class="prompt-symbol">{"🤖"}</span>
+                <span class="cursor">{"🔥"}</span>
             </div>
             
             <div class="tagline">

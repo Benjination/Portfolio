@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 // 🎨 THEME SYSTEM - Change this variable to switch themes instantly!
 // ═══════════════════════════════════════════════════════════════════════════════
-$current-theme: 'halloween'; // Options: 'retro', 'halloween', 'winter', 'cyberpunk'
+$current-theme: 'cyberpunk'; // Options: 'retro', 'halloween', 'winter', 'cyberpunk'
 
 // Theme color definitions (inline for simplicity)
 $primary-green: if($current-theme == 'halloween', #ff6600, if($current-theme == 'winter', #00ccff, if($current-theme == 'cyberpunk', #ff0080, #00ff00)));
@@ -10,6 +10,30 @@ $dark-green: if($current-theme == 'halloween', #cc4400, if($current-theme == 'wi
 $terminal-bg: if($current-theme == 'halloween', #0d0505, if($current-theme == 'winter', #001122, if($current-theme == 'cyberpunk', #000011, #0a0a0a)));
 $terminal-bg-light: if($current-theme == 'halloween', #1a0a0a, if($current-theme == 'winter', #002244, if($current-theme == 'cyberpunk', #110022, #1a1a1a)));
 $amber: if($current-theme == 'halloween', #ff8800, if($current-theme == 'winter', #66ccff, if($current-theme == 'cyberpunk', #ffff00, #ffb000)));
+
+// Theme-specific content variables
+$theme-name: $current-theme;
+$matrix-characters: if($current-theme == 'halloween', '🎃👻💀⚰️🕷️🦇🕸️', if($current-theme == 'winter', '❄️⛄❅⚪🌨️☃️❆', if($current-theme == 'cyberpunk', '01234567890ABCDEF><{}[]()+=*&^%$#@!~`', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrs0123456789')));
+$terminal-prompt: if($current-theme == 'halloween', 'necro@spooky-terminal:~$', if($current-theme == 'winter', 'necro@winter-terminal:~$', if($current-theme == 'cyberpunk', 'necro@cyber-terminal:~$', 'necro@retro-terminal:~$')));
+$welcome-message: if($current-theme == 'halloween', 'Welcome to the spooky terminal... 🎃 Enter if you dare.', if($current-theme == 'winter', 'Welcome to the winter terminal... ❄️ Let it snow, let it code.', if($current-theme == 'cyberpunk', 'Welcome to the cyber terminal... 🤖 Neural link established.', 'Welcome to the retro terminal...')));
+$header-decoration: if($current-theme == 'halloween', '🎃👻💀', if($current-theme == 'winter', '❄️⛄❅', if($current-theme == 'cyberpunk', '⚡️🤖💫', '')));
+$theme-description: if($current-theme == 'halloween', 'Spooky orange and dark theme for Halloween vibes', if($current-theme == 'winter', 'Cool blue winter theme with snowflake aesthetics', if($current-theme == 'cyberpunk', 'Futuristic neon cyberpunk theme with hot pink and cyan', 'Classic green terminal theme')));
+
+// CSS Custom Properties for Rust components
+:root {
+  --current-theme: '#{$theme-name}';
+  --primary-color: #{$primary-green};
+  --secondary-color: #{$secondary-green};
+  --dark-color: #{$dark-green};
+  --bg-color: #{$terminal-bg};
+  --bg-light-color: #{$terminal-bg-light};
+  --accent-color: #{$amber};
+  --matrix-chars: '#{$matrix-characters}';
+  --terminal-prompt: '#{$terminal-prompt}';
+  --welcome-message: '#{$welcome-message}';
+  --header-decoration: '#{$header-decoration}';
+  --theme-description: '#{$theme-description}';
+}
 
 // Common colors
 $white: #ffffff;

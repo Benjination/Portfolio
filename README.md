@@ -1,4 +1,5 @@
 # 🦀 Benjamin Niccum's Portfolio
+Remember this: npm regenerate-blogs
 
 A modern, retro-styled portfolio website built with **Rust + Yew** and compiled to **WebAssembly** for maximum performance and that "wow factor" that other developers will appreciate.
 

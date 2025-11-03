@@ -14,6 +14,7 @@ mod blog_auth;
 mod blog_admin;
 mod blog_list;
 mod blog_post;
+mod theme_config;
 
 pub use header::Header;
 pub use about::About;
@@ -31,3 +32,4 @@ pub use blog_auth::{verify_blog_password, verify_blog_credentials, authenticate_
 pub use blog_admin::{BlogAdmin, BlogPost};
 pub use blog_list::{BlogList, BlogPost as BlogListPost};
 pub use blog_post::{BlogPost as BlogPostComponent, BlogPostData};
+pub use theme_config::{ThemeConfig, load_theme_config};
