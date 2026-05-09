@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 // 🎨 THEME SYSTEM - Change this variable to switch themes instantly!
 // ═══════════════════════════════════════════════════════════════════════════════
-$current-theme: 'cyberpunk'; // Options: 'retro', 'halloween', 'winter', 'cyberpunk'
+$current-theme: 'retro'; // Options: 'retro', 'halloween', 'winter', 'cyberpunk'
 
 // Theme color definitions (inline for simplicity)
 $primary-green: if($current-theme == 'halloween', #ff6600, if($current-theme == 'winter', #00ccff, if($current-theme == 'cyberpunk', #ff0080, #00ff00)));
