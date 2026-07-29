@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Week 5 & 6 - Benjamin Niccum</title>
+    <meta name="description" content="4th post in a series about Cloud Computing">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="Week 5 & 6">
+    <meta property="og:description" content="4th post in a series about Cloud Computing">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/week-5-6">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Week 5 & 6">
+    <meta name="twitter:description" content="4th post in a series about Cloud Computing">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2025-10-30T19:59:46.041Z">
+    <meta property="article:modified_time" content="2025-10-30T19:59:46.041Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/week-5-6">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">Week 5 & 6</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">10/30/2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p>Week 5 & 6</p>
+
+<p>Benjamin Niccum</p>
+
+<p>10/23/2025</p>
+
+<p>In last week’s update I said that this week I would be accomplishing a few goals. The first was to continue to find free ways to implement enterprise level capabilities that match AWS, Azure, and other 3rd party web services. I’m excited to talk a little bit about that today and outline the direction I will be going for the rest of the semester. Along with mapping out the next sections of cloud deployment, I also created a streamlined plan for AWS certification that only takes 2 weeks. Finally, I want to talk a little bit about availability and what happened with the AWS outage this week.</p>
+
+<p>First, let’s get to the exciting stuff, cloud computing. After covering Redis and Memcache in weeks 3 and 4 by using a clever fat-client style of caching for earthquake data, I switched to an entirely different project. Long-story-short, my gamer buddies and I were having trouble finding times where we could get together because the three of us are adults and have wives, kids, and responsibilities that prevent us from being chronically online. So, I developed and launched a new site called “Time To Party”. You can check it out at https://benjination.github.io/TimeToParty/Links to an external site. if you want to. The mobile version is not optimized, but it’s pretty clean on a laptop or desktop. The app includes features like Authorization for unique users, a click and drag grid where you can input your availability, a friends list, a group creator that allows you to schedule with only the people you want in your party, and a way to invite users to group that you have created. This website is just a baby and certainly needs some fine tuning. The star of the show however is the live chat. Once you have joined a group, you are added to a chat, and you can communicate live with anyone in the chat. This feature is similar to services offered by providers like Amazon Connect, AWS AppSync, TalkPlus, and Sendbird Chat, but (as you may have guessed) completely free for smaller websites. Let me add this disclaimer though. If you are running a live chat like they do on youtube live, twitch streaming, or tiktok, you are going to rack up some serious database call charges very quickly, and in that situation, you may want to use a larger paid service that offers discounted prices for mass consumption. You will not rack up charges nearly as fast as you might think though if you use a clever coding trick. There is a specific type of database call named Snapshot. Basically what this call does is instead of adding a “Refresh Chat” button, a style that vanished sometime after the meteor killed the dinosaurs, or calling the database at a frequency every few milliseconds (very costly), the program only calls to read information from the database when the information changes. This works fantastic for live chat. If no one is chatting, no calls are made, and then the moment that someone pushes a new message, the database alerts the program that the data has changed, and it reads the new data and adds it to the chat instantly. It’s a very cost effective method, free for small projects, and it adds an awesome function to your website. I’ll talk about the next steps in next weeks plan.</p>
+
+<p>Onto my progress in actually getting certified in Azure or AWS. I had planned to create a step-by-step plan to blitz an AWS certification since I am rapidly running out of time. So, I present the plan:<br>2-week AWS PlanDownload 2-week AWS Plan<br>My plan covers four very specific domains: “Cloud Concepts”, “Security and Compliance”, “Cloud Technology and Services”, and “Billing Pricing and Support”. This plan will require constant vigilance and maximum effort. I will be working 2 hours a day for 14 days to try and complete this before the end of the semester. The total cost will come exclusively from the test itself, and cost $120 (Including optional practice test). For study materials I will be using the AWS Training and Certification Portal, AWS Documentation and Whitepapers, AWS Service FAQ’s, and YouTube. If for whatever reason I am not able to complete in two weeks, I’m not going to beat myself up about it. I’ve got all of Thanksgiving and winter break to finish it.</p>
+
+<p>Finally, Let’s talk a little bit about what happened last week. There was a major issue with the AWS-East-1 region. This is a cluster of physical data centers in northern Virginia that provides service to large companies all of the world. When East-1 went donw, Amazon went down, that’s pretty obvious, but it also wreaked havoc for Disney+, Delta Airlines, Fortnite, Hulu, McDonalds, Snapchat, YouTube, Canvas, Playstation, Xbox, Venmo… The list goes on. So much of e-commerce and online services rely on AWS for their online presence, and for about 24 hours they were not able to operate. The amount of money lost by the companies that went down was easily in the hundred-millions, and probably over a billion. It's difficult to estimate the total cost, but it is staggering. As it would turn out, the cause was a DNS issue where companies could not access a huge database that is used by AWS clients. A single DNS issue cost millions of dollars. It really puts into perspective the importance of what we do and how we do it. My small free systems really can’t compare with the titan that is AWS, but let me brush a little dust off my shoulder because my websites stayed running the entire time. I did create a few graphics to show the damage scale over time, and the specific updates as Amazon scrambled to fix the issue:<br><Images omitted></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>

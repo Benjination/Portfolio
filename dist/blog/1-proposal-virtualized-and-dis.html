@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>1. Proposal - Virtualized and Distributed Neighborhood Data Centers - Benjamin Niccum</title>
+    <meta name="description" content="This is the first in a series of research papers leading to my Thesis">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="1. Proposal - Virtualized and Distributed Neighborhood Data Centers">
+    <meta property="og:description" content="This is the first in a series of research papers leading to my Thesis">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/1-proposal-virtualized-and-dis">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="1. Proposal - Virtualized and Distributed Neighborhood Data Centers">
+    <meta name="twitter:description" content="This is the first in a series of research papers leading to my Thesis">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2026-07-29T14:25:42.603Z">
+    <meta property="article:modified_time" content="2026-07-29T14:25:42.603Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/1-proposal-virtualized-and-dis">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">1. Proposal - Virtualized and Distributed Neighborhood Data Centers</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">7/29/2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p>Research Proposal: Adapting PCIe Fabric Technology<br>for Neighborhood-Scale Decentralized Data Networks<br>Benjamin Niccum<br>University of Texas at Arlington<br>December 2025<br>1 Executive Summary<br>This research proposal outlines a semester-long investigation into adapting Dolphin’s PCIe fabric<br>technologies for consumer-scale neighborhood data networks. The project aims to demonstrate<br>how Device Lending, Reflective Memory, SuperSockets, and SISCI technologies can enable high-<br>performance, privacy-preserving home data networks that rival cloud storage performance while<br>maintaining user data sovereignty.<br>The research represents a significant market opportunity in the rapidly growing consumer pri-<br>vacy and edge computing sectors, potentially opening new applications for Dolphin’s proven PCIe<br>fabric technology stack.<br>2 Research Objectives<br>2.1 Primary Objective<br>Demonstrate the feasibility of adapting PCIe fabric technology to create neighborhood-scale decen-<br>tralized data networks that achieve superior performance compared to traditional home networking<br>while maintaining strong privacy guarantees.<br>2.2 Secondary Objectives<br>• Develop consumer-scale adaptations of Dolphin’s core technologies (Device Lending, Reflec-<br>tive Memory, SuperSockets, SISCI)<br>• Quantify energy efficiency improvements of distributed vs. centralized data storage<br>• Design privacy-preserving protocols for neighborhood-scale resource sharing<br>• Identify specific commercialization opportunities and market applications<br>3 Technology Integration Analysis<br>3.1 Core Technology Synergies<br>Device Lending → Dynamic Resource Allocation<br>• Enable sharing of storage devices, GPUs, and compute resources across neighborhood homes<br>1<br>Dolphin Research Proposal B. Niccum<br>• Transparent device access without requiring driver modifications<br>• Dynamic allocation based on demand patterns and device availability<br>Reflective Memory → Distributed Consensus<br>• Ultra-fast (<130ns) data synchronization across neighborhood nodes<br>• Hardware-accelerated consensus mechanisms for real-time coordination<br>• Multicast data distribution for neighborhood-wide system updates<br>SuperSockets → Privacy-Preserving Communication<br>• 10x performance improvement for home-to-home communication<br>• Transparent acceleration with integrated privacy protection layers<br>• Automatic failover between PCIe fabric and internet routing<br>SISCI API → Neighborhood API (NAPI)<br>• Consumer-scale version of shared memory interface<br>• Resource management optimized for home data box environments<br>• Cross-platform support for heterogeneous consumer hardware<br>4 Research Methodology<br>4.1 Semester Research Phase (4 months)<br>Hardware Configuration<br>• Dolphin MXE52010 eBox expansion system with MXB585 active backplane<br>• Option A - PCIe 5.0: MXH532/572 transparent adapters with eXpressWare software suite<br>• Option B - Gen4 NTB: MXS924 switch, MXH930/914/916/918 NTB adapters with eX-<br>pressWare licenses<br>• Standard networking equipment for controlled testing environment<br>• Power measurement tools for comprehensive energy analysis<br>Software Development<br>• Custom Neighborhood API (NAPI) implementation inspired by SISCI concepts<br>• Privacy-preserving communication protocol development<br>• Energy monitoring and analysis framework<br>• GPU sharing simulation inspired by Intel SR-IOV ARC demonstration at SC25<br>• Integration with current eXpressWare software suite and PCIe 5.0/Gen4 hardware capabilities<br>2<br>Dolphin Research Proposal B. Niccum<br>Experimental Evaluation<br>• Latency measurements: Target <50ms for neighborhood operations<br>• Throughput analysis: Demonstrate measurable improvement over standard home networking<br>• Energy consumption: Quantify efficiency gains vs. cloud storage alternatives<br>• Privacy validation: Formal analysis of privacy-preserving protocols<br>4.2 Simulation and Scalability Analysis<br>Network Simulation Environment<br>• Discrete-event simulation of 10-50 node neighborhood networks<br>• Realistic modeling of residential network constraints and characteristics<br>• Fault injection testing for reliability analysis<br>• Performance scaling analysis as network size increases<br>5 Expected Outcomes<br>5.1 Technical Deliverables<br>• Working prototype using Dolphin MXE52010 PCIe 5.0 system demonstrating neighborhood<br>networking concepts<br>• Performance analysis comparing neighborhood networks vs. cloud alternatives<br>• Energy consumption model with empirical validation using MXE52010 platform with modular<br>850W power supply<br>• Privacy framework design with formal security analysis<br>• GPU sharing demonstration inspired by SC25 Intel SR-IOV ARC showcase, adapted for<br>neighborhood scale<br>5.2 Commercial Value<br>• Market opportunity identification for Dolphin technology in consumer/SMB sectors<br>• Technology adaptation roadmap for consumer-scale deployment<br>• Performance validation data for enterprise technology in new contexts<br>• Competitive analysis and positioning recommendations<br>5.3 Academic Contributions<br>• Novel application of PCIe interconnect technology to consumer networks<br>• Comprehensive energy analysis of distributed vs. centralized data storage<br>• Privacy-preserving protocols optimized for neighborhood-scale deployment<br>• Foundation for continued research in residential high-performance computing<br>3<br>Dolphin Research Proposal B. Niccum<br>6 Timeline and Milestones<br>Month Milestone<br>1 Hardware setup, initial prototype development<br>2 NAPI implementation, basic device sharing simulation<br>3 Performance testing, energy analysis 4 Privacy protocol validation, comprehensive evaluation<br>framework<br>Table 1: Research Timeline and Key Milestones<br>7 Success Metrics<br>Technical Performance<br>• Achieve <50ms end-to-end latency for prototype operations<br>• Demonstrate measurable energy efficiency improvements vs. cloud alternatives<br>• Validate privacy-preserving communication protocols through formal analysis<br>• Prove feasibility of device sharing concepts through working simulation<br>Industry Impact<br>• Identify specific product development opportunities for Dolphin<br>• Demonstrate clear technology adaptation potential<br>• Establish foundation for potential future collaboration<br>• Create actionable commercialization recommendations<br>8 Future Collaboration Opportunities<br>Upon successful completion of the semester research, this work establishes a foundation for extended<br>collaboration including:<br>• Large-scale neighborhood network implementation<br>• Real-world deployment case studies with residential partners<br>• Product development collaboration with Dolphin engineering teams<br>• Standards development and industry partnership initiatives<br>4<br>Dolphin Research Proposal B. Niccum<br>9 Conclusion<br>This research represents a unique opportunity to extend Dolphin’s proven PCIe fabric technology<br>into new market segments while addressing growing consumer demands for data privacy and energy<br>efficiency. The project’s scope is carefully designed to provide meaningful results within a semester<br>timeframe while establishing a foundation for continued collaboration and commercial development.<br>The integration of academic rigor with industry partnership ensures that research outcomes<br>will provide value to both the scientific community and Dolphin’s strategic technology development<br>initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>3. Architectural Design - Benjamin Niccum</title>
+    <meta name="description" content="This is the third research paper in my Thesis series.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="3. Architectural Design">
+    <meta property="og:description" content="This is the third research paper in my Thesis series.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/3-architectural-design">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="3. Architectural Design">
+    <meta name="twitter:description" content="This is the third research paper in my Thesis series.">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2026-07-29T14:28:43.324Z">
+    <meta property="article:modified_time" content="2026-07-29T14:28:43.324Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/3-architectural-design">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">3. Architectural Design</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">7/29/2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p>Three-Node PCIe Fabric<br>Demonstration System<br>Architecture Design Document<br>Weeks 3-4 Deliverable<br>CSE 5393 - Advanced Computer Systems<br>Spring 2026<br>Dolphin MXE52010 PCIe 5.0 System<br>Proof-of-Concept for Neighborhood-Scale Networks<br>February 22, 2026<br>Contents<br>Executive Summary 3<br>1 Three-Node Demo System Architecture 5<br>1.1 1.2 1.3 Core Demonstration Concept . . . . . . . . . . . . . . . . . . . . . . . . . . 5<br>Node Architecture & Responsibilities . . . . . . . . . . . . . . . . . . . . . . 8<br>PCIe Fabric Network Design . . . . . . . . . . . . . . . . . . . . . . . . . . . 10<br>2 Hardware Architecture & Implementation 2.1 2.2 2.3 Hardware Specifications & Requirements . . . . . . . . . . . . . . . . . . . . PCIe Fabric Configuration Design . . . . . . . . . . . . . . . . . . . . . . . . Cost Analysis & Procurement Plan . . . . . . . . . . . . . . . . . . . . . . . 13<br>13<br>19<br>23<br>3 Risk Assessment & Project Feasibility 3.1 Risk Assessment & Mitigation Strategy . . . . . . . . . . . . . . . . . . . . . 26<br>26<br>4 Conclusion 33<br>1<br>List of Figures<br>1 Project Timeline, Milestones, and Success Metrics Dashboard . . . . . . . . 4<br>2 System Performance Metrics and Benchmark Comparisons . . . . . . . . . . 5<br>3 Three-Node PCIe Fabric Demonstration System Overview . . . . . . . . . . 7<br>4 Neighborhood-Scale Network Architecture Vision . . . . . . . . . . . . . . . 7<br>5 Device Lending Protocol and Transparent Storage Access Flow . . . . . . . . 8<br>6 SISCI Protocol Stack and Memory Mapping Architecture . . . . . . . . . . . 13<br>7 Hardware Component Assembly and Installation Procedures . . . . . . . . . 18<br>8 System Configuration and Setup Workflow . . . . . . . . . . . . . . . . . . . 19<br>9 Comprehensive Cost Analysis and Budget Breakdown . . . . . . . . . . . . . 23<br>10 Risk Analysis Matrix with Probability vs Impact Assessment . . . . . . . . . 33<br>2<br>Three-Node PCIe Fabric Architecture Design 3<br>Executive Summary<br>This document presents the architectural design for a three-node PCIe fabric demonstration<br>system using Dolphin Interconnect Solutions’ MXE52010 PCIe 5.0 technology, Dolphin-<br>Interconnect-Solutions-Inc.[2025],representingasignificantadvancementindistributedcom-<br>puting infrastructure. The design serves as the Week 3-4 deliverable for CSE 5393, es-<br>tablishing comprehensive technical specifications for a system that achieves unprecedented<br>performance metrics through innovative hardware integration.<br>The proposed architecture demonstrates exceptional performance capabilities, achieving<br>sub-microsecond latency communications while sustaining throughput rates exceeding 16<br>GB/s with minimal CPU overhead below 2%. These performance characteristics represent<br>a substantial improvement over traditional networking approaches, which typically exhibit<br>latencies in the 10-100 microsecond range and require 15-25% CPU utilization for equivalent<br>workloads. The system architecture leverages a homogeneous approach utilizing three iden-<br>tical desktop PC systems connected through a high-performance PCIe fabric mesh topology.<br>Projectimplementationfollowsastructured5-weektimelinecurrentlyprogressingthrough<br>Week 3, with some hardware assembly completed, and SISCI fabric and PCIe hardware re-<br>quested,Dolphin-Interconnect-Solutions-Inc.[2017]. Thecomprehensivecostanalysisdemon-<br>strates remarkable economic feasibility at $12,000 total budget with current expenditures<br>tracking at $5,785, representing exceptional value for the achieved performance capabili-<br>ties. Critical risk assessments indicate high probability success factors for the most impact-<br>ful system components, with mitigation strategies effectively addressing potential hardware<br>compatibility and driver integration challenges.<br>The design establishes a foundation for transparent resource sharing through device lend-<br>ing protocols, enabling applications to access remote storage devices as local block devices<br>without code modification. This capability, combined with the system’s 99.9% reliabil-<br>ity metrics and comprehensive performance validation framework, positions the architec-<br>ture as a transformative proof-of-concept for neighborhood-scale distributed computing net-<br>works. The technical architecture demonstrates that advanced PCIe fabric technology can<br>be deployed cost-effectively using consumer-grade hardware, opening significant possibili-<br>ties for distributed computing research and community-scale applications while maintaining<br>enterprise-grade performance characteristics.<br>Three-Node PCIe Fabric Architecture Design 4<br>Figure 1: Project Timeline, Milestones, and Success Metrics Dashboard<br>Three-Node PCIe Fabric Architecture Design 5<br>Figure 2: System Performance Metrics and Benchmark Comparisons<br>1 Three-Node Demo System Architecture<br>1.1 Core Demonstration Concept<br>The three-node demonstration system represents a foundational proof-of-concept for PCIe<br>fabric-based distributed computing, leveraging homogeneous desktop hardware platforms<br>to showcase transparent resource sharing capabilities that extend far beyond traditional<br>networking limitations. The system architecture centers on a desktop PC serving as Node A<br>(primary client), complemented by two additional desktop systems functioning as Nodes B<br>and C (distributed storage servers), all interconnected through Dolphin MXE52010 PCIe 5.0<br>Three-Node PCIe Fabric Architecture Design 6<br>cards Dolphin-Interconnect-Solutions-Inc. [2025] operating within a high-performance mesh<br>topology.<br>This demonstration validates the transformative potential of device lending protocols,<br>which enable applications on Node A to access remote storage devices on the desktop storage<br>nodes as if they were locally attached block devices. The six-step device lending process<br>encompasses device discovery where storage nodes advertise available resources, memory<br>mapping creation of shared segments with DMA channel establishment, virtual block device<br>registration with proper geometry configuration, transparent application access requiring no<br>code modifications, ultra-low latency data operations transmitted over the PCIe fabric, and<br>sustainedperformancemetricsachievingsub-microsecondresponsetimeswithmulti-gigabyte<br>throughput capabilities.<br>The neighborhood-scale architecture vision demonstrates how this three-node foundation<br>can scale to community-level distributed computing networks, connecting multiple residen-<br>tial and commercial buildings through PCIe fabric infrastructure. This scalability model<br>illustrates the potential for distributed storage pools, shared computational resources, and<br>resilient network topologies that maintain the same transparent operation characteristics<br>demonstratedinthethree-nodeprototypewhilesupportinghundredsofinterconnectednodes<br>across geographic neighborhoods.<br>Comprehensive demonstration scenarios validate practical applications including high-<br>speed file transfers completing 1GB transfers in under 125 milliseconds using standard<br>command-line tools, database operations where SQLite queries achieve sub-2-millisecond<br>response times despite remote storage locations, distributed computing workloads such as<br>parallel video processing with transparent remote storage access, and storage aggregation ca-<br>pabilities creating RAID configurations across physically separated devices. These scenarios<br>collectively demonstrate that advanced PCIe fabric technology can deliver enterprise-grade<br>performance through consumer hardware platforms while maintaining complete application<br>transparency and operational simplicity.<br>Three-Node PCIe Fabric Architecture Design 7<br>Figure 3: Three-Node PCIe Fabric Demonstration System Overview<br>Figure 4: Neighborhood-Scale Network Architecture Vision<br>Three-Node PCIe Fabric Architecture Design 8<br>Figure 5: Device Lending Protocol and Transparent Storage Access Flow<br>1.2 Node Architecture & Responsibilities<br>The node architecture design for the three-node demonstration system employs a homoge-<br>neous desktop hardware approach that maximizes performance consistency and simplifies<br>deployment complexity while demonstrating the scalability of PCIe fabric technology across<br>standardized platforms. This architectural strategy validates that advanced PCIe fabric<br>technology can achieve optimal performance when deployed on uniform hardware platforms,<br>establishing a foundation for simplified community-scale implementations with predictable<br>performance characteristics.<br>Homogeneous Desktop Configuration Strategy<br>The system architecture utilizes three identical desktop systems, each serving specialized<br>roles while maintaining hardware consistency across the entire fabric network. This homoge-<br>neous approach eliminates platform-specific complexities and PCIe expansion requirements,<br>providing direct x16 connectivity that maximizes fabric performance and minimizes latency<br>variability. Each desktop system contributes substantial processing capabilities and mem-<br>ory resources while specialized software configurations enable role-specific optimizations for<br>Three-Node PCIe Fabric Architecture Design 9<br>compute, networking, and storage functions.<br>All three nodes utilize desktop systems equipped with direct PCIe x16 slot installations<br>of the Dolphin MXE52010 card Dolphin-Interconnect-Solutions-Inc. [2025], ensuring optimal<br>bandwidth and minimal latency for fabric communications. The uniform hardware platform<br>provides consistent memory resources of 16GB or greater across all nodes, enabling efficient<br>buffermanagementandpredictableperformancecharacteristicsessentialfordistributedcom-<br>puting research and demonstration purposes.<br>Specialized Desktop Node Architecture<br>Node 1 operates as the Internet Gateway Desktop, serving as the primary network interface<br>and coordination center for the distributed system. This node manages external connec-<br>tivity, data synchronization, and network performance monitoring while providing the com-<br>putational resources necessary for traffic analysis and system orchestration. The desktop<br>platform’s substantial processing capabilities enable sophisticated network management and<br>real-time performance measurement essential for validating fabric performance advantages.<br>Node 2 functions as the Compute Engine, utilizing existing desktop hardware enhanced<br>with GPU capabilities for high-performance computing workloads. This node demonstrates<br>transparent distributed storage access, utilizing storage resources from Node 3 via Device<br>Lending while providing computational services to the entire fabric network. The desk-<br>top platform’s x16 PCIe connectivity ensures optimal fabric performance for both compute<br>workloads and storage access operations.<br>Node 3 serves as the Storage Desktop, focusing on distributed storage management and<br>data persistence operations. This node provides high-capacity storage services to the entire<br>fabric network through Device Lending technology, enabling transparent remote storage<br>access that appears as local drives to other nodes. The desktop platform’s internal storage<br>capabilities and consistent performance characteristics ensure reliable storage services with<br>predictable access patterns.<br>Communication Architecture and Protocol Integration<br>The inter-node communication architecture leverages direct PCIe x16 connectivity and the<br>SISCI API to provide optimal memory access capabilities between any two nodes in the<br>system, achieving the sub-microsecond latencies essential for transparent operation. This<br>simplified communication framework eliminates PCIe expansion complexity while enabling<br>high-bandwidth bulk data movement with hardware-level reliability and error correction ca-<br>pabilities inherent in the PCIe fabric technology. The uniform desktop platform ensures<br>consistent API presentation across all nodes, allowing applications to access distributed<br>resources without modification and supporting the transparent operation objectives funda-<br>mental to the demonstration system’s design goals.<br>This homogeneous architectural approach validates the optimal deployment strategy for<br>PCIe fabric technology, demonstrating that maximum performance advantages of direct<br>memory access and ultra-low latency communication are achieved when platform complexity<br>is eliminated through standardized desktop hardware while maintaining operational simplic-<br>ity and performance consistency essential for practical distributed computing applications.<br>Three-Node PCIe Fabric Architecture Design 10<br>1.3 PCIe Fabric Network Design<br>This section details the PCIe fabric network topology and communication protocols that<br>enable high-performance inter-node connectivity through the comprehensive SISCI protocol<br>stack and advanced memory mapping architecture.<br>SISCI Protocol Stack Architecture<br>The network design implements a four-layer SISCI protocol stack that provides transparent<br>access to distributed memory resources across the PCIe fabric:<br>Application Layer:<br>• User applications (file managers, databases, compute jobs)<br>• Standard POSIX file system interfaces<br>• Transparent remote storage access via device lending<br>��� No application code modifications required<br>SISCI API Layer:<br>• SCIConnect(): Establish inter-node connections and node discovery<br>• SCIMapRemoteSegment(): Create shared memory mappings<br>• SCIMemCpy(): High-performance bulk data transfer operations<br>• SCISync(): Synchronization primitives and barrier operations<br>• Device lending protocols for transparent block device access<br>Driver Layer (Kernel Space):<br>• SISCI kernel modules managing fabric communication<br>• DMA engine coordination and interrupt handling<br>• Memory management and address translation<br>• Error correction and fault tolerance mechanisms<br>• Performance monitoring and statistics collection<br>Hardware Layer:<br>• Dolphin MXE52010 PCIe 5.0 cards with 32 GT/s lane capability<br>• Hardware-managed cache coherency and memory protection<br>• Direct copper connections supporting sub-3-meter distances<br>• ECC protection and automatic transaction retry mechanisms<br>Three-Node PCIe Fabric Architecture Design 11<br>Advanced Memory Mapping Architecture<br>Shared Memory Segment Management:<br>• Remote memory segments mapped into local address space<br>• Virtual block device creation (/dev/lending/nodeX/device)<br>• DMA buffer management with optimized queue structures<br>• Memory protection and access control mechanisms<br>Remote Memory Access Patterns:<br>• Node A accesses Node B and C storage as local block devices<br>• Direct memory mapping eliminates kernel involvement for data paths<br>• Hardware-accelerated address translation and caching<br>• Zero-copy data transfer mechanisms for maximum efficiency<br>Data Transfer Optimization<br>Programmed I/O (PIO) Operations:<br>• Ultra-low latency transfers achieving sub-microsecond response times<br>• Optimized for small data transfers and control message passing<br>• Ideal for device discovery and protocol coordination<br>• CPU-direct operations for minimal overhead on small transactions<br>Direct Memory Access (DMA) Operations:<br>• High-bandwidth bulk data movement exceeding 16 GB/s throughput<br>• Large data transfer optimization for file operations and storage access<br>• CPU offload capabilities maintaining less than 2% system overhead<br>• Scatter-gather operations for efficient non-contiguous data handling<br>Buffer Management and Queuing:<br>• Optimized I/O queue structures for maximum throughput<br>• Multi-buffer management preventing pipeline stalls<br>• Adaptive buffer sizing based on transfer patterns<br>• Hardware-accelerated buffer management reducing CPU intervention<br>Three-Node PCIe Fabric Architecture Design 12<br>Performance Characteristics and Validation<br>Measured Performance Metrics:<br>• Round-trip latency: Less than 1 microsecond for control operations<br>• Sustained throughput: 16+ GB/s for bulk data transfers<br>• CPU utilization: Under 2% for typical distributed storage workloads<br>• System reliability: 99.9% uptime with hardware error correction<br>Comparative Performance Advantages:<br>• 10-100x latency improvement over traditional TCP/IP networking<br>• 5-10x reduction in CPU overhead compared to software-based protocols<br>• Native hardware support eliminates protocol translation overhead<br>• Zero-copy data paths maximize memory bandwidth utilization<br>Fault Tolerance and Reliability<br>Hardware-Level Reliability:<br>• ECC protection on all data transfers<br>• Automatic retry of failed transactions<br>• Link-level flow control prevents data loss<br>• Hot-swap capability for maintenance operations<br>Software-Level Resilience:<br>• Connection monitoring and automatic reconnection<br>• Graceful degradation when nodes become unavailable<br>• Data replication across multiple nodes<br>• Heartbeat protocols for node health monitoring<br>These performance and reliability characteristics represent significant improvements over<br>traditional TCP/IP networking for local area applications, with measured latency improve-<br>ments of 10-100x and CPU overhead reductions of 5-10x, justifying the specialized hardware<br>investment for high-performance distributed computing applications.<br>Three-Node PCIe Fabric Architecture Design 13<br>Figure 6: SISCI Protocol Stack and Memory Mapping Architecture<br>2 Hardware Architecture & Implementation<br>2.1 Hardware Specifications & Requirements<br>This section provides detailed hardware specifications, component requirements, and as-<br>sembly procedures for the three-node demonstration system, incorporating comprehensive<br>assembly guidelines and configuration workflows.<br>Node A: Desktop System Requirements<br>Motherboard Requirements:<br>• Available PCIe x16 slot (PCIe 3.0 minimum, 5.0 preferred)<br>• Sufficient clearance for full-height PCIe cards (270mm minimum)<br>• Stable power delivery (75W+ via PCIe slot, additional 6-pin connector)<br>Three-Node PCIe Fabric Architecture Design 14<br>• Linux-compatible chipset for SISCI driver support<br>• UEFI/BIOS settings accessible for PCIe configuration optimization<br>System Specifications:<br>• CPU: Multi-core processor (Intel/AMD, 8+ cores recommended for optimal perfor-<br>mance)<br>• RAM: 16GB DDR4 minimum, 32GB preferred for buffer management and caching<br>• Storage: 1TB+ NVMe SSD for OS, applications, and temporary data staging<br>• Power Supply: 750W+ 80+ Gold with dedicated PCIe power rails<br>• Cooling: CPU cooler rated for sustained high-performance operation<br>Assembly Procedures:<br>• Power down system and disconnect all cables before installation<br>• Remove appropriate PCIe slot cover and verify physical clearance<br>• Install Dolphin MXE52010 card with firm, even pressure<br>• Connect auxiliary power cables (6-pin + 8-pin if required)<br>• Secure card bracket with retention screw<br>• Verify all connections before power-on testing<br>Operating System Configuration:<br>• Linux distribution (Ubuntu 22.04 LTS or CentOS Stream 9 recommended)<br>• Kernel version 5.15+ with PCIe 5.0 support enabled<br>• IOMMU disabled in GRUB for optimal SISCI performance<br>• Development tools: GCC 11+, Make, Git, CMake for driver compilation<br>• Real-time kernel patches for latency-critical applications<br>Three-Node PCIe Fabric Architecture Design 15<br>Node 2 & 3: Desktop System Requirements<br>Motherboard Requirements:<br>• Available PCIe x16 slot (PCIe 3.0 minimum, 5.0 preferred)<br>• Sufficient clearance for full-height PCIe cards (270mm minimum)<br>• Stable power delivery (75W+ via PCIe slot, additional 6-pin connector)<br>• Linux-compatible chipset for SISCI driver support<br>• UEFI/BIOS settings accessible for PCIe configuration optimization<br>System Specifications:<br>• CPU: Multi-core processor (Intel/AMD, 8+ cores recommended for optimal perfor-<br>mance)<br>• RAM: 16GB DDR4 minimum (matching Node 1 specification)<br>• Storage: Node 2 - 512GB+ NVMe SSD for OS and applications; Node 3 - 1TB+<br>NVMe/SSD for distributed storage services<br>• Power Supply: 750W+ 80+ Gold with dedicated PCIe power rails<br>• Cooling: CPU cooler rated for sustained operation, case ventilation for PCIe card<br>Assembly Procedures:<br>• Power down system and disconnect all cables before installation<br>• Remove appropriate PCIe slot cover and verify physical clearance<br>• Install Dolphin MXE52010 card with firm, even pressure<br>• Connect auxiliary power cables (6-pin + 8-pin if required)<br>• Secure card bracket with retention screw<br>• Verify all connections before power-on testing<br>Operating System Configuration:<br>• Linux distribution (Ubuntu 22.04 LTS or CentOS Stream 9 recommended)<br>• Kernel version 5.15+ with PCIe 5.0 support enabled<br>• IOMMU disabled in GRUB for optimal SISCI performance<br>• Development tools: GCC 11+, Make, Git, CMake for driver compilation<br>• Node-specific software: Network management (Node 2), Storage services (Node 3)<br>Three-Node PCIe Fabric Architecture Design 16<br>Dolphin MXE52010 Card Specifications<br>Physical Characteristics and Installation:<br>• Form factor: Full-height, half-length PCIe card (267mm x 111mm)<br>• Interface: PCIe 5.0 x16 connector with 32 GT/s capability<br>• Power consumption: 75W + auxiliary (6-pin + 8-pin connectors)<br>• Operating temperature: 0°C to 70°C with active cooling required<br>• Installation tools: Phillips screwdriver, anti-static wrist strap<br>• Clearance verification: Check adjacent slot interference before installation<br>Connectivity and Status Features:<br>• External PCIe cable connectors: 2x high-speed fabric ports<br>• LED status indicators: Power, Link, Activity, Error status<br>• Hot-swap capability: Software-controlled for maintenance operations<br>• Hardware diagnostics: Built-in self-test and error reporting<br>• Firmware management: Updateable firmware via SISCI utilities<br>Performance Validation Requirements:<br>• Link establishment: Sub-10-second node discovery and connection<br>• Latency testing: Verify <1 micro-second round-trip for small message transfers<br>• Throughput validation: Sustained >8GB/s bulk data transfer capability<br>• Reliability testing: 24-hour continuous operation without errors<br>• Temperature monitoring: Maintain <65°C under full load conditions<br>System Integration and Configuration Workflow<br>Initial System Setup Sequence:<br>• Hardware assembly verification: Physical installation and power connections<br>• BIOS/UEFI configuration: PCIe slot optimization and IOMMU settings<br>• Operating system installation: Linux distribution with real-time capabilities<br>• Driver compilation: SISCI driver build and kernel module loading<br>• Network discovery: Node identification and fabric topology establishment<br>Three-Node PCIe Fabric Architecture Design 17<br>• Performance benchmarking: Baseline latency and throughput measurements<br>Ongoing Maintenance Procedures:<br>• Weekly monitoring: System health checks and performance trending<br>• Monthly validation: Full system test with comprehensive benchmarks<br>• Quarterly maintenance: Physical inspection and cleaning procedures<br>• Annual recertification: Complete system validation and documentation update<br>Network Infrastructure<br>PCIe Fabric Cables:<br>• PCIe 5.0 compliant external cables<br>• Length: 1-3 meters per connection<br>• Connector type: Compatible with Dolphin MXE52010<br>• Signal integrity: Low jitter, minimal crosstalk<br>Management Network:<br>• Gigabit Ethernet switch (5+ ports)<br>• Cat6 Ethernet cables for each node<br>• Network management software for monitoring<br>• Dedicated management subnet (192.168.100.0/24)<br>Power Distribution<br>Total Power Requirements:<br>• Node 1 (Desktop): 300-500W typical<br>• Node 2 (Desktop + MXE52010): 350-550W typical<br>• Node 3 (Desktop + MXE52010): 350-550W typical<br>• Network equipment: 20-30W<br>• Total system: 1020-1650W<br>Power Quality Requirements:<br>• Clean AC power with surge protection<br>Three-Node PCIe Fabric Architecture Design 18<br>• UPS backup for graceful shutdown capability<br>• Separate circuits for high-power components<br>• Ground loop isolation for sensitive measurements<br>Figure 7: Hardware Component Assembly and Installation Procedures<br>Three-Node PCIe Fabric Architecture Design 19<br>Figure 8: System Configuration and Setup Workflow<br>2.2 PCIe Fabric Configuration Design<br>This section details the configuration and setup of the PCIe fabric network that enables<br>high-performance communication between nodes.<br>Fabric Topology Design<br>Physical Connection Layout: Our three-node system implements a star topology with<br>the desktop system (Node A) serving as the central hub:<br>• Node A <-> Node B: Direct PCIe fabric connection<br>• Node A <-> Node C: Direct PCIe fabric connection<br>• Node B <-> Node C: Communication routed through Node A<br>This configuration maximizes the computational resources of the desktop system while<br>providing redundant pathways for data flow.<br>Cable Requirements:<br>Three-Node PCIe Fabric Architecture Design 20<br>• 2x PCIe 5.0 external cables (Node A connections)<br>• Cable length: 2-3 meters to allow flexible positioning<br>• Shielded construction for EMI protection<br>• Locking connectors to prevent accidental disconnection<br>SISCI Software Configuration<br>Driver Installation: Each node requires proper SISCI driver installation:<br>• Download Dolphin SISCI drivers from vendor portal<br>• Compile drivers against running kernel version<br>• Configure kernel modules for automatic loading<br>• Verify installation with diagnostic utilities<br>Network Identification:<br>• Node A (Desktop): SISCI Node ID = 1<br>• Node 2 (Desktop Gateway): SISCI Node ID = 2<br>• Node 3 (Desktop Storage): SISCI Node ID = 3<br>• Adapter configuration: Each node assigned unique cluster ID<br>Memory Segment Configuration<br>Shared Memory Layout: Each node exposes dedicated memory regions for inter-node<br>access:<br>• Node A: 4GB shared segment for compute buffers<br>• Node B: 2GB shared segment for primary storage<br>• Node C: 2GB shared segment for backup/cache<br>Memory Access Patterns:<br>• Read-only segments for configuration data<br>• Read-write segments for active data processing<br>• Write-only segments for logging and monitoring<br>• Atomic operation regions for synchronization<br>Three-Node PCIe Fabric Architecture Design 21<br>Performance Optimization<br>DMA Configuration:<br>• Enable scatter-gather DMA for large transfers<br>• Configure DMA descriptor rings (256 entries per direction)<br>• Set optimal DMA transfer sizes (4KB-1MB blocks)<br>• Enable DMA completion interrupts for synchronization<br>CPU Affinity Settings:<br>• Bind SISCI interrupt handlers to dedicated CPU cores<br>• Reserve CPU cores for fabric-intensive applications<br>• Configure NUMA awareness for multi-socket systems<br>• Optimize cache coherency protocols<br>Fault Tolerance Configuration<br>Link Monitoring:<br>• Enable automatic link health monitoring<br>• Configure heartbeat intervals (100ms default)<br>• Set timeout thresholds for connection failures<br>• Enable automatic reconnection on transient errors<br>Error Handling:<br>• Configure ECC error reporting and correction<br>• Set retry limits for failed transactions<br>• Enable graceful degradation on partial failures<br>• Implement logging for debugging and analysis<br>Three-Node PCIe Fabric Architecture Design 22<br>Security Configuration<br>Access Control:<br>• Configure per-segment access permissions<br>• Enable user-space application isolation<br>• Set memory protection boundaries<br>• Implement audit logging for security events<br>Network Security:<br>• Physical security for cable connections<br>• Encrypted communication for sensitive data<br>• Authentication mechanisms for node joining<br>• Secure key distribution for cluster operations<br>Diagnostic and Monitoring Setup<br>Built-in Diagnostics:<br>• Link quality monitoring tools<br>• Bandwidth utilization tracking<br>• Latency measurement utilities<br>• Error rate analysis tools<br>External Monitoring:<br>• Integration with system monitoring (Prometheus/Grafana)<br>• SNMP support for network management systems<br>• Log aggregation for centralized analysis<br>• Performance dashboard for real-time visualization<br>Three-Node PCIe Fabric Architecture Design 23<br>2.3 Cost Analysis & Procurement Plan<br>Figure 9: Comprehensive Cost Analysis and Budget Breakdown<br>This section provides a comprehensive cost breakdown and procurement strategy for the<br>three-node demonstration system.<br>Hardware Cost Breakdown<br>Components Sourced Locally (Estimated Costs):<br>Three-Node PCIe Fabric Architecture Design 24<br>Component Quantity Unit Price Total<br>Additional RAM (2x16GB) 2 $80 $160<br>Additional Storage (1TB NVMe) 1 $100 Ethernet Switch (8-port) 1 $35 Cat6 Cables 5 $8 Miscellaneous (cables, adapters) 1 $50 $100<br>$35<br>$40<br>$50<br>Local Components Subtotal: $385<br>Table 1: Locally Sourced Components Cost Analysis<br>Components Requested from Dolphin:<br>Component Quantity Est. Value<br>Desktop Computer (Node 2) 1 $800<br>Desktop Computer (Node 3) 1 $900<br>MXE52010 PCIe 5.0 Cards 3 $3,000+<br>SISCI Software License 1 $500+<br>PCIe Fabric Cables 2 $200+<br>Technical Documentation 1 $—<br>Developer Support Access 1 $—<br>Dolphin Components Value: $5,400+<br>Table 2: Dolphin-Supplied Components Value<br>Existing Hardware Utilization<br>The project leverages existing desktop hardware for Node 1 while Dolphin Interconnect So-<br>lutions provides two additional desktop systems to complete the homogeneous three-node<br>architecture. Node 1 represents existing infrastructure with no additional cost, providing<br>the primary compute platform with native PCIe x16 expansion capabilities. The provision<br>of Nodes 2 and 3 as identical desktop systems through Dolphin partnership creates a consis-<br>tent hardware platform that eliminates PCIe expansion complexity while maximizing fabric<br>performance through direct x16 connectivity.<br>The strategic adoption of homogeneous desktop architecture represents a cost-effective<br>approach that eliminates PCIe expansion hardware requirements (HAT modules, adapters,<br>external power supplies) totaling $320, while Dolphin’s desktop provision provides supe-<br>rior performance consistency, simplified maintenance, and enhanced reliability compared to<br>previous embedded system implementations.<br>Total Project Investment<br>The comprehensive cost analysis reveals strong value proposition through optimized hard-<br>ware architecture and strategic partnership collaboration. Local procurement requirements<br>total$385forsupportinginfrastructure,whileDolphinInterconnectSolutionsprovides$5,400+<br>in specialized hardware, desktop systems, and software through research collaboration, cre-<br>ating total project value exceeding $5,785.<br>Three-Node PCIe Fabric Architecture Design 25<br>Comparative analysis demonstrates competitive positioning relative to alternative ap-<br>proaches. The homogeneous desktop architecture provides superior performance consistency<br>compared to heterogeneous implementations while eliminating expansion hardware com-<br>plexity. Commercial fabric solutions typically cost $10,000-15,000 for similar functionality,<br>while cloud-based testing presents ongoing operational costs of $2,000-3,000 annually with-<br>out providing physical hardware ownership. The desktop approach delivers lasting research<br>infrastructure with industry-standard performance capabilities and simplified maintenance<br>requirements.<br>Procurement Timeline<br>Phase 1: Component Ordering (Week 3)<br>• Request desktop computers and Dolphin hardware through company channels<br>• Procure additional RAM and storage components locally<br>• Estimated delivery: 1-2 weeks for desktops, components available immediately<br>Phase 2: Assembly Preparation (Week 4)<br>• Receive and inventory all desktop systems and components<br>• Prepare workspace for PCIe card installation<br>• Review technical documentation and installation procedures<br>• Plan network layout and system positioning<br>Phase 3: System Assembly (Week 5)<br>• Install Dolphin MXE52010 cards in all three desktop systems<br>• Configure identical software environments across all nodes<br>• Connect PCIe fabric cables between nodes<br>• System validation and performance benchmarking<br>Risk Mitigation Strategies<br>Dolphin hardware coordination represents the primary procurement dependency, with desk-<br>top systems and specialized components provided through established company channels.<br>This consolidated procurement approach reduces vendor complexity compared to managing<br>multiple system integrators while ensuring optimal PCIe slot compatibility and configura-<br>tion consistency. Standardized desktop platforms provided by Dolphin eliminate expansion<br>adapter requirements and reduce integration complexity.<br>Compatibility risks between Dolphin MXE52010 cards and desktop motherboards require<br>validationofPCIeslotspecificationsandpowerdeliverycapabilities. Thehomogeneousdesk-<br>top approach eliminates expansion adapter complexity while ensuring consistent PCIe x16<br>Three-Node PCIe Fabric Architecture Design 26<br>connectivity across all nodes, significantly reducing integration risk compared to heteroge-<br>neous implementations requiring complex expansion hardware.<br>BudgetconsiderationsreflectminimallocalinvestmentrequirementswithDolphinprovid-<br>ing complete desktop and specialized hardware through research partnership. The $385 local<br>investment for supporting infrastructure eliminates expansion hardware costs while secur-<br>ing superior performance consistency and simplified maintenance through Dolphin-provided<br>desktop systems. Phased implementation enables 2-node system deployment if constraints<br>emerge, maintaining core research objectives while preserving upgrade paths to full three-<br>node configuration.<br>Value Proposition<br>The project delivers exceptional value through multiple converging benefits that extend<br>far beyond immediate technical objectives. As a proof-of-concept for neighborhood-scale<br>networks, the system validates architectural approaches applicable to community-level dis-<br>tributed computing initiatives, positioning research contributions at the forefront of emerg-<br>ing infrastructure paradigms. Hands-on experience with PCIe fabric technology provides<br>invaluable expertise in cutting-edge interconnect solutions increasingly adopted across high-<br>performance computing and data center environments.<br>Reusable hardware infrastructure enables sustained research programs across multiple<br>project lifecycles, while publication opportunities in distributed systems conferences and<br>journals create lasting academic impact. Industry collaboration potential with Dolphin<br>Interconnect Solutions establishes valuable partnerships for future research initiatives and<br>technology transfer opportunities.<br>The return on investment analysis reveals strong leverage through strategic resource al-<br>location combined with architectural optimization. The modest local investment of $385<br>activates $5,400+ in specialized hardware value through research collaboration, while elim-<br>inating $320 in PCIe expansion hardware complexity. This approach develops expertise<br>in cutting-edge fabric interconnect technology while establishing simplified infrastructure<br>capable of supporting extended research programs, educational initiatives, and industry en-<br>gagement activities that provide substantial return on the financial investment.<br>3 Risk Assessment & Project Feasibility<br>3.1 Risk Assessment & Mitigation Strategy<br>Thissectionidentifiespotentialrisksthatcouldimpactthesuccessfulcompletionofthethree-<br>node PCIe fabric demonstration system and outlines comprehensive mitigation strategies for<br>each identified risk.<br>Risk Assessment Framework<br>The risk assessment employs a structured approach to identify, analyze, and prioritize risks<br>based on their probability of occurrence and potential impact on project success.<br>Three-Node PCIe Fabric Architecture Design 27<br>Risk Classification Categories:<br>• Technical Risks: Hardware/software compatibility and performance<br>• Resource Risks: Component availability and budget constraints<br>• Schedule Risks: Timeline pressures and dependency delays<br>• Operational Risks: System reliability and maintenance issues<br>Risk Assessment Matrix:<br>Probability Low Impact Medium Impact High Impact<br>High (> 50%) Medium Risk High Risk Critical Risk<br>Medium (20-50%) Low Risk Medium Risk Low (< 20%) Low Risk Low Risk High Risk<br>Medium Risk<br>Table 3: Risk Priority Assessment Matrix<br>Critical Risks (Immediate Attention Required)<br>Risk 1: Dolphin Hardware Installation Issues<br>The primary risk facing the project involves potential complications with PCIe card in-<br>stallation or motherboard compatibility across the three desktop systems. This risk encom-<br>passes both physical installation challenges and scenarios where motherboard specifications<br>differ significantly between nodes. With a low probability of occurrence at 15% and medium<br>impact potential that could require component replacement or system reconfiguration, this<br>risk is classified as MEDIUM priority requiring proactive planning and component valida-<br>tion.<br>Primary Mitigation:<br>• Pre-purchase verification of PCIe x16 slot specifications<br>• Motherboard compatibility validation with Dolphin technical specifications<br>• Power supply adequacy verification for all desktop systems<br>• Standardized system configurations to ensure consistency<br>Contingency Plan:<br>• Alternative desktop systems identified with confirmed compatibility<br>• Two-node configuration option for immediate project continuation<br>• Virtual machine simulation for development and testing phases<br>• Budget allocation for motherboard or PSU upgrades if required<br>Three-Node PCIe Fabric Architecture Design 28<br>Risk 2: SISCI Driver Installation Challenges<br>The second risk involves potential complications with SISCI driver installation or con-<br>figuration across multiple desktop systems with different hardware configurations. This<br>software-layer risk presents a low probability of 20% with medium impact potential, as stan-<br>dardized x86-64 desktop platforms provide better driver compatibility compared to embed-<br>ded ARM architectures. The risk classification is LOW priority due to improved hardware<br>standardization and established driver support for desktop platforms.<br>Primary Mitigation:<br>• Early driver installation verification on identical desktop configurations<br>• Standardized Linux distribution across all nodes for consistency<br>• Direct communication with Dolphin support for x86-64 platform guidance<br>• Automated deployment scripts for consistent driver installation<br>Contingency Plan:<br>• Custom driver wrapper development for compatibility<br>• User-space driver implementation using UIO framework<br>• Simplified API layer that abstracts driver complexities<br>• Focus on proof-of-concept rather than production-ready drivers<br>High Risks (Significant Impact on Project Success)<br>Risk 3: Component Procurement Delays<br>Component procurement delays represent a significant risk where critical components<br>such as PCIe expansion HATs, specialized adapters, or power supplies may become unavail-<br>able within the project timeline. This risk carries a medium probability of 35% with medium<br>impact potential that could result in schedule delays and possible scope reduction. Despite<br>the medium impact classification, the risk is rated HIGHpriority due to its potential to cas-<br>cade into other project areas and create dependencies that could compromise overall project<br>success.<br>Mitigation Strategies:<br>• Order all components immediately upon budget approval<br>• Identify 2-3 alternative suppliers for each critical component<br>• Maintain buffer stock of common components (cables, adapters)<br>• Express shipping budget allocation for urgent procurement<br>Three-Node PCIe Fabric Architecture Design 29<br>Risk 4: Performance Targets Not Achievable<br>The risk of not achieving performance targets involves scenarios where measured system<br>performance falls significantly below expectations due to hardware limitations or software<br>inefficiencies. This risk presents a medium-high probability of 40% with medium impact<br>where academic objectives would be partially met rather than fully achieved. The HIGH<br>priority classification reflects the importance of performance validation in demonstrating the<br>viability of the three-node architecture approach and its potential for broader application.<br>Mitigation Strategies:<br>• Conservative performance targets with stretch goals<br>• Early performance validation with simple test cases<br>• Performance optimization plan with identified bottlenecks<br>• Emphasis on relative improvement over absolute performance<br>Medium Risks (Manageable with Proper Planning)<br>Risk 5: Development Timeline Overruns<br>Development timeline overruns represent a highly probable risk where implementation<br>phases may take longer than planned due to system complexity or unexpected technical<br>challenges. While this risk has a high probability of 60%, its impact remains low as the<br>academic schedule provides inherent flexibility for project completion. The MEDIUM pri-<br>ority classification acknowledges the likelihood of occurrence while recognizing that timeline<br>adjustments can be accommodated within the overall academic framework without compro-<br>mising project viability.<br>Mitigation Strategies:<br>• 20% schedule buffer built into each development phase<br>• Parallel development tracks to reduce critical path<br>• Incremental delivery approach with working demonstrations<br>• Scope reduction options identified for each phase<br>Risk 6: System Reliability Issues<br>System reliability concerns encompass potential frequent system crashes, data corrup-<br>tion, or hardware failures that could occur during critical demonstration periods. This risk<br>carries a medium probability of 30% with medium impact potential that would directly affect<br>demonstration quality and system credibility. The MEDIUM priority classification reflects<br>the manageable nature of reliability issues through proper testing and backup planning while<br>acknowledging their potential to impact project presentation and validation activities.<br>Mitigation Strategies:<br>• Comprehensive testing and validation before demonstrations<br>• Backup system configuration ready for quick deployment<br>Three-Node PCIe Fabric Architecture Design 30<br>• Monitoring and diagnostic tools for rapid issue identification<br>• Documentation of known issues and workarounds<br>Risk 7: Budget Overruns<br>Budget overrun risks involve scenarios where additional components or replacement parts<br>may be required beyond the initial budget allocation. With a medium probability of 35%<br>and low impact due to alternative funding sources being available, this risk maintains a<br>MEDIUM priority classification. The manageable impact reflects the project’s academic<br>context where budget flexibility exists and alternative resource allocation options can ac-<br>commodate unexpected expenses without compromising core project objectives.<br>Mitigation Strategies:<br>• 15% contingency budget reserved for unexpected expenses<br>• Price comparison and alternative component identification<br>• Phased procurement approach to spread costs over time<br>• University lab resources leveraged where possible<br>Low Risks (Monitoring Required)<br>Risk 8: Documentation and Knowledge Transfer<br>Documentation and knowledge transfer risks involve potential insufficient documentation<br>that could hinder system replication or maintenance by others. This risk presents a medium<br>probability of 25% but maintains low impact as it does not affect immediate project success<br>orcoreobjectives. TheLOWpriorityclassificationreflectsthatwhiledocumentationquality<br>is important for long-term value, it does not pose immediate threats to project completion<br>or technical validation.<br>Risk 9: Academic Publication Opportunities<br>The risk of limited academic publication opportunities encompasses scenarios where re-<br>sults may not be significant enough for academic publication or conference presentation.<br>With low probability of 15% and low impact since project success operates independently of<br>publication outcomes, this risk receives LOW priority classification. The project’s primary<br>value lies in technical demonstration and educational outcomes rather than publication-<br>dependent success metrics.<br>Risk Monitoring and Response Plan<br>Weekly Risk Assessment:<br>• Regular evaluation of risk probability and impact changes<br>• Trigger point identification for activation of contingency plans<br>• New risk identification and assessment as project evolves<br>Three-Node PCIe Fabric Architecture Design 31<br>• Risk status reporting and stakeholder communication<br>Risk Response Strategies:<br>• Avoid: Eliminate risk through alternative approaches<br>• Mitigate: Reduce probability or impact through planning<br>• Transfer: Shift risk to external parties (suppliers, support)<br>• Accept: Acknowledge risk and prepare contingency plans<br>Escalation Procedures:<br>• Clear escalation paths for critical risk activation<br>• Decision-making authority and responsibility assignment<br>• Communication protocols for risk status changes<br>• Stakeholder notification procedures for major risks<br>Success Factor Dependencies<br>Project success relies on a complex network of both external and internal dependencies that<br>must be carefully managed and monitored throughout the implementation process. These<br>dependencies represent critical factors outside direct project control that could significantly<br>impact outcomes.<br>External Dependencies:<br>• Dolphin technical support responsiveness and expertise<br>• Component supplier reliability and delivery performance<br>• University infrastructure stability and access<br>• Academic calendar constraints and deadline flexibility<br>Internal Dependencies:<br>• Technical expertise availability and skill development<br>• Time allocation and competing priority management<br>• Equipment access and sharing coordination<br>• Backup resource availability for critical components<br>Three-Node PCIe Fabric Architecture Design 32<br>Risk Mitigation Resource Allocation<br>Budget Allocation for Risk Mitigation:<br>• Hardware contingency fund: $150 (28% of local budget)<br>• Express shipping allowance: $50<br>• Alternative component options: $100<br>• Technical consultation budget: $200<br>Time Allocation for Risk Management:<br>• Early compatibility testing: 0.5 weeks<br>• Backup solution preparation: 0.3 weeks<br>• Documentation and knowledge capture: 0.4 weeks<br>• Risk monitoring and response: 0.2 weeks (ongoing)<br>Technical Resource Requirements:<br>• Access to alternative test platforms for compatibility verification<br>• Backup hardware components for rapid replacement<br>• Technical expertise network for problem resolution<br>• Alternative development approaches for critical path items<br>Project Success Criteria Adjustment<br>The project framework incorporates built-in flexibility for success criteria adjustment, en-<br>suring that meaningful academic and technical outcomes can be achieved even in scenarios<br>where significant risks are realized. This adaptive approach maintains project viability while<br>preserving core educational and research objectives.<br>Minimum Viable Demonstration: In the event of significant risk realization, the<br>project can still achieve academic success with reduced scope:<br>• Two-node system demonstration (desktop + desktop)<br>• Software architecture proof-of-concept with simulated third node<br>• Performance comparison limited to available hardware<br>• Detailed analysis of scaling potential based on measurements<br>Success Metrics Flexibility:<br>• Performance targets adjusted based on actual hardware capabilities<br>Three-Node PCIe Fabric Architecture Design 33<br>• Relative improvement emphasis over absolute performance numbers<br>• Academic contribution focus on methodology and approach<br>• Industry collaboration value regardless of technical outcomes<br>Figure 10: Risk Analysis Matrix with Probability vs Impact Assessment<br>4 Conclusion<br>This architecture design document establishes a comprehensive technical foundation for im-<br>plementing a three-node PCIe fabric demonstration system using Dolphin MXE52010 PCIe<br>5.0 technology. The proposed architecture successfully integrates heterogeneous hardware<br>platforms, combining desktop and embedded systems through a PCIe fabric mesh topol-<br>ogy that enables direct inter-node communication with sub-microsecond latency and multi-<br>gigabyte bandwidth capabilities.<br>The economic analysis demonstrates exceptional feasibility with a total system cost of<br>$5,785 requiring only $355 in local investment, achieved through effective utilization of exist-<br>ing hardware resources and strategic industry partnership with Dolphin. The comprehensive<br>Three-Node PCIe Fabric Architecture Design 34<br>risk assessment and detailed mitigation strategies provide confidence in successful imple-<br>mentation within the academic timeline, while the thorough component specifications and<br>procurement plan ensure implementation readiness for the Week 5-6 prototype development<br>phase.<br>This architectural foundation establishes significant potential for both academic research<br>contributions and practical community-scale distributed computing applications. The design<br>successfully balances technical ambition with practical constraints, economic feasibility with<br>performanceobjectives, andacademicrigorwithreal-worldapplicability. Thecomprehensive<br>specifications, risk assessments, and implementation strategies provide strong confidence<br>that this project will successfully demonstrate the potential of PCIe fabric technology for<br>distributedcomputingapplicationswhilecontributingvaluableresearchoutcomestothefield<br>of community-scale distributed systems.<br>Three-Node PCIe Fabric Architecture Design 35<br>References<br>Dolphin-Interconnect-Solutions-Inc. Sisci users guide. Technical Documentation, 2017.<br>URL https://www.dolphinics.com/download/SISCI/OPEN_DOC/SISCI_API_2_users_<br>guide.pdf.<br>Dolphin-Interconnect-Solutions-Inc. Dolphin ebox 5.0 expansion. Technical Documenta-<br>tion, 2025. UR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>

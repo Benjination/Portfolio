@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Self-Healing Test Automation in Regression Testing - Benjamin Niccum</title>
+    <meta name="description" content="Ai use in program self-repair">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="Self-Healing Test Automation in Regression Testing">
+    <meta property="og:description" content="Ai use in program self-repair">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/selfhealing-test-automation-in">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Self-Healing Test Automation in Regression Testing">
+    <meta name="twitter:description" content="Ai use in program self-repair">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2025-10-30T20:02:55.521Z">
+    <meta property="article:modified_time" content="2025-10-30T20:02:55.521Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/selfhealing-test-automation-in">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">Self-Healing Test Automation in Regression Testing</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">10/30/2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p><br>Test automation is an essential part of modern and complex online distributed system software.<br>Until recently, the method of testing deployed software required the use of static object locators<br>that can find and interact with specific elements on a webpage. The main issue with this kind of<br>testing is that any minor UI (User Interface) change like renaming a button or variable will cause<br>this type of test to fail. The time spent on modifying tests typically outweighs the time spent on<br>actual implementation.<br>Now that we have experienced a significant advance in AI technology, there are options for<br>automated testing that were never available before. Self-Healing Test Automation (SHTA) is an<br>integration of artificial intelligence into test automation frameworks. This method automatically<br>detects, analyzes, and repairs failed tests without any human interaction at all. This creates a<br>major change for the workflow of designers and programmers that specialize in online<br>distributed system software, as they are allowed to focus more on implementation and less on<br>redesigning test scripts. Using this method, if a programmer makes a minor UI change, the test<br>will not automatically fail, but instead the AI will attempt to recognize the issue to determine if it<br>is a legitimate test failure. If the program is legitimately failing the test, it will report the failed<br>test back, but if it's something trivial like a name change, the AI corrects the test and reports the<br>change back to the programmer. SHTA addresses a real market challenge and aims to prevent<br>potential bottlenecks and enable continuous delivery and innovation.<br>ACCELQ's Self-Healing Framework:<br>In my research on this topic, I found an article by Geosley Andrades with ACCELQ (Not an<br>acronym, but a business specializing in AI-powered codeless test automation) that I found<br>particularly enlightening. Andrades frames self-healing test automation as an evolutionary<br>necessity rather than merely a convenient feature (Andrades, 2025). He recognizes as I have that<br>traditional testing methods do not accommodate emerging technologies, and that minor UI<br>changes are creating massive difficulties for modern programmers. In the article, Andrades offers<br>an excellent 5 step process of how SHTA-AI actually works.<br>1. Detection: The framework identifies that an element is missing or has been modified.<br>2. Analysis: The algorithm analyzes the UI to identify an alternative matching element.<br>3. Adaptation: Outdated locator scripts are updated with the new information dynamically.<br>4. Validation: The modified test is executed to ensure correctness.<br>5. Learning: The system improves by learning from past fixes.<br>This framework gained credibility by demonstrating an 80% reduction in required test<br>maintenance with an unnamed e-commerce website (Andrades, 2025). Moore’s law says that<br>processing speeds every 18-24 months. For innovation to keep pace with rapidly advancing<br>technologies, the processes must be streamlined and improved whenever possible. SHTA is<br>allowing innovation to move faster than ever before by eliminating time wasted on modifying<br>static tests.<br>I expanded my knowledge on the subject by exploring other sources that supported Andrades’<br>system. The other works cited below is an article by Vincent Nguyen called Self-Healing test<br>Automation: A practical guide, and a work called the World Quality Report for 2024-25 by many<br>different contributors, but specifically a man named Muji Majzoub. Majzoub is the Chief Product<br>Officer with Opentext. He conducted a survey of 1,775 Quality Engineering professionals from<br>33 different countries that confirmed that technologies in software development were no longer<br>aspirational goals, but operational necessities (Majzoub, 2024). This study also showed that<br>nearly seventy percent of respondents were using some form of generative Ai, and seventy-five<br>percent were actively seeking and planning to implement new testing technologies. This<br>momentum that is apparent in modern programmers confirms Andrades outlook that this<br>emerging technology is a necessity, and not just a convenience feature.<br>This dramatic shift in the number of companies using generative AI demonstrates the industries<br>movement to AI-powered solutions and technical implementation strategies which supports both<br>Andrades’ claim and the article written by Vincent Nguyen. Nguyen is a QA consultant with<br>Katalon, a separate software company that also AI-powered automation testing. The thing that set<br>Nguyen’s article aoart from the other two is that he provides a comprehensive guide that offers<br>technical validation for Andrades’ Self-Healing framework. Nguyen’s article examines the<br>method from an implementation viewpoint. Nguyen independently confirms that "test scripts<br>break" is "one of the most frustrating parts of test automation," directly supporting Andrades'<br>assertion that traditional locator-based testing creates unsustainable maintenance burdens<br>(Nguyen, 2025). He suggests the use of redundancy in programs with locator strategies as back-<br>up for the Ai-powered system. Andrades’ claim that such technologies can exist is fortified by the<br>fact that the service is already being provided by companies like Katalon. Not only is Self-<br>Healing testing automation now possible, but it is likely to become a necessary testing method<br>for all deployed systems as new technologies emerge.<br>WORKS CITED<br>Andrades, Geosley. "Self-Healing Test Automation: A Comprehensive Guide." ACCELQ Blog,<br>28 Feb 2025, accelq.com/blog/self-healing-test-automation/.<br>Majzoub, Muji. "New Futures in Focus: World Quality Report 16th Edition 2024-25." OpenText,<br>2024, www.opentext.com/media/report/new-futures-in-focus-world-quality-report-16th-edition-<br>2024-25-en.pdf.<br>Nguyen, Vincent N. "Self-Healing Test Automation: A Practical Guide." Katalon Blog, 21 Aug<br>2025, katalon.com/resources-center/blog/self-healing-test-automation.<br></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>
