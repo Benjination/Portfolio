@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>My Summer - Benjamin Niccum</title>
+    <meta name="description" content="Bonus Material for Thesis project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="benjination2@gmail.com">
+    
+    <!-- Open Graph Meta Tags for social sharing -->
+    <meta property="og:title" content="My Summer">
+    <meta property="og:description" content="Bonus Material for Thesis project">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://benjaminniccum.com/blog/my-summer">
+    <meta property="og:image" content="https://benjaminniccum.com/og-image.png">
+    <meta property="og:site_name" content="Benjamin Niccum - Portfolio">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Summer">
+    <meta name="twitter:description" content="Bonus Material for Thesis project">
+    <meta name="twitter:image" content="https://benjaminniccum.com/og-image.png">
+    
+    <!-- Article Meta -->
+    <meta property="article:author" content="benjination2@gmail.com">
+    <meta property="article:published_time" content="2026-07-29T14:59:50.368Z">
+    <meta property="article:modified_time" content="2026-07-29T14:59:50.368Z">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://benjaminniccum.com/blog/my-summer">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Static page styles matching main app -->
+    <style>
+        /* Terminal-inspired retro theme variables */
+        :root {
+            --primary-green: #00ff00;
+            --secondary-green: #00cc00;
+            --dark-green: #008800;
+            --terminal-bg: #0a0a0a;
+            --terminal-bg-light: #1a1a1a;
+            --amber: #ffb000;
+            --white: #ffffff;
+            --gray: #cccccc;
+            --light-gray: #999999;
+            --dark-gray: #666666;
+            --mono-font: 'Fira Code', 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--terminal-bg);
+            color: var(--white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Blog post page styling - exact match to main app */
+        .blog-post-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 2rem 1rem;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--white);
+        }
+
+        .blog-content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-green);
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: var(--primary-green);
+            color: var(--terminal-bg);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        .post-meta .post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 1rem 0;
+            color: var(--white);
+            font-family: 'Georgia', serif;
+        }
+
+        .post-meta .post-info {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--light-gray);
+        }
+
+        .post-info .author {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        .post-info .date-separator {
+            margin: 0 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .post-info .date {
+            color: var(--light-gray);
+        }
+
+        .blog-content {
+            padding: 3rem 4rem;
+        }
+
+        .content-text {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .content-text p {
+            margin: 0 0 1.5rem 0;
+            text-align: justify;
+        }
+
+        .content-text h1, 
+        .content-text h2, 
+        .content-text h3, 
+        .content-text h4, 
+        .content-text h5, 
+        .content-text h6 {
+            color: var(--white);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .content-text h1:first-child,
+        .content-text h2:first-child,
+        .content-text h3:first-child,
+        .content-text h4:first-child,
+        .content-text h5:first-child,
+        .content-text h6:first-child {
+            margin-top: 0;
+        }
+
+        .content-text h1 { font-size: 2.25rem; }
+        .content-text h2 { font-size: 1.875rem; }
+        .content-text h3 { font-size: 1.5rem; }
+        .content-text h4 { font-size: 1.25rem; }
+
+        .content-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--amber);
+            font-style: italic;
+        }
+
+        .content-text code {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-green);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            font-size: 0.9em;
+        }
+
+        .content-text pre {
+            background: var(--terminal-bg);
+            color: var(--primary-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .content-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .content-text blockquote {
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--light-gray);
+            background: rgba(0, 255, 0, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .content-text ul, 
+        .content-text ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-text ul li, 
+        .content-text ol li {
+            margin: 0.5rem 0;
+            color: #e0e0e0;
+        }
+
+        .content-text a {
+            color: var(--primary-green);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .content-text a:hover {
+            border-bottom-color: var(--primary-green);
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .blog-post-page {
+                padding: 1rem 0.5rem;
+            }
+
+            .blog-header {
+                padding: 1.5rem;
+            }
+
+            .post-meta .post-title {
+                font-size: 2rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-page">
+        <div class="blog-content-container">
+            <div class="blog-header">
+                <a href="/#blog" class="back-button">← Back to Blog List</a>
+                
+                <div class="post-meta">
+                    <h1 class="post-title">My Summer</h1>
+                    <div class="post-info">
+                        <span class="author">benjination2@gmail.com</span>
+                        <span class="date-separator">•</span>
+                        <span class="date">7/29/2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-content">
+                <div class="content-text">
+                    <p>My Summer with PCIe and SISCI (Reference Draft)<br>Purpose of this document<br>This is a working reference summary of what I accomplished over the summer using Dolphin PCIe technology and SISCI software. It is written for thesis planning and chapter development, not as final chapter prose.</p>
+
+<p>Executive summary<br>Over the summer, I progressed from basic node access and installer execution to full cluster-level diagnosis, performance validation, and early application development on top of SISCI. The work combined three tracks:</p>
+
+<p>Platform engineering: bring-up, recovery, and stabilization of multi-node PCIe systems.<br>Performance engineering: validating link health, benchmarking latency/throughput, and isolating bottlenecks.<br>Applied development and documentation: building SISCI-based prototypes and producing customer-ready technical guidance.<br>By the end of the period, I had repeatedly demonstrated practical competence in remote cluster operations, ExpressWare/SISCI troubleshooting, link-level PCIe diagnostics, and communication of technical findings to both internal and customer-facing audiences.</p>
+
+<p>Timeline of work and progression<br>Phase 1: Initial bring-up and installer workflow validation<br>Key activities:</p>
+
+<p>Connected to remote nodes over SSH.<br>Identified OS/kernel versions and installer compatibility constraints.<br>Copied installers, corrected execution gaps, and completed firmware/EEPROM update cycles.<br>Used diagnostic commands to validate software and hardware state.<br>Important progression:</p>
+
+<p>Early in the process, installer files had been copied but not actually executed. I caught and corrected this by enforcing executable permissions and explicit installer runs.<br>I established a repeatable baseline sequence: transfer, install, firmware check, reset, reboot, re-verify.<br>What this phase produced:</p>
+
+<p>A reliable procedural baseline for first-pass SISCI/ExpressWare deployment and validation.<br>Phase 2: Root-cause troubleshooting and cluster recovery<br>Key activities:</p>
+
+<p>Investigated lane-width degradation (x8 when x16 was expected).<br>Cross-checked dis_diag and firmware outputs between nodes.<br>Escalated from software-only assumptions to physical layer inspection.<br>Found and corrected hardware connection issues (unplugged cable) that software tuning alone could not fix.<br>Important progression:</p>
+
+<p>This phase was where diagnosis became systematic: verify, hypothesize, isolate, retest.<br>I learned to treat PCIe health as a full-stack problem (physical cabling, adapter state, firmware partition, driver/kernel alignment, and host config).<br>What this phase produced:</p>
+
+<p>Restored x16 operation and active partition health across nodes.<br>A practical lesson for thesis discussion: many "software" interconnect problems are ultimately cross-layer.<br>Phase 3: OS/kernel alignment and compatibility hardening<br>Key activities:</p>
+
+<p>Standardized nodes onto compatible Linux families and kernel lines.<br>Repeated install/reinstall with RT and non-RT variants.<br>Used local console and USB recovery workflows when remote operations were insufficient.<br>Escalated to BIOS/firmware support when symptoms indicated lower-level instability.<br>Important progression:</p>
+
+<p>I documented that repeated failed installs are often secondary symptoms; the true blocker can be kernel/driver mismatch or firmware-level instability.<br>What this phase produced:</p>
+
+<p>Matched OS/kernel baselines on the Genfi nodes.<br>A clearer compatibility model for future deployments.<br>Phase 4: Stable diagnostics and benchmark-driven validation<br>Key activities:</p>
+
+<p>Confirmed both nodes visible in topology with valid sessions.<br>Verified clean health reports (no warnings/errors) with x16 Gen4 links.<br>Ran and interpreted benchmark tools for throughput and latency.<br>Benchmark and measurement exposure:</p>
+
+<p>DMA_Bench: throughput-oriented transfer behavior.<br>SCIBench2 / SCIPP / SCIMemcopyBench / interrupt benchmark: latency and transfer-behavior perspectives.<br>Example latency ranges captured in notes (microseconds):<br>DMA_Bench: about 36.04 to 38.81 us.<br>SCIBench2: about 3.85 to 3.98 us.<br>SCIPP: about 1.0359 to 2.736 us.<br>SCIMemcopy: around 3.72 us.<br>Interrupt bench: about 4.92 to 5.001 us.<br>What this phase produced:</p>
+
+<p>A practical benchmarking workflow for diagnosis and tuning.<br>Evidence for thesis sections on method, instrumentation, and performance interpretation.<br>Phase 5: Switch integration, constraints, and operational lessons<br>Key activities:</p>
+
+<p>Integrated a switch into a two-node path.<br>Observed throughput drop and investigated cause.<br>Determined speed fallback behavior due to generation mismatch (Gen4 adapters routed through Gen3 switch).<br>Noted recurring dmesg errors when config expectations (Gen4) did not match effective switch behavior (Gen3 path).<br>Important progression:</p>
+
+<p>Learned that cluster configuration files and expected link parameters must track real hardware capabilities after topology changes.<br>Established the need to regenerate config and validate post-change state whenever switching fabric design changes.<br>What this phase produced:</p>
+
+<p>A concrete case study of topology-induced performance limits.<br>Useful thesis material for "expected vs. effective bandwidth" analysis.<br>Phase 6: Customer support engineering and technical communication<br>Key activities:</p>
+
+<p>Worked customer ticket workflows (including Fujitsu follow-up).<br>Produced structured technical responses on:<br>host identification limits in network-less PCIe contexts,<br>dummy/static IP interface requirements,<br>dishosts and node manager behavior,<br>kernel module mismatch symptoms,<br>install-time SSH dependency versus runtime proprietary port behavior.<br>Reduced support noise by requesting minimum diagnostic evidence first.<br>Important progression:</p>
+
+<p>Transitioned from local troubleshooting to externally consumable guidance.<br>Improved response quality by separating tested facts from "needs validation" claims.<br>What this phase produced:</p>
+
+<p>A support-oriented knowledge base and reproducible verification checklists.<br>Strong thesis material on operationalization and field support practices.<br>Phase 7: SISCI application prototyping and demo engineering<br>Key activities:</p>
+
+<p>Designed and planned a two-node SISCI "vanishing text" chat app.<br>Defined shared-memory architecture elements:<br>presence heartbeat segment,<br>append-only key-event ring with sequence and expiration.<br>Broke implementation into staged phases (scaffold, presence, transport, vanish logic, terminal UI).<br>Continued adapting existing demos from three-node assumptions to two-node constraints.<br>Captured SmartIO device-lending demo flow for camera/video use cases (add, connect, mark available, borrow, return, cleanup).<br>Important progression:</p>
+
+<p>Moved from using the platform to designing software that exploits SISCI semantics directly.<br>What this phase produced:</p>
+
+<p>Chapter-ready material connecting low-level transport properties to application behavior and UX constraints.<br>Phase 8: Expansion and inventory testing methodology<br>Key activities:</p>
+
+<p>Produced a reproducible PCIe expansion box detection method:<br>baseline lspci capture,<br>post-install capture,<br>diff generation,<br>custom filter pass to isolate truly new devices versus renumbered entries.<br>Packaged this into a formal report workflow with reproducibility notes.<br>What this phase produced:</p>
+
+<p>A clean test methodology suitable for thesis appendices and future lab validation.<br>Major technical outcomes<br>Built a repeatable SISCI/ExpressWare installation and recovery process across remote nodes.<br>Restored and validated high-quality link state (x16 Gen4) and session integrity in a two-node topology.<br>Established benchmark-informed diagnosis habits for throughput and latency problems.<br>Identified and documented hardware-generation mismatch effects on effective performance.<br>Produced support-grade explanations for cluster formation, driver mismatch symptoms, and deployment prerequisites.<br>Designed an original SISCI application architecture that demonstrates shared-memory and event-distribution concepts.<br>Created a reproducible PCIe device-detection testing pipeline for expansion scenarios.<br>Skills and competencies developed<br>PCIe and adapter-level engineering<br>Link-width/speed interpretation and validation.<br>Adapter firmware/partition checks and reset procedures.<br>Topology and cable integrity troubleshooting.<br>SISCI/ExpressWare operations<br>Installer and module compatibility verification.<br>Node identity, dishosts behavior, and cluster setup considerations.<br>Diagnostic command fluency and result interpretation.<br>Performance analysis<br>Latency and throughput benchmark selection by objective.<br>Understanding of why measured GUI metrics can diverge from direct transfer paths.<br>Structured troubleshooting for benchmark-to-application performance gaps.<br>Applied software and systems thinking<br>Shared-memory data-structure design for low-latency applications.<br>Event-stream and TTL-based state lifecycle modeling.<br>Balancing demonstrator requirements with system constraints.<br>Support and communication<br>Creating customer-facing technical responses with validation paths.<br>Distinguishing confirmed behavior from assumptions.<br>Converting ad hoc troubleshooting into reusable procedure.<br>Thesis chapter seed ideas from this summer work<br>Chapter seed A: Cluster bring-up under real constraints<br>Focus:</p>
+
+<p>End-to-end process from access, installation, and alignment to stable operation.<br>Why OS/kernel and firmware interactions dominate early-stage risk.<br>Chapter seed B: Multi-layer diagnosis of PCIe performance<br>Focus:</p>
+
+<p>Physical link state, config expectations, benchmark evidence, and runtime behavior.<br>Case study of x16 restoration and switch-induced speed fallback.<br>Chapter seed C: From infrastructure to application semantics with SISCI<br>Focus:</p>
+
+<p>How shared-memory primitives shape application architecture.<br>Vanishing-text chat design as a concrete SISCI-native example.<br>Chapter seed D: Operationalization and support engineering<br>Focus:</p>
+
+<p>Turning engineering findings into reproducible support workflows.<br>Customer Q and A patterns around installation prerequisites and cluster formation.<br>Chapter seed E: Expansion and device discovery methodology<br>Focus:</p>
+
+<p>Repeatable lspci diff/filter pipeline.<br>Distinguishing true device additions from enumeration renumbering.<br>Practical limits and notes for later drafting<br>Some claims in working notes were marked as needing further validation and should be cross-checked before final thesis publication.<br>Several large PDF/user-guide references were studied as background; this summary prioritizes tasks and outcomes documented in day logs and authored technical notes.<br>This file is intentionally broad and thesis-oriented. It should be paired later with direct evidence excerpts when drafting final chapters.<br>Source note set used<br>Primary source notes:</p>
+
+<p>Daily logs, week summaries, and ticket responses in TheSummer (renamed sequence files 001 through 024).<br>Setup and demo notes (032 and 033).<br>Expansion test report template (024).<br>Adapter guide text references (028, 029, 035) and conference/class background notes (031).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <noscript>
+        <style>
+            .js-redirect-notice { display: none; }
+        </style>
+    </noscript>
+</body>
+</html>
